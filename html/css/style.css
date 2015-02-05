@@ -98,14 +98,17 @@ h1,h2,h3,h4,h5,h6,p,span{
 }
 .corner {
 	margin-left: 3em;
+    padding-top: 10em;
 }
 .header-banner{
 	font-family: 'Bree Serif', serif;
 	/*background: url(../images/header-banner.jpg) no-repeat 0px 0px;*/
-	background: url(../images/img-08.jpg) no-repeat 0px 0px;
+	background: url(../images/logo.png) no-repeat 0px 0px;
 	background-size: cover;
-	min-height: 920px;
-	padding-top: 23em;
+    width: 100%;
+	/*min-height: 920px;*/
+	/*min-height: 450px;*/
+	/*padding-top: 23em;*/
 }
 .header-banner h1{
 	font-size: 77px;
@@ -1597,5 +1600,5 @@ a.fa-btn1.btn-2.btn-1e1 {
 }
 /*--/responsive design--*/
 
-.img-frame { width: 100%; height: 250px; overflow: hidden }
+.img-frame { width: 100%; height: 200px; overflow: hidden }
 .img-content { position: relative; top: -10%; }

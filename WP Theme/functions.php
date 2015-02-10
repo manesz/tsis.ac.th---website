@@ -239,4 +239,72 @@ if($calEvent){
 	echo "[{title:'All Day Event',start:'2014-11-01'},{title:'Long Event',start:'2014-11-07',end:'2014-11-10'},{id:999,title:'Repeating Event',start:'2014-11-09T16:00:00'},{id:999,title:'Repeating Event',start:'2014-11-16T16:00:00'},{title:'Conference',start:'2014-11-11',end:'2014-11-13'},{title:'Meeting',start:'2014-11-12T10:30:00',end:'2014-11-12T12:30:00'},{title:'Lunch',start:'2014-11-12T12:00:00'},{title:'Meeting',start:'2014-11-12T14:30:00'},{title:'Happy Hour',start:'2014-11-12T17:30:00'},{title:'Dinner',start:'2014-11-12T20:00:00'},{title:'Birthday Party',start:'2014-11-13T07:00:00'},{title:'Click for Google',url:'http://google.com/',start:'2014-11-28'}]";
 	exit();
 }
-/* DON'T DELETE THIS CLOSING TAG */ ?>
+class inittheme{
+	private $def_post = array(
+		  'post_title' => 'My post',
+		  'post_content'  => 'This is my post.',
+		  'post_status'=> 'publish',
+		  'post_author'=> 1
+	);
+	private function createPage($postarr){
+		$my_post = array_merge($this->def_post,$postarr);
+		// Insert the post into the database
+		wp_insert_post($my_post);
+		return false;
+	}
+	public function firstInit($firstarrs){
+		global $wpdb;
+    if(!function_exists('dbDelta')){
+    require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+    }
+    $sql = "CREATE TABLE IF NOT EXISTS `wp_videos` (
+  `ID` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `vdourl` text NOT NULL,
+  `vdo_desc` text NOT NULL,
+  `vdo_title` varchar(255) NOT NULL,
+  `post_id` bigint(20) NOT NULL DEFAULT '0',
+  `duration` bigint(20) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`ID`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;";
+ dbDelta($sql);
+		foreach($firstarrs as $firstarr){
+			$this->createPage($firstarr);
+		}
+	}
+}
+$is_inittm = get_option( 'is_first_setup' );
+if($is_inittm==false){
+$inittm = new inittheme();
+$init_page = array(
+	array(
+		  'post_title' => 'About us',
+		  'post_content'  => '',
+		  'post_status'=> 'publish',
+		  'post_type'=>'page',
+		  'post_author'=> 1
+	),
+	array(
+		  'post_title' => 'News',
+		  'post_content'  => '',
+		  'post_status'=> 'publish',
+		  'post_type'=>'page',
+		  'post_author'=> 1
+	),
+	array(
+		  'post_title' => 'Facilities',
+		  'post_content'  => '',
+		  'post_status'=> 'publish',
+		  'post_type'=>'page',
+		  'post_author'=> 1
+	),
+	array(
+		  'post_title' => 'Videos',
+		  'post_content'  => '',
+		  'post_status'=> 'publish',
+		  'post_type'=>'page',
+		  'post_author'=> 1
+	),
+);
+$inittm->firstInit($init_page);
+add_option( 'is_first_setup', '1', '', 'yes' );
+}

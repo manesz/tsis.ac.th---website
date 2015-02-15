@@ -48,6 +48,7 @@
         <div class="header-right">
             <div class="navigation">
                 <span class="menu"> </span>
+                <?php wp_nav_menu( array('menu' => 'Main' )); ?>
                 <ul>
                     <li><a href="page.html" class="" title="ABOUT US"><span>ABOUT US</span></a></li>
                     <li><a href="page.html" class="active" title="offerings"><span>OFFERINGS</span></a></li>

@@ -10,7 +10,8 @@ sidebars, comments, ect.
 
 // LOAD BONES CORE (if you remove this, the theme will break)
 require_once( 'library/bones.php' );
-
+require_once( 'library/class/admin.php');
+add_action('admin_menu', 'tsis_add_pages');
 // CUSTOMIZE THE WORDPRESS ADMIN (off by default)
 // require_once( 'library/admin.php' );
 
@@ -28,7 +29,8 @@ function bones_ahoy() {
   load_theme_textdomain( 'bonestheme', get_template_directory() . '/library/translation' );
 
   // USE THIS TEMPLATE TO CREATE CUSTOM POST TYPES EASILY
-  require_once( 'library/custom-post-type.php' );
+  //require_once( 'library/custom-post-type.php' );
+  require_once('library/custom-announcement.php');
 
   // launching operation cleanup
   add_action( 'init', 'bones_head_cleanup' );
@@ -264,6 +266,7 @@ class inittheme{
   `vdo_title` varchar(255) NOT NULL,
   `post_id` bigint(20) NOT NULL DEFAULT '0',
   `duration` bigint(20) NOT NULL DEFAULT '0',
+  `order_id` bigint(20) NOT NULL DEFAULT '0',
   PRIMARY KEY (`ID`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;";
  dbDelta($sql);
@@ -271,6 +274,20 @@ class inittheme{
 			$this->createPage($firstarr);
 		}
 	}
+}
+function get_first_inserted_image() {
+    global $post, $posts;
+	$pccont = str_replace('src="http://tsis.ac.th/i/wp-content/uploads/2013/02/copy-header1.png"','',$post->post_content);
+    preg_match_all('/<img.+src=[\'"]([^\'"]+)[\'"].*>/i',$pccont, $matches);
+	if($matches [1] [0]){
+    $first_img = $matches [1] [0];
+	}else{
+	$first_img = 'http://tsis.ac.th/i/wp-content/uploads/2013/02/copy-header1.png';
+	}
+    // Spew it out as an imege
+	
+    $first_img = '<img alt="'.$post->post_title.'" width="100%" src="' . $first_img . '" />';
+    return $first_img;
 }
 $is_inittm = get_option( 'is_first_setup' );
 if($is_inittm==false){

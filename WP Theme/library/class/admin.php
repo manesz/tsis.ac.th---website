@@ -3,6 +3,7 @@ $rootpath = get_option('siteurl').'/';
 include_once('pagination.class.php');
 function tsis_add_pages() {
     add_menu_page(__('Manage TSIS Theme'), __('Manage TSIS Theme'), 'manage_options', 'manage-tsis', 'tsis_toplevel_page' );
+	add_submenu_page('manage-tsis', __('Contact'), __('Contact'), 'manage_options', 'manage-contact', 'tsis_sublevel_contact');
 	add_submenu_page('manage-tsis', __('Top Content'), __('Top Content'), 'manage_options', 'managetop-content', 'tsis_sublevel_topcontent');
     add_submenu_page('manage-tsis', __('Video Manage'), __('Video Manage'), 'manage_options', 'video-mange', 'tsis_sublevel_vdo');
 }
@@ -19,6 +20,9 @@ function tsis_sublevel_announcements() {
 }
 function tsis_sublevel_topcontent() {
     include_once(get_template_directory().'/library/adminpage/topcontent.php');
+}
+function tsis_sublevel_contact() {
+    include_once(get_template_directory().'/library/adminpage/contact.php');
 }
 function tsis_sublevel_vdo() {
     include_once(get_template_directory().'/library/adminpage/vdo.php');

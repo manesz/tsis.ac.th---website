@@ -48,7 +48,11 @@
         <div class="header-right">
             <div class="navigation">
                 <span class="menu"> </span>
-                <?php wp_nav_menu( array('menu' => 'Main' )); ?>
+                <?php 
+				if (has_nav_menu('the-main-menu')){
+				wp_nav_menu( array('menu' => 'Main' ));
+				}else{
+				?>
                 <ul>
                     <li><a href="page.html" class="" title="ABOUT US"><span>ABOUT US</span></a></li>
                     <li><a href="page.html" class="active" title="offerings"><span>OFFERINGS</span></a></li>
@@ -58,6 +62,7 @@
                     <!--<li><a class="scroll" href="#achievements" title="Achievements"><span>ACHIEVEMENTS</span></a></li>-->
                     <li><a href="contact.html" class="" title="CONTACT US"><span>CONTACT US</span></a></li>
                 </ul>
+                <?php }?>
             </div>
             
             <div class="clearfix"> </div>

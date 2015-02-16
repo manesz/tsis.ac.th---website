@@ -325,3 +325,7 @@ $init_page = array(
 $inittm->firstInit($init_page);
 add_option( 'is_first_setup', '1', '', 'yes' );
 }
+add_filter( 'wp_mail_content_type', 'set_html_content_type' ); 
+function set_html_content_type() {
+return 'text/html';
+}

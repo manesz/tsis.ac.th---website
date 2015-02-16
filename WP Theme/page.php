@@ -26,7 +26,12 @@ while ( have_posts() ) : the_post();?>
         <div class="bootstrap-grids">
             <div class="col-md-12 camps">
                 <div class="Proin">
-                    <?php the_content(); ?>
+                    <?php 
+					if(is_page('gallery')){
+						include_once('post-formats/format-gallely.php');
+					}else{
+						the_content();
+					}?>
                 </div>
             </div>
             <div class="clearfix"> </div>

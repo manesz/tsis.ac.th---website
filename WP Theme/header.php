@@ -36,13 +36,13 @@
 		<?php wp_head(); ?>
 	</head>
 
-	<body <?php body_class(); ?> itemscope itemtype="http://schema.org/WebPage">
+	<body <?php body_class(); $mysite = get_option('siteurl').'/';?> itemscope itemtype="http://schema.org/WebPage">
 
 <!--Header-->
 <div class="header">
     <div class="container">
         <div class="logo">
-            <a href="index.html"><img src="<?php echo $themeLib;?>images/logo.png" class="img-responsive" alt="" style="max-width: 300px;"/></a>
+            <a href="<?php echo $mysite?>"><img src="<?php echo $themeLib;?>images/logo.png" class="img-responsive" alt="" style="max-width: 300px;"/></a>
             <div class="clearfix"> </div>
         </div>
         <div class="header-right">
@@ -52,15 +52,16 @@
 				if (has_nav_menu('the-main-menu')){
 				wp_nav_menu( array('menu' => 'Main' ));
 				}else{
+					
 				?>
                 <ul>
-                    <li><a href="page.html" class="" title="ABOUT US"><span>ABOUT US</span></a></li>
-                    <li><a href="page.html" class="active" title="offerings"><span>OFFERINGS</span></a></li>
-                    <li><a href="page.html" class="" title="Levels"><span>LEVELS</span></a></li>
-                    <li><a href="category.html" class="" title="Gallery"><span>GALLERY</span></a></li>
-                    <li><a href="page.html" class="" title="Facilities"><span>FACILITIES</span></a></li>
+                    <li><a href="<?php echo $mysite;?>about-the-school/" class="<?php if(is_page('about-the-school')){?>active<?php }?>" title="ABOUT US"><span>ABOUT US</span></a></li>
+                    <li><a href="<?php echo $mysite;?>" class="<?php if(is_page('offering')){?>active<?php }?>" title="offerings"><span>OFFERINGS</span></a></li>
+                    <li><a href="<?php echo $mysite;?>levels/" class="<?php if(is_page('levels')){?>active<?php }?>" title="Levels"><span>LEVELS</span></a></li>
+                    <li><a href="<?php echo $mysite;?>gallery/" class="<?php if(is_page('gallery')){?>active<?php }?>" title="Gallery"><span>GALLERY</span></a></li>
+                    <li><a href="<?php echo $mysite;?>facilities-3/" class="<?php if(is_page('facilities-3')){?>active<?php }?>" title="Facilities"><span>FACILITIES</span></a></li>
                     <!--<li><a class="scroll" href="#achievements" title="Achievements"><span>ACHIEVEMENTS</span></a></li>-->
-                    <li><a href="contact.html" class="" title="CONTACT US"><span>CONTACT US</span></a></li>
+                    <li><a href="<?php echo $mysite;?>contact-us/" class="<?php if(is_page('contact-us')){?>active<?php }?>" title="CONTACT US"><span>CONTACT US</span></a></li>
                 </ul>
                 <?php }?>
             </div>

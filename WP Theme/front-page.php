@@ -18,7 +18,7 @@ $top_content_op = get_option('top_content');
 global $post,$posts;
 $post = get_post($top_content_op);
 $imagethumb = get_the_post_thumbnail( $post->ID );
-$imagethumb = $imagethumb?'<img alt="'.$post->post_title.'" width="190" class="img-responsive img-content" src="' .$imagethumb. '" />':str_replace('src',' class="img-responsive img-content" src',get_first_inserted_image());?>
+$imagethumb = $imagethumb?str_replace('src',' class="img-responsive" src',$imagethumb):str_replace('src',' class="img-responsive img-content" src',get_first_inserted_image());?>
 <div class="clearfix">
     <div class="col-lg-6"><?php echo $imagethumb;?></div>
     <div class="col-lg-6">
@@ -90,7 +90,7 @@ if(count($myindex)<6){
 query_posts($arghis);
 while(have_posts()):the_post();
 $imagethumb = get_the_post_thumbnail( $post->ID );
-$imagethumb = $imagethumb?'<img alt="'.$post->post_title.'" width="100%" src="' .$imagethumb. '" />':str_replace('src',' class="img-responsive img-content" src',get_first_inserted_image());
+$imagethumb = $imagethumb?str_replace('src',' class="img-responsive" src',$imagethumb):str_replace('src',' class="img-responsive img-content" src',get_first_inserted_image());
 getListHilight($post->post_title,$post->post_excerpt?$post->post_excerpt: iconv_substr(strip_tags($post->post_content),0,320, "UTF-8")."...",get_permalink($post->ID),$imagethumb);
 endwhile;
 }else if(count($myindex)>5){
@@ -125,7 +125,7 @@ if(count($myindex)<6){
 query_posts($arghis);
 while(have_posts()):the_post();
 $imagethumb = get_the_post_thumbnail( $post->ID );
-$imagethumb = $imagethumb?'<img alt="'.$post->post_title.'" width="100%" src="' .$imagethumb. '" />':str_replace('src',' class="img-responsive img-content" src',get_first_inserted_image());
+$imagethumb = $imagethumb?str_replace('src',' class="img-responsive" src',$imagethumb):str_replace('src',' class="img-responsive img-content" src',get_first_inserted_image());
 getListHilight($post->post_title,$post->post_excerpt?$post->post_excerpt: iconv_substr(strip_tags($post->post_content),0,320, "UTF-8")."...",get_permalink($post->ID),$imagethumb);
 endwhile;
 }else if(count($myindex)>5){
@@ -133,7 +133,7 @@ global $posts,$post;
 for($i=0;$i<count($myindex);$i++){	
 $post = get_post($myindex[$i]); 
 $imagethumb = get_the_post_thumbnail( $post->ID );
-$imagethumb = $imagethumb?'<img alt="'.$post->post_title.'" width="100%" src="' .$imagethumb. '" />':str_replace('src',' class="img-responsive img-content" src',get_first_inserted_image());
+$imagethumb = $imagethumb?str_replace('src',' class="img-responsive" src',$imagethumb):str_replace('src',' class="img-responsive img-content" src',get_first_inserted_image());
 getListHilight($post->post_title,$post->post_excerpt?$post->post_excerpt: iconv_substr(strip_tags($post->post_content),0,320, "UTF-8")."...",get_permalink($post->ID),$imagethumb);
 }
 }
@@ -144,91 +144,31 @@ getListHilight($post->post_title,$post->post_excerpt?$post->post_excerpt: iconv_
         <div id="" class="offerings text-left" style="color: #fff;">
             <h3 class="text-left">Achievements</h3>
             <div class="bootstrap-grids">
-
-                <div class="col-md-4 camps">
-                    <a href="#">
-                        <div class="img-frame"><img class="img-responsive img-content" src="<?php echo $themeLib;?>images/demo-img-05.jpg" alt=""/>
-                        </div>
-                    </a>
-                    <h3 style="margin-bottom: 20px; font-family: 'Bree Serif', serif; font-size: 18px; font-weight: 300; color: ##fff">TSIS First Junior Student Council</h3>
-                    <div class="Proin">
-                        <p style="color: #eee;">Our First Junior Student Council (JSC) at TSIS was recently elected by a vote from the entire
-                            Primary Level. They are willing, eager, and able to learn. The Teacher Advisors, colleagues, and
-                            Administration all believe these JSC members can contribute much to the development of future
-                            student involvement at TSIS. Congratulations to our First JSC!</p>
-                        <a class="button wow bounceIn col-md-12 text-center" data-wow-delay="0.4s" href="#">ENROLL TODAY</a>
-                    </div>
-                </div>
-                <div class="col-md-4 camps">
-                    <a href="#">
-                        <div class="img-frame"><img class="img-responsive img-content" src="<?php echo $themeLib;?>images/demo-img-05.jpg" alt=""/>
-                        </div>
-                    </a>
-                    <h3 style="margin-bottom: 20px; font-family: 'Bree Serif', serif; font-size: 18px; font-weight: 300; color: ##fff">TSIS First Junior Student Council</h3>
-                    <div class="Proin">
-                        <p style="color: #eee;">Our First Junior Student Council (JSC) at TSIS was recently elected by a vote from the entire
-                            Primary Level. They are willing, eager, and able to learn. The Teacher Advisors, colleagues, and
-                            Administration all believe these JSC members can contribute much to the development of future
-                            student involvement at TSIS. Congratulations to our First JSC!</p>
-                        <a class="button wow bounceIn col-md-12 text-center" data-wow-delay="0.4s" href="#">ENROLL TODAY</a>
-                    </div>
-                </div>
-                <div class="col-md-4 camps">
-                    <a href="#">
-                        <div class="img-frame"><img class="img-responsive img-content" src="<?php echo $themeLib;?>images/demo-img-05.jpg" alt=""/>
-                        </div>
-                    </a>
-                    <h3 style="margin-bottom: 20px; font-family: 'Bree Serif', serif; font-size: 18px; font-weight: 300; color: ##fff">TSIS First Junior Student Council</h3>
-                    <div class="Proin">
-                        <p style="color: #eee;">Our First Junior Student Council (JSC) at TSIS was recently elected by a vote from the entire
-                            Primary Level. They are willing, eager, and able to learn. The Teacher Advisors, colleagues, and
-                            Administration all believe these JSC members can contribute much to the development of future
-                            student involvement at TSIS. Congratulations to our First JSC!</p>
-                        <a class="button wow bounceIn col-md-12 text-center" data-wow-delay="0.4s" href="#">ENROLL TODAY</a>
-                    </div>
-                </div>
-                <div class="col-md-4 camps">
-                    <a href="#">
-                        <div class="img-frame"><img class="img-responsive img-content" src="<?php echo $themeLib;?>images/demo-img-05.jpg" alt=""/>
-                        </div>
-                    </a>
-                    <h3 style="margin-bottom: 20px; font-family: 'Bree Serif', serif; font-size: 18px; font-weight: 300; color: ##fff">TSIS First Junior Student Council</h3>
-                    <div class="Proin">
-                        <p style="color: #eee;">Our First Junior Student Council (JSC) at TSIS was recently elected by a vote from the entire
-                            Primary Level. They are willing, eager, and able to learn. The Teacher Advisors, colleagues, and
-                            Administration all believe these JSC members can contribute much to the development of future
-                            student involvement at TSIS. Congratulations to our First JSC!</p>
-                        <a class="button wow bounceIn col-md-12 text-center" data-wow-delay="0.4s" href="#">ENROLL TODAY</a>
-                    </div>
-                </div>
-                <div class="col-md-4 camps">
-                    <a href="#">
-                        <div class="img-frame"><img class="img-responsive img-content" src="<?php echo $themeLib;?>images/demo-img-05.jpg" alt=""/>
-                        </div>
-                    </a>
-                    <h3 style="margin-bottom: 20px; font-family: 'Bree Serif', serif; font-size: 18px; font-weight: 300; color: ##fff">TSIS First Junior Student Council</h3>
-                    <div class="Proin">
-                        <p style="color: #eee;">Our First Junior Student Council (JSC) at TSIS was recently elected by a vote from the entire
-                            Primary Level. They are willing, eager, and able to learn. The Teacher Advisors, colleagues, and
-                            Administration all believe these JSC members can contribute much to the development of future
-                            student involvement at TSIS. Congratulations to our First JSC!</p>
-                        <a class="button wow bounceIn col-md-12 text-center" data-wow-delay="0.4s" href="#">ENROLL TODAY</a>
-                    </div>
-                </div>
-                <div class="col-md-4 camps">
-                    <a href="#">
-                        <div class="img-frame"><img class="img-responsive img-content" src="<?php echo $themeLib;?>images/demo-img-05.jpg" alt=""/>
-                        </div>
-                    </a>
-                    <h3 style="margin-bottom: 20px; font-family: 'Bree Serif', serif; font-size: 18px; font-weight: 300; color: ##fff">TSIS First Junior Student Council</h3>
-                    <div class="Proin">
-                        <p style="color: #eee;">Our First Junior Student Council (JSC) at TSIS was recently elected by a vote from the entire
-                            Primary Level. They are willing, eager, and able to learn. The Teacher Advisors, colleagues, and
-                            Administration all believe these JSC members can contribute much to the development of future
-                            student involvement at TSIS. Congratulations to our First JSC!</p>
-                        <a class="button wow bounceIn col-md-12 text-center" data-wow-delay="0.4s" href="#">ENROLL TODAY</a>
-                    </div>
-                </div>
+<?php $cat_show = get_option('achievements_show');
+$myindex = json_decode(stripslashes($cat_show));
+if(count($myindex)<6){
+	$arghis = array(
+		'post_type' => array('post','page'),
+		'post_status' =>'publish',
+		'category_name' => 'achievements'
+	);
+	global $posts,$post;
+query_posts($arghis);
+while(have_posts()):the_post();
+$imagethumb = get_the_post_thumbnail( $post->ID );
+$imagethumb = $imagethumb?str_replace('src',' class="img-responsive" src',$imagethumb):str_replace('src',' class="img-responsive img-content" src',get_first_inserted_image());
+getListHilight($post->post_title,$post->post_excerpt?$post->post_excerpt: iconv_substr(strip_tags($post->post_content),0,320, "UTF-8")."...",get_permalink($post->ID),$imagethumb);
+endwhile;
+}else if(count($myindex)>5){
+global $posts,$post;
+for($i=0;$i<count($myindex);$i++){	
+$post = get_post($myindex[$i]); 
+$imagethumb = get_the_post_thumbnail( $post->ID );
+$imagethumb = $imagethumb?str_replace('src',' class="img-responsive" src',$imagethumb):str_replace('src',' class="img-responsive img-content" src',get_first_inserted_image());
+getListHilight($post->post_title,$post->post_excerpt?$post->post_excerpt: iconv_substr(strip_tags($post->post_content),0,320, "UTF-8")."...",get_permalink($post->ID),$imagethumb);
+}
+}
+?>
 
             </div>
             <div class="clearfix"></div>
@@ -246,30 +186,39 @@ getListHilight($post->post_title,$post->post_excerpt?$post->post_excerpt: iconv_
                             Suspendisse in laoreet purus. Phasellus turpis lacus, feugiat
                             eu tincidunt a, ultrices quis tellus. Ut eu justo a nunc gravida adipiscing.</p>
                     </div>
-                    <div class="col-md-6 posts wow bounceIn" data-wow-delay="0.4s">
-                        <a href="#"><img class="img-responsive" src="<?php echo $themeLib;?>images/br1.jpg" alt=""/></a>
-                        <span>February 14, 2014</span>
+                    <?php 
+					$arghis = array(
+		'post_type' => 'parent_info',
+		'post_status' =>'publish'
+	);
+	global $posts,$post;
+query_posts($arghis);
+$countparent = 1;
+while(have_posts()):the_post();
+$imagethumb = get_the_post_thumbnail( $post->ID );
+$imagethumb = $imagethumb?str_replace('src',' class="img-responsive" src',$imagethumb):str_replace('src',' class="img-responsive" src',get_first_inserted_image());
+$mylink = get_permalink($post->ID);
+$postdate = date('F d, Y',strtotime($post->post_date));
+if($countparent==1){
 
-                        <h2>Picnic to Rock Garden & Sukhna</h2>
+?>
+<div class="col-md-6 posts wow bounceIn" data-wow-delay="0.4s">
+                        <a href="<?php echo $mylink;?>"><?php echo $imagethumb;?></a>
+                        <span><?php echo $postdate;?></span>
 
-                        <p>Vivamus laoreet vitae mi sit amet mattis.
-                            Praesent sagittis libero dui, et adipiscing lorem pharetra non.
-                            Vestibulum aliquam adipiscing magna ut adipiscing. Mauris sit amet ante nisl.</p>
+                        <h2><?php echo $post->post_title;?></h2>
+
+                        <p><?php echo $post->post_excerpt?$post->post_excerpt: iconv_substr(strip_tags($post->post_content),0,320, "UTF-8")."...";?></p>
                     </div>
-                    <div class="col-md-6 magna wow bounceIn" data-wow-delay="0.4s">
-                        <div class="col-md-6 amet wow bounceIn" data-wow-delay="0.4s">
-                            <span>February 4, 2014</span>
-                            <a href="#"><img class="img-responsive" src="<?php echo $themeLib;?>images/br2.jpg" alt=""/></a>
-                        </div>
-                        <div class="col-md-6 dui wow bounceIn" data-wow-delay="0.4s">
-                            <h2>New swings added</h2>
+<?php 
+$countparent++;
 
-                            <p>Vivamus laoreet vitae mi sit amet mattis.
-                                Praesent sagittis libero dui, et adipiscing lorem pharetra non.
-                                Vestibulum aliquam adipiscing. Vivamus laoreet vitae mi sit amet mattis.
-                                Sent sagittis libero dui et adipiscing.</p>
-                        </div>
-                        <div class="col-md-6 amet wow bounceIn" data-wow-delay="0.4s">
+}else{
+	if($countparent==2){
+?>
+<div class="col-md-6 magna wow bounceIn" data-wow-delay="0.4s">
+                        
+<!--                        <div class="col-md-6 amet wow bounceIn" data-wow-delay="0.4s">
                             <span>February 4, 2014</span>
                             <a href="#"><img class="img-responsive" src="<?php echo $themeLib;?>images/br3.jpg" alt=""/></a>
                         </div>
@@ -280,8 +229,27 @@ getListHilight($post->post_title,$post->post_excerpt?$post->post_excerpt: iconv_
                                 Praesent sagittis libero dui, et adipiscing lorem pharetra non.
                                 Vestibulum aliquam adipiscing. Vivamus laoreet vitae mi sit amet mattis.
                                 Sent sagittis libero dui et adipiscing.</p>
+                        </div>-->
+                    
+<?php
+}
+?>
+<div class="col-md-6 amet wow bounceIn" data-wow-delay="0.4s">
+                            <span>February 4, 2014</span>
+                            <a href="<?php echo $mylink;?>"><?php echo $imagethumb;?></a>
                         </div>
-                    </div>
+                        <div class="col-md-6 dui wow bounceIn" data-wow-delay="0.4s">
+                            <h2><?php echo $post->post_title;?></h2>
+
+                            <p><?php echo $post->post_excerpt?$post->post_excerpt: iconv_substr(strip_tags($post->post_content),0,320, "UTF-8")."...";?></p>
+                        </div>
+<?php	
+$countparent++;
+}
+if($countparent==4){?> </div><?php }
+endwhile;
+					?>
+                                       
                 </div>
         </div>
         <div class="clearfix"></div>

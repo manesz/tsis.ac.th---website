@@ -1,11 +1,28 @@
 <?php
+$actiontget = isset($_REQUEST['cat_show'])?$_REQUEST['cat_show']:false;
+$cat_show = get_option($actiontget);
+if($actiontget&&($cat_show!=false)){
+$myindex = json_decode(stripslashes($cat_show));
+$myarr = NULL;
+global $posts,$post;
+for($i=0;$i<count($myindex);$i++){	
+$post = get_post($myindex[$i]); 
+$imagethumb = get_the_post_thumbnail( $post->ID );
+$imagethumb = $imagethumb?'<img alt="'.$post->post_title.'" width="100%" src="' .$imagethumb. '" />':get_first_inserted_image();
+$mypotarr = array('post_title'=>$post->post_title,'ID'=>$post->ID,'image'=>$imagethumb,'shortpost'=>$post->post_content);
+$myarr['data'][] = $mypotarr;
+}
+header('Content-Type: application/json');
+echo json_encode($myarr);
+exit();
+}
 $s = isset($_REQUEST['s'])?$_REQUEST['s']:false;
+$catslug = isset($_REQUEST['catslug'])?$_REQUEST['catslug']:false;
 if(!function_exists('spd_pagination')){
 function spd_pagination($echo=false,$catid=NULL,$prev = '«', $next = '»') {
     global $wp_query, $wp_rewrite;
     $wp_query->query_vars['paged'] > 1 ? $current = $wp_query->query_vars['paged'] : $current = 1;
 	$formatxx = '?paged=%#%';
-	
     $pagination = array(
         //'base' => @add_query_arg('paged','%#%'),
         'format' => $formatxx,
@@ -27,11 +44,13 @@ function spd_pagination($echo=false,$catid=NULL,$prev = '«', $next = '»') {
     }
 };	
 }
+$
 $paged = isset($_REQUEST['paged'])?$_REQUEST['paged']:1;
 $myarr = NULL;
 $args = array(
 	'post_type' => array('post','page'),
 	'post_status' =>'publish',
+	'category_name' => $catslug,
 	'paged' =>$paged
 );
 if($s){

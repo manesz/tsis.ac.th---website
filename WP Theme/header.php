@@ -49,7 +49,7 @@
             <div class="navigation">
                 <span class="menu"> </span>
                 <?php 
-				if (has_nav_menu('the-main-menu')){
+				if (has_nav_menu('top-menu')){
 				wp_nav_menu( array('menu' => 'Main' ));
 				}else{
 					
@@ -69,9 +69,11 @@
             <div class="clearfix"> </div>
             <!-- /script-nav -->
             <div class="top-icons">
-                <span class="icon1"> </span>
-                <span class="icon2"> </span>
-                <span class="icon3"> </span>
+            <?php
+			$fb_contact = get_option('fb_contact');
+$tw_contact = get_option('tw_contact');
+$gp_conteact = get_option('gp_conteact');
+ if($fb_contact){?><a href="<?php echo $fb_contact;?>"><span class="icon1"> </span></a><?php } if($tw_contact){?><a href="<?php echo $tw_contact;?>"><span class="icon2"> </span></a><?php } if($gp_conteact){?><a href="<?php echo $gp_conteact;?>"><span class="icon3"> </span></a><?php }?>
             </div>
             <div class="clearfix"> </div>
         </div>

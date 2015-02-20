@@ -31,7 +31,7 @@ function bones_ahoy() {
   // USE THIS TEMPLATE TO CREATE CUSTOM POST TYPES EASILY
   //require_once( 'library/custom-post-type.php' );
   require_once('library/custom-announcement.php');
-
+require_once('library/custom-parent.php');
   // launching operation cleanup
   add_action( 'init', 'bones_head_cleanup' );
   // A better title
@@ -325,6 +325,13 @@ $init_page = array(
 $inittm->firstInit($init_page);
 add_option( 'is_first_setup', '1', '', 'yes' );
 }
+register_nav_menus(array(
+	'top-menu'         => __('Top Menu', 'responsive'),
+	'header-menu'      => __('Header Menu', 'responsive'),
+	'sub-header-menu'  => __('Sub-Header Menu', 'responsive'),
+	'footer-menu'      => __('Footer Menu', 'responsive')
+	)
+);
 add_filter( 'wp_mail_content_type', 'set_html_content_type' ); 
 function set_html_content_type() {
 return 'text/html';

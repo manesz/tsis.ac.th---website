@@ -1,9 +1,24 @@
 <?php	include_once('header.php');
+function getListHilight($title,$desc,$link,$img='<img class="img-responsive img-content" src="http://tsis.ac.th/i/wp-content/uploads/2013/02/copy-header1.png" alt=""/>'){
+	?>
+<div class="col-md-4 camps">
+                        <a href="<?php echo $link;?>">
+                            <div class="img-frame"><?php echo $img;?>
+                            </div>
+                        </a>
+                        <h3 style="margin-bottom: 20px; font-family: 'Bree Serif', serif; font-size: 18px; font-weight: 300; color: ##fff"><?php echo $title;?></h3>
+                        <div class="Proin">
+                            <p style="color: #eee;"><?php echo $desc;?></p>
+                            <a class="button wow bounceIn col-md-12 text-center" data-wow-delay="0.4s" href="<?php echo $link;?>">ENROLL TODAY</a>
+                        </div>
+                    </div>
+    <?php
+}
 $top_content_op = get_option('top_content');
 global $post,$posts;
 $post = get_post($top_content_op);
 $imagethumb = get_the_post_thumbnail( $post->ID );
-$imagethumb = $imagethumb?'<img alt="'.$post->post_title.'" width="190" src="' .$imagethumb. '" />':get_first_inserted_image();?>
+$imagethumb = $imagethumb?'<img alt="'.$post->post_title.'" width="190" class="img-responsive img-content" src="' .$imagethumb. '" />':str_replace('src',' class="img-responsive img-content" src',get_first_inserted_image());?>
 <div class="clearfix">
     <div class="col-lg-6"><?php echo $imagethumb;?></div>
     <div class="col-lg-6">
@@ -63,92 +78,32 @@ foreach($vdofeeds as $vdofeed){
             <div id="" class="offerings text-left" style="color: #fff;">
                 <h3 class="text-left">Highlight </h3>
                 <div class="bootstrap-grids">
-
-                    <div class="col-md-4 camps">
-                        <a href="#">
-                            <div class="img-frame"><img class="img-responsive img-content" src="<?php echo $themeLib;?>images/demo-img-01.jpg" alt=""/>
-                            </div>
-                        </a>
-                        <h3 style="margin-bottom: 20px; font-family: 'Bree Serif', serif; font-size: 18px; font-weight: 300; color: ##fff">TSIS First Junior Student Council</h3>
-                        <div class="Proin">
-                            <p style="color: #eee;">Our First Junior Student Council (JSC) at TSIS was recently elected by a vote from the entire
-                                Primary Level. They are willing, eager, and able to learn. The Teacher Advisors, colleagues, and
-                                Administration all believe these JSC members can contribute much to the development of future
-                                student involvement at TSIS. Congratulations to our First JSC!</p>
-                            <a class="button wow bounceIn col-md-12 text-center" data-wow-delay="0.4s" href="#">ENROLL TODAY</a>
-                        </div>
-                    </div>
-                    <div class="col-md-4 camps">
-                        <a href="#">
-                            <div class="img-frame"><img class="img-responsive img-content" src="<?php echo $themeLib;?>images/demo-img-01.jpg" alt=""/>
-                            </div>
-                        </a>
-                        <h3 style="margin-bottom: 20px; font-family: 'Bree Serif', serif; font-size: 18px; font-weight: 300; color: ##fff">TSIS First Junior Student Council</h3>
-                        <div class="Proin">
-                            <p style="color: #eee;">Our First Junior Student Council (JSC) at TSIS was recently elected by a vote from the entire
-                                Primary Level. They are willing, eager, and able to learn. The Teacher Advisors, colleagues, and
-                                Administration all believe these JSC members can contribute much to the development of future
-                                student involvement at TSIS. Congratulations to our First JSC!</p>
-                            <a class="button wow bounceIn col-md-12 text-center" data-wow-delay="0.4s" href="#">ENROLL TODAY</a>
-                        </div>
-                    </div>
-                    <div class="col-md-4 camps">
-                        <a href="#">
-                            <div class="img-frame"><img class="img-responsive img-content" src="<?php echo $themeLib;?>images/demo-img-01.jpg" alt=""/>
-                            </div>
-                        </a>
-                        <h3 style="margin-bottom: 20px; font-family: 'Bree Serif', serif; font-size: 18px; font-weight: 300; color: ##fff">TSIS First Junior Student Council</h3>
-                        <div class="Proin">
-                            <p style="color: #eee;">Our First Junior Student Council (JSC) at TSIS was recently elected by a vote from the entire
-                                Primary Level. They are willing, eager, and able to learn. The Teacher Advisors, colleagues, and
-                                Administration all believe these JSC members can contribute much to the development of future
-                                student involvement at TSIS. Congratulations to our First JSC!</p>
-                            <a class="button wow bounceIn col-md-12 text-center" data-wow-delay="0.4s" href="#">ENROLL TODAY</a>
-                        </div>
-                    </div>
-                    <div class="col-md-4 camps">
-                        <a href="#">
-                            <div class="img-frame"><img class="img-responsive img-content" src="<?php echo $themeLib;?>images/demo-img-01.jpg" alt=""/>
-                            </div>
-                        </a>
-                        <h3 style="margin-bottom: 20px; font-family: 'Bree Serif', serif; font-size: 18px; font-weight: 300; color: ##fff">TSIS First Junior Student Council</h3>
-                        <div class="Proin">
-                            <p style="color: #eee;">Our First Junior Student Council (JSC) at TSIS was recently elected by a vote from the entire
-                                Primary Level. They are willing, eager, and able to learn. The Teacher Advisors, colleagues, and
-                                Administration all believe these JSC members can contribute much to the development of future
-                                student involvement at TSIS. Congratulations to our First JSC!</p>
-                            <a class="button wow bounceIn col-md-12 text-center" data-wow-delay="0.4s" href="#">ENROLL TODAY</a>
-                        </div>
-                    </div>
-                    <div class="col-md-4 camps">
-                        <a href="#">
-                            <div class="img-frame"><img class="img-responsive img-content" src="<?php echo $themeLib;?>images/demo-img-01.jpg" alt=""/>
-                            </div>
-                        </a>
-                        <h3 style="margin-bottom: 20px; font-family: 'Bree Serif', serif; font-size: 18px; font-weight: 300; color: ##fff">TSIS First Junior Student Council</h3>
-                        <div class="Proin">
-                            <p style="color: #eee;">Our First Junior Student Council (JSC) at TSIS was recently elected by a vote from the entire
-                                Primary Level. They are willing, eager, and able to learn. The Teacher Advisors, colleagues, and
-                                Administration all believe these JSC members can contribute much to the development of future
-                                student involvement at TSIS. Congratulations to our First JSC!</p>
-                            <a class="button wow bounceIn col-md-12 text-center" data-wow-delay="0.4s" href="#">ENROLL TODAY</a>
-                        </div>
-                    </div>
-                    <div class="col-md-4 camps">
-                        <a href="#">
-                            <div class="img-frame"><img class="img-responsive img-content" src="<?php echo $themeLib;?>images/demo-img-01.jpg" alt=""/>
-                            </div>
-                        </a>
-                        <h3 style="margin-bottom: 20px; font-family: 'Bree Serif', serif; font-size: 18px; font-weight: 300; color: ##fff">TSIS First Junior Student Council</h3>
-                        <div class="Proin">
-                            <p style="color: #eee;">Our First Junior Student Council (JSC) at TSIS was recently elected by a vote from the entire
-                                Primary Level. They are willing, eager, and able to learn. The Teacher Advisors, colleagues, and
-                                Administration all believe these JSC members can contribute much to the development of future
-                                student involvement at TSIS. Congratulations to our First JSC!</p>
-                            <a class="button wow bounceIn col-md-12 text-center" data-wow-delay="0.4s" href="#">ENROLL TODAY</a>
-                        </div>
-                    </div>
-
+<?php $cat_show = get_option('highlight_show');
+$myindex = json_decode(stripslashes($cat_show));
+if(count($myindex)<6){
+	$arghis = array(
+		'post_type' => array('post','page'),
+		'post_status' =>'publish',
+		'category_name' => 'highlight'
+	);
+	global $posts,$post;
+query_posts($arghis);
+while(have_posts()):the_post();
+$imagethumb = get_the_post_thumbnail( $post->ID );
+$imagethumb = $imagethumb?'<img alt="'.$post->post_title.'" width="100%" src="' .$imagethumb. '" />':str_replace('src',' class="img-responsive img-content" src',get_first_inserted_image());
+getListHilight($post->post_title,$post->post_excerpt?$post->post_excerpt: iconv_substr(strip_tags($post->post_content),0,320, "UTF-8")."...",get_permalink($post->ID),$imagethumb);
+endwhile;
+}else if(count($myindex)>5){
+global $posts,$post;
+for($i=0;$i<count($myindex);$i++){	
+$post = get_post($myindex[$i]); 
+$imagethumb = get_the_post_thumbnail( $post->ID );
+$imagethumb = $imagethumb?'<img alt="'.$post->post_title.'" width="100%" src="' .$imagethumb. '" />':str_replace('src',' class="img-responsive img-content" src',get_first_inserted_image());
+getListHilight($post->post_title,$post->post_excerpt?$post->post_excerpt: iconv_substr(strip_tags($post->post_content),0,320, "UTF-8")."...",get_permalink($post->ID),$imagethumb);
+}
+}
+?>
+                    
 
                 </div>
                 <div class="clearfix"></div>
@@ -158,97 +113,32 @@ foreach($vdofeeds as $vdofeed){
         <div class="clearfix">
 
             <h3 class="text-left" style="font-family: 'Bree Serif', serif; font-weight: 300; color: #668591; text-align: center; font-size: 52px; padding: 0.5em 0em 0.5em; margin-top: 0;">On Focus</h3>
-
-            <div class="col-md-4 camps">
-                <a href="#">
-                    <div class="img-frame"><img class="img-responsive img-content" src="<?php echo $themeLib;?>images/demo-img-03.jpg" alt=""/>
-                    </div>
-                </a>
-                <ul class="product_title titlelast">
-                    <li class="s_head"><h3 style="margin-bottom: 20px; font-family: 'Bree Serif', serif; font-size: 18px; font-weight: 300;">Student Immersion Program in Singapore</h3></li>
-                    <!--<li> <a href="#" class="fa-btn1 btn-2 btn-1e1">$35</a> </li>-->
-                </ul>
-                <div class="clearfix"></div>
-                <div class="Proin">
-                    <p>Our P2 and P3 students went to Singapore for an Immersion Program in Jingshan Primary School. The program provided our students with great learning experience. They attended classes taught by wonderful teachers and were able to interact with students in Jingshan in and out of the classroom. The immersion program has established a strong education partnership between two schools from two different countries - Thailand and Singapore.</p>
-                    <a class="button wow bounceIn col-md-12 text-center" data-wow-delay="0.4s" href="#">ENROLL TODAY</a>
-                </div>
-            </div>
-            <div class="col-md-4 camps">
-                <a href="#">
-                    <div class="img-frame"><img class="img-responsive img-content" src="<?php echo $themeLib;?>images/demo-img-03.jpg" alt=""/>
-                    </div>
-                </a>
-                <ul class="product_title titlelast">
-                    <li class="s_head"><h3 style="margin-bottom: 20px; font-family: 'Bree Serif', serif; font-size: 18px; font-weight: 300;">Student Immersion Program in Singapore</h3></li>
-                    <!--<li> <a href="#" class="fa-btn1 btn-2 btn-1e1">$35</a> </li>-->
-                </ul>
-                <div class="clearfix"></div>
-                <div class="Proin">
-                    <p>Our P2 and P3 students went to Singapore for an Immersion Program in Jingshan Primary School. The program provided our students with great learning experience. They attended classes taught by wonderful teachers and were able to interact with students in Jingshan in and out of the classroom. The immersion program has established a strong education partnership between two schools from two different countries - Thailand and Singapore.</p>
-                    <a class="button wow bounceIn col-md-12 text-center" data-wow-delay="0.4s" href="#">ENROLL TODAY</a>
-                </div>
-            </div>
-            <div class="col-md-4 camps">
-                <a href="#">
-                    <div class="img-frame"><img class="img-responsive img-content" src="<?php echo $themeLib;?>images/demo-img-03.jpg" alt=""/>
-                    </div>
-                </a>
-                <ul class="product_title titlelast">
-                    <li class="s_head"><h3 style="margin-bottom: 20px; font-family: 'Bree Serif', serif; font-size: 18px; font-weight: 300;">Student Immersion Program in Singapore</h3></li>
-                    <!--<li> <a href="#" class="fa-btn1 btn-2 btn-1e1">$35</a> </li>-->
-                </ul>
-                <div class="clearfix"></div>
-                <div class="Proin">
-                    <p>Our P2 and P3 students went to Singapore for an Immersion Program in Jingshan Primary School. The program provided our students with great learning experience. They attended classes taught by wonderful teachers and were able to interact with students in Jingshan in and out of the classroom. The immersion program has established a strong education partnership between two schools from two different countries - Thailand and Singapore.</p>
-                    <a class="button wow bounceIn col-md-12 text-center" data-wow-delay="0.4s" href="#">ENROLL TODAY</a>
-                </div>
-            </div>
-            <div class="col-md-4 camps">
-                <a href="#">
-                    <div class="img-frame"><img class="img-responsive img-content" src="<?php echo $themeLib;?>images/demo-img-03.jpg" alt=""/>
-                    </div>
-                </a>
-                <ul class="product_title titlelast">
-                    <li class="s_head"><h3 style="margin-bottom: 20px; font-family: 'Bree Serif', serif; font-size: 18px; font-weight: 300;">Student Immersion Program in Singapore</h3></li>
-                    <!--<li> <a href="#" class="fa-btn1 btn-2 btn-1e1">$35</a> </li>-->
-                </ul>
-                <div class="clearfix"></div>
-                <div class="Proin">
-                    <p>Our P2 and P3 students went to Singapore for an Immersion Program in Jingshan Primary School. The program provided our students with great learning experience. They attended classes taught by wonderful teachers and were able to interact with students in Jingshan in and out of the classroom. The immersion program has established a strong education partnership between two schools from two different countries - Thailand and Singapore.</p>
-                    <a class="button wow bounceIn col-md-12 text-center" data-wow-delay="0.4s" href="#">ENROLL TODAY</a>
-                </div>
-            </div>
-            <div class="col-md-4 camps">
-                <a href="#">
-                    <div class="img-frame"><img class="img-responsive img-content" src="<?php echo $themeLib;?>images/demo-img-03.jpg" alt=""/>
-                    </div>
-                </a>
-                <ul class="product_title titlelast">
-                    <li class="s_head"><h3 style="margin-bottom: 20px; font-family: 'Bree Serif', serif; font-size: 18px; font-weight: 300;">Student Immersion Program in Singapore</h3></li>
-                    <!--<li> <a href="#" class="fa-btn1 btn-2 btn-1e1">$35</a> </li>-->
-                </ul>
-                <div class="clearfix"></div>
-                <div class="Proin">
-                    <p>Our P2 and P3 students went to Singapore for an Immersion Program in Jingshan Primary School. The program provided our students with great learning experience. They attended classes taught by wonderful teachers and were able to interact with students in Jingshan in and out of the classroom. The immersion program has established a strong education partnership between two schools from two different countries - Thailand and Singapore.</p>
-                    <a class="button wow bounceIn col-md-12 text-center" data-wow-delay="0.4s" href="#">ENROLL TODAY</a>
-                </div>
-            </div>
-            <div class="col-md-4 camps">
-                <a href="#">
-                    <div class="img-frame"><img class="img-responsive img-content" src="<?php echo $themeLib;?>images/demo-img-03.jpg" alt=""/>
-                    </div>
-                </a>
-                <ul class="product_title titlelast">
-                    <li class="s_head"><h3 style="margin-bottom: 20px; font-family: 'Bree Serif', serif; font-size: 18px; font-weight: 300;">Student Immersion Program in Singapore</h3></li>
-                    <!--<li> <a href="#" class="fa-btn1 btn-2 btn-1e1">$35</a> </li>-->
-                </ul>
-                <div class="clearfix"></div>
-                <div class="Proin">
-                    <p>Our P2 and P3 students went to Singapore for an Immersion Program in Jingshan Primary School. The program provided our students with great learning experience. They attended classes taught by wonderful teachers and were able to interact with students in Jingshan in and out of the classroom. The immersion program has established a strong education partnership between two schools from two different countries - Thailand and Singapore.</p>
-                    <a class="button wow bounceIn col-md-12 text-center" data-wow-delay="0.4s" href="#">ENROLL TODAY</a>
-                </div>
-            </div>
+<?php $cat_show = get_option('onfocus_show');
+$myindex = json_decode(stripslashes($cat_show));
+if(count($myindex)<6){
+	$arghis = array(
+		'post_type' => array('post','page'),
+		'post_status' =>'publish',
+		'category_name' => 'onfocus'
+	);
+	global $posts,$post;
+query_posts($arghis);
+while(have_posts()):the_post();
+$imagethumb = get_the_post_thumbnail( $post->ID );
+$imagethumb = $imagethumb?'<img alt="'.$post->post_title.'" width="100%" src="' .$imagethumb. '" />':str_replace('src',' class="img-responsive img-content" src',get_first_inserted_image());
+getListHilight($post->post_title,$post->post_excerpt?$post->post_excerpt: iconv_substr(strip_tags($post->post_content),0,320, "UTF-8")."...",get_permalink($post->ID),$imagethumb);
+endwhile;
+}else if(count($myindex)>5){
+global $posts,$post;
+for($i=0;$i<count($myindex);$i++){	
+$post = get_post($myindex[$i]); 
+$imagethumb = get_the_post_thumbnail( $post->ID );
+$imagethumb = $imagethumb?'<img alt="'.$post->post_title.'" width="100%" src="' .$imagethumb. '" />':str_replace('src',' class="img-responsive img-content" src',get_first_inserted_image());
+getListHilight($post->post_title,$post->post_excerpt?$post->post_excerpt: iconv_substr(strip_tags($post->post_content),0,320, "UTF-8")."...",get_permalink($post->ID),$imagethumb);
+}
+}
+?>
+            
         </div>
 
         <div id="" class="offerings text-left" style="color: #fff;">

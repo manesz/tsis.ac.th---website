@@ -1,4 +1,7 @@
 <?php
+$fb_contact = $fb_contact?$fb_contact:get_option('fb_contact');
+$tw_contact = $tw_contact?$tw_contact:get_option('tw_contact');
+$gp_conteact = $gp_conteact?$gp_conteact:get_option('gp_conteact');
 $title_contact = get_option('title_contact');
 $description_contact = get_option('description_contact');
 $address_contact = get_option('address_contact');
@@ -83,9 +86,7 @@ $title_contact = $title_contact?$title_contact:'Get in Touch';
             <h4 style="font-size: 12px;">Design by<a href="http://w3layouts.com" target="_blank"> Idea Corners Studio co.,ltd.</a></h4>
         </div>
         <div class="col-md-6 bottom-icons">
-            <span class="icon1"> </span>
-            <span class="icon2"> </span>
-            <span class="icon3"> </span>
+            <?php if($fb_contact){?><a href="<?php echo $fb_contact;?>"><span class="icon1"> </span></a><?php } if($tw_contact){?><a href="<?php echo $tw_contact;?>"><span class="icon2"> </span></a><?php } if($gp_conteact){?><a href="<?php echo $gp_conteact;?>"><span class="icon3"> </span></a><?php }?>
         </div>
     </div>
 </div>
@@ -96,6 +97,32 @@ get_stylesheet_directory_uri().'/library/js/move-top.js';?>"></script>
 <script type="text/javascript" src="<?php echo 
 get_stylesheet_directory_uri().'/library/js/easing.js';?>"></script>
 <script src="<?php echo $themeLib;?>js/wow.min.js"></script>
+<?php if(isset($gallpage)){?>
+<link href="<?php echo $themeLib;?>js/fancyapps/jquery.fancybox.css" rel="stylesheet" type="text/css" /><link href="<?php echo $themeLib;?>js/fancyapps/helpers/jquery.fancybox-buttons.css" rel="stylesheet" type="text/css" /><link href="<?php echo $themeLib;?>js/fancyapps/helpers/jquery.fancybox-thumbs.css" rel="stylesheet" type="text/css" /><script type="text/javascript" src="<?php echo 
+$themeLib.'js/fancyapps/jquery.fancybox.pack.js';?>"></script>
+<script type="text/javascript" src="<?php echo 
+$themeLib.'js/fancyapps/helpers/jquery.fancybox-buttons.js';?>"></script><script type="text/javascript" src="<?php echo 
+$themeLib.'js/fancyapps/helpers/jquery.fancybox-thumbs.js';?>"></script>
+<script type="text/javascript">
+	var gallhook = {
+		init:function(){
+			$('.ngg-gallery-thumbnail a').attr('rel', 'media-gallery')
+				.fancybox({
+					openEffect : 'none',
+					closeEffect : 'none',
+					prevEffect : 'none',
+					nextEffect : 'none',
+
+					arrows : false,
+					helpers : {
+						media : {},
+						buttons : {}
+					}
+				});
+		}
+	};
+</script>
+<?php }?>
 <?php if(is_front_page()){?>
 <link href="<?php echo $themeLib;?>css/fullcalendar.css" rel="stylesheet" type="text/css" />
 <link href="<?php echo $themeLib;?>css/fullcalendar.print.css" rel="stylesheet" media="print" />
@@ -118,6 +145,9 @@ var mysiteurl = '<?php echo get_option('siteurl').'/';?>';
 		addEventPage:function(){
 			new WOW().init();
 			contactMail.init();
+			if(typeof gallhook !== 'undefined'){
+				gallhook.init();
+			}
 			$("span.menu").on('click',function(){
 				$(".navigation ul").slideToggle("slow" , function(){});
 			});

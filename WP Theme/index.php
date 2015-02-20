@@ -1,4 +1,4 @@
-<?php get_header(); ?>
+<?php include_once('header.php');?>
 
 			<div id="content">
 
@@ -71,6 +71,4 @@
 				</div>
 
 			</div>
-
-
-<?php get_footer(); ?>
+<?php include_once('footer.php');exit();

@@ -7,6 +7,8 @@ $begin = 0;
 if($paged>1){
 	$begin = ($paged-1)*$limit;
 }
+$total = $wpdb->get_var("SELECT count(gid) FROM wp_ngg_gallery where
+		 pageid>0");
 $sql = "
          SELECT * FROM wp_ngg_gallery
 		 where
@@ -32,7 +34,19 @@ foreach($galldatas as $galldata){
                 <div class="clearfix"> </div>
             </div>
     <?php
-}?></div></div>
+}?>
+</div></div><div class="clearfix"> </div><div class="ngg-navigation"><?php
+$p = new pagination;
+$p->items($total);
+$p->limit($limit);
+$p->nextLabel('');//removing next text
+$p->prevLabel('');//removing previous text
+$p->nextIcon('&#9658;');//Changing the next icon
+$p->prevIcon('&#9668;');//Changing the previous icon
+$p->target($_SERVER['REQUEST_URI']);
+$p->currentPage($paged);
+$p->parameterName("paged");
+echo $p->getOutput();?></div>
 <style type="text/css">
 .col-md-3.camps{margin-bottom:10px;overflow:hidden}.col-md-3.camps ul.product_title li.s_head h3{font-size:18px}
 </style>

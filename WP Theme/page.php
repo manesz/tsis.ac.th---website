@@ -37,4 +37,4 @@ while ( have_posts() ) : the_post();?>
             <div class="clearfix"> </div>
         </div>
     </div>
-<?php  endwhile;}include_once('footer.php');exit();
+<?php  endwhile;}$gallpage = true;include_once('footer.php');exit();

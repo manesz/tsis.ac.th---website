@@ -23,6 +23,7 @@ h1,h2,h3,h4,h5,h6,p,span{
 .clearfix{
 	clear:both;
 }
+.slideshowlink{display:none}
 .logo{
 	float:left;
 	margin-top: -0.4em;
@@ -193,6 +194,7 @@ h1,h2,h3,h4,h5,h6,p,span{
 	margin-top: 0;
 	margin-bottom: 0;
 }
+#camps{margin-bottom:5px}
 .camps h2{
 	font-family: 'Bree Serif', serif;
 	color: #668591;
@@ -844,6 +846,8 @@ a:hover {
 	padding: 0.5em;
 	font-size: 18px;
 }
+.alignright{text-align:right}
+.alignleft{text-align:left}
 /*------------------ Slider Part starts Here----------*/
 #slider2,
 #slider3 {

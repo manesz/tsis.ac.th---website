@@ -11,7 +11,6 @@
  * For more info: http://codex.wordpress.org/Post_Type_Templates
 */
 ?>
-
 <?php get_header(); ?>
 
 			<div id="content">

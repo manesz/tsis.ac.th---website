@@ -8,7 +8,7 @@ global $posts,$post;
 for($i=0;$i<count($myindex);$i++){	
 $post = get_post($myindex[$i]); 
 $imagethumb = get_the_post_thumbnail( $post->ID );
-$imagethumb = $imagethumb?'<img alt="'.$post->post_title.'" width="100%" src="' .$imagethumb. '" />':get_first_inserted_image();
+$imagethumb = $imagethumb?str_replace('','',$imagethumb):get_first_inserted_image();
 $mypotarr = array('post_title'=>$post->post_title,'ID'=>$post->ID,'image'=>$imagethumb,'shortpost'=>$post->post_content);
 $myarr['data'][] = $mypotarr;
 }
@@ -62,7 +62,7 @@ $i =1;
 $myarr['pagination']=str_replace($paged.'/',$paged,spd_pagination(true,$catid));
 while(have_posts()):the_post();
 $imagethumb = get_the_post_thumbnail( $post->ID );
-$imagethumb = $imagethumb?'<img alt="'.$post->post_title.'" width="100%" src="' .$imagethumb. '" />':get_first_inserted_image();
+$imagethumb = $imagethumb?str_replace('','',$imagethumb):get_first_inserted_image();
 $mypotarr = array('post_title'=>$post->post_title,'ID'=>$post->ID,'image'=>$imagethumb,'shortpost'=>$post->post_content);
 $myarr['data'][] = $mypotarr;
 endwhile;

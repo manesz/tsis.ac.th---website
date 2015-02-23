@@ -10,7 +10,7 @@ if($posts){
 foreach($posts as $post){
 	$mydata = NULL;
 	$mydata['title'] = $post->post_title;
-	$mydata['url'] = get_permalink($posts->ID);
+	$mydata['url'] = get_home_url().'/?p='.$post->ID;
 	$mydata['start'] = get_post_meta($post->ID, 'ann_start_date', true);
 	$mydata['end'] = get_post_meta($post->ID, 'ann_end_date', true);
 	$myarr['data'][] = (object)$mydata;

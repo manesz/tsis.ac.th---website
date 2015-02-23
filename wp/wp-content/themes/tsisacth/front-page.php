@@ -1,4 +1,5 @@
 <?php	include_once('header.php');
+$myfrontpage = true;
 function getListHilight($title,$desc,$link,$img='<img class="img-responsive img-content" src="http://tsis.ac.th/i/wp-content/uploads/2013/02/copy-header1.png" alt=""/>'){
 	?>
 <div class="col-md-4 camps">
@@ -8,7 +9,7 @@ function getListHilight($title,$desc,$link,$img='<img class="img-responsive img-
                         </a>
                         <h3 style="margin-bottom: 20px; font-family: 'Bree Serif', serif; font-size: 18px; font-weight: 300; color: ##fff"><?php echo $title;?></h3>
                         <div class="Proin">
-                            <p style="color: #eee;"><?php echo $desc;?></p>
+                            <p style="color: #eee;"><?php the_content();?><?php //echo $desc;?></p>
                             <a class="button wow bounceIn col-md-12 text-center" data-wow-delay="0.4s" href="<?php echo $link;?>">ENROLL TODAY</a>
                         </div>
                     </div>

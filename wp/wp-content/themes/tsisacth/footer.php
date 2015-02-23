@@ -123,12 +123,11 @@ $themeLib.'js/fancyapps/helpers/jquery.fancybox-thumbs.js';?>"></script>
 	};
 </script>
 <?php }?>
-<?php if(is_front_page()){?>
+<?php if($myfrontpage){?>
 <link href="<?php echo $themeLib;?>css/fullcalendar.css" rel="stylesheet" type="text/css" />
 <link href="<?php echo $themeLib;?>css/fullcalendar.print.css" rel="stylesheet" media="print" />
 <script src='<?php echo get_stylesheet_directory_uri();?>/lib/moment.min.js'></script>
-<script src='<?php echo get_stylesheet_directory_uri();?>/lib/fullcalendar.min.js'></script>
-<script type="text/javascript">var ishome = true,calurl = '<?php echo get_site_url();?>/';</script>
+<script src='<?php echo get_stylesheet_directory_uri();?>/lib/fullcalendar.min.js'></script><script type="text/javascript">var ishome = true,calurl = '<?php echo get_site_url();?>/';</script>
 <?php }else{?><script type="text/javascript">var ishome = false;</script><?php }?>
 <script type="text/javascript">
 var mysiteurl = '<?php echo get_option('siteurl').'/';?>';

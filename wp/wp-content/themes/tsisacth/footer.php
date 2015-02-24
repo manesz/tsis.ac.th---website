@@ -131,7 +131,7 @@ $themeLib.'js/fancyapps/helpers/jquery.fancybox-thumbs.js';?>"></script>
 <?php }else{?><script type="text/javascript">var ishome = false;</script><?php }?>
 <script type="text/javascript">
 var mysiteurl = '<?php echo get_option('siteurl').'/';?>';
-	var $ = jQuery.noConflict();
+	var $ = null;
 	
 	var homeHook = {
 		init:function(){
@@ -191,9 +191,23 @@ var mysiteurl = '<?php echo get_option('siteurl').'/';?>';
 			});
 		}
 	};
+function pageinit(){
+	$ = jQuery.noConflict();
     $(document).ready(function() {
         homeHook.init();       
-    });
+    });	
+}
+if (typeof jQuery == 'undefined') {
+   var jqscript = document.createElement('script');
+   jqscript.type = "text/javascript";
+   jqscript.src = calurl+'jquery/jquery.js';
+   document.getElementsByTagName('head')[0].appendChild(script);
+   jqscript.onload = function(){
+	  pageinit(); 
+   }
+}else{
+	pageinit();
+}
 </script>
 <a href="#to-top" id="toTop" style="display: block;"><span id="toTopHover" style="opacity: 1;"> </span></a>
 </body>

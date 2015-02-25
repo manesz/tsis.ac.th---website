@@ -241,6 +241,19 @@ if($calEvent){
 	echo "[{title:'All Day Event',start:'2014-11-01'},{title:'Long Event',start:'2014-11-07',end:'2014-11-10'},{id:999,title:'Repeating Event',start:'2014-11-09T16:00:00'},{id:999,title:'Repeating Event',start:'2014-11-16T16:00:00'},{title:'Conference',start:'2014-11-11',end:'2014-11-13'},{title:'Meeting',start:'2014-11-12T10:30:00',end:'2014-11-12T12:30:00'},{title:'Lunch',start:'2014-11-12T12:00:00'},{title:'Meeting',start:'2014-11-12T14:30:00'},{title:'Happy Hour',start:'2014-11-12T17:30:00'},{title:'Dinner',start:'2014-11-12T20:00:00'},{title:'Birthday Party',start:'2014-11-13T07:00:00'},{title:'Click for Google',url:'http://google.com/',start:'2014-11-28'}]";
 	exit();
 }
+function getPostGallMeta($post_id){
+	$gallinpost = get_post_meta($post_id, 'gallinpost', true);
+	$gallinpostid = get_post_meta($post_id, 'gallinpostid', true);
+	$mytext = '';
+	if($gallinpostid){
+	$p1 = explode(',',$gallinpost);
+	$p2 = explode(',',$gallinpostid);
+	for($i=0;$i<count($p2);$i++){
+		$mytext .= '<li><img id="gall-'.$p2[$i].'" class="mygallsrc" src="'.$p1[$i].'"></li>';
+	}
+	}
+	return $mytext;
+}
 class inittheme{
 	private $def_post = array(
 		  'post_title' => 'My post',

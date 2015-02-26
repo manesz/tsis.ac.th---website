@@ -254,6 +254,7 @@ function getPostGallMeta($post_id){
 	}
 	return $mytext;
 }
+<<<<<<< HEAD
 function arrGetPostGallery($post_id){
     $gallinpost = get_post_meta($post_id, 'gallinpost', true);
     $gallinpostid = get_post_meta($post_id, 'gallinpostid', true);
@@ -266,6 +267,20 @@ function arrGetPostGallery($post_id){
         }
     }
     return $arrGallery;
+=======
+function getpostGallArr($post_id){
+	$returnArr = NULL;
+	$gallinpost = get_post_meta($post_id, 'gallinpost', true);
+	$gallinpostid = get_post_meta($post_id, 'gallinpostid', true);
+	if($gallinpostid){
+	$p1 = explode(',',$gallinpost);
+	$p2 = explode(',',$gallinpostid);
+	for($i=0;$i<count($p2);$i++){
+		$returnArr[]=array('id'=>$p2[$i],'src'=>$p1[$i]);
+	}
+	}
+	return $returnArr;
+>>>>>>> origin/master
 }
 class inittheme{
 	private $def_post = array(

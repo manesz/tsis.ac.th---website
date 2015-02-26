@@ -7,8 +7,12 @@ function tsis_add_pages() {
 	add_submenu_page('manage-tsis', __('Contact'), __('Contact'), 'manage_options', 'manage-contact', 'tsis_sublevel_contact');
 	add_submenu_page('manage-tsis', __('Highlight'), __('Highlight'), 'manage_options', 'manage-highlight', 'tsis_sublevel_highlight');
 	add_submenu_page('manage-tsis', __('Onfocus'), __('Onfocus'), 'manage_options', 'manage-onfocus', 'tsis_sublevel_onfocus');
+	add_submenu_page('manage-tsis', __('Gallery order'), __('Gallery order'), 'manage_options', 'manage-category-order', 'tsis_sublevel_categoryorder');
 	add_submenu_page('manage-tsis', __('Achievements'), __('Achievements'), 'manage_options', 'manage-achievements', 'tsis_sublevel_achievements');
     add_submenu_page('manage-tsis', __('Video Manage'), __('Video Manage'), 'manage_options', 'video-mange', 'tsis_sublevel_vdo');
+}
+function tsis_sublevel_categoryorder(){
+	include_once(get_template_directory().'/library/adminpage/category_order.php');
 }
 function getconfigscript(){
 ?>

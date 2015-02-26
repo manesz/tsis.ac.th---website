@@ -28,7 +28,7 @@ while ( have_posts() ) : the_post();?>
                 <div class="Proin">
                     <?php 
 					if(is_page('gallery')){
-						include_once('post-formats/format-gallely.php');
+						include_once('post-formats/loop-gallery.php');
 					}else{
 						the_content();
 					}?>

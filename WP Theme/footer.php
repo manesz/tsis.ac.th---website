@@ -83,7 +83,7 @@ $title_contact = $title_contact?$title_contact:'Get in Touch';
 <div class="footer">
     <div class="container">
         <div class="col-md-6 Reserved">
-            <h4 style="font-size: 12px;">Design by<a href="http://w3layouts.com" target="_blank"> Idea Corners Studio co.,ltd.</a></h4>
+            <h4 style="font-size: 12px;">Design by<a href="http://www.idaecorners.com" target="_blank"> Idea Corners Studio co.,ltd.</a></h4>
         </div>
         <div class="col-md-6 bottom-icons">
             <?php if($fb_contact){?><a href="<?php echo $fb_contact;?>"><span class="icon1"> </span></a><?php } if($tw_contact){?><a href="<?php echo $tw_contact;?>"><span class="icon2"> </span></a><?php } if($gp_conteact){?><a href="<?php echo $gp_conteact;?>"><span class="icon3"> </span></a><?php }?>
@@ -92,11 +92,20 @@ $title_contact = $title_contact?$title_contact:'Get in Touch';
 </div>
 <!--/Footer end Here-->
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-<script type="text/javascript" src="<?php echo 
-get_stylesheet_directory_uri().'/library/js/move-top.js';?>"></script>
-<script type="text/javascript" src="<?php echo 
-get_stylesheet_directory_uri().'/library/js/easing.js';?>"></script>
+<script type="text/javascript" src="<?php echo get_stylesheet_directory_uri().'/library/js/move-top.js';?>"></script>
+<script type="text/javascript" src="<?php echo get_stylesheet_directory_uri().'/library/js/easing.js';?>"></script>
 <script src="<?php echo $themeLib;?>js/wow.min.js"></script>
+<!------------------------------- Fancy jQuery Lightbox ------------------------------->
+
+<!-- Add fancyBox main JS and CSS files -->
+<script type="text/javascript" src="<?php echo get_stylesheet_directory_uri().'/library/js/jquery.fancybox.js?v=2.1.5'?>"></script>
+<link rel="stylesheet" type="text/css" href="<?php echo get_stylesheet_directory_uri().'/library/css/jquery.fancybox.css?v=2.1.5'?>" media="screen" />
+
+<!-- Add Thumbnail helper (this is optional) -->
+<link rel="stylesheet" type="text/css" href="<?php echo get_stylesheet_directory_uri().'/library/css/jquery.fancybox-thumbs.css?v=1.0.7'?>" />
+<script type="text/javascript" src="<?php echo get_stylesheet_directory_uri().'/library/js/jquery.fancybox-thumbs.js?v=1.0.7'?>"></script>
+
+<!------------------------------- END: Fancy jQuery Lightbox ------------------------------->
 <?php if(isset($gallpage)){?>
 <link href="<?php echo $themeLib;?>js/fancyapps/jquery.fancybox.css" rel="stylesheet" type="text/css" /><link href="<?php echo $themeLib;?>js/fancyapps/helpers/jquery.fancybox-buttons.css" rel="stylesheet" type="text/css" /><link href="<?php echo $themeLib;?>js/fancyapps/helpers/jquery.fancybox-thumbs.css" rel="stylesheet" type="text/css" /><script type="text/javascript" src="<?php echo 
 $themeLib.'js/fancyapps/jquery.fancybox.pack.js';?>"></script>
@@ -123,15 +132,25 @@ $themeLib.'js/fancyapps/helpers/jquery.fancybox-thumbs.js';?>"></script>
 	};
 </script>
 <?php }?>
-<?php if($myfrontpage){?>
+
+<?php 
+
+$myfrontpage = true;
+
+if($myfrontpage){?>
 <link href="<?php echo $themeLib;?>css/fullcalendar.css" rel="stylesheet" type="text/css" />
 <link href="<?php echo $themeLib;?>css/fullcalendar.print.css" rel="stylesheet" media="print" />
 <script src='<?php echo get_stylesheet_directory_uri();?>/lib/moment.min.js'></script>
-<script src='<?php echo get_stylesheet_directory_uri();?>/lib/fullcalendar.min.js'></script><script type="text/javascript">var ishome = true,calurl = '<?php echo get_site_url();?>/';</script>
-<?php }else{?><script type="text/javascript">var ishome = false;</script><?php }?>
-<script type="text/javascript">
+<script src='<?php echo get_stylesheet_directory_uri();?>/lib/fullcalendar.min.js'></script>
+<script type="text/javascript">var ishome = true,calurl = '<?php echo get_site_url();?>/';</script>
+<?php } ?>
+
+
+<script>
+
 var mysiteurl = '<?php echo get_option('siteurl').'/';?>';
 	var $ = jQuery.noConflict();
+//	var $ = null;
 	
 	var homeHook = {
 		init:function(){
@@ -191,8 +210,28 @@ var mysiteurl = '<?php echo get_option('siteurl').'/';?>';
 			});
 		}
 	};
+
+</script>
+<script type="text/javascript">
+    var $ = jQuery.noConflict();
     $(document).ready(function() {
-        homeHook.init();       
+        homeHook.init();
+
+        $('.fancybox-thumbs').fancybox({
+            prevEffect : 'none',
+            nextEffect : 'none',
+
+            closeBtn  : false,
+            arrows    : false,
+            nextClick : true,
+
+            helpers : {
+                thumbs : {
+                    width  : 50,
+                    height : 50
+                }
+            }
+        });
     });
 </script>
 <a href="#to-top" id="toTop" style="display: block;"><span id="toTopHover" style="opacity: 1;"> </span></a>

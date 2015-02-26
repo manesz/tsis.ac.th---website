@@ -1602,7 +1602,97 @@ a.fa-btn1.btn-2.btn-1e1 {
 	left: 5em;
 }
 }
+#topTitle {
+    font-family: 'Bree Serif', serif;
+    font-size: 38px;
+    font-weight: 300;
+    color: #333;
+}
+#topContent p {
+    margin: 2em 0em 1em 0em;
+    font-family: 'Lato', sans-serif;
+    font-size: 17px;
+    font-weight: 300;
+    color: #333;
+    line-height: 34px;
+    word-spacing: 4px;
+}
 /*--/responsive design--*/
-
+.gallery-frame { height: 200px; overflow: hidden }
+.gallery-thumb { position: relative; }
 .img-frame { width: 100%; height: 200px; overflow: hidden }
-.img-content { position: relative; top: -10%; }
+.img-content { position: relative; /*top: -10%;*/ }
+.onFocusImg img{ max-height: 350px !important; width: auto; }
+.alignleft {
+    display: inline;
+    float: left;
+    margin-right: 1.5em;
+}
+.alignright {
+    display: inline;
+    float: right;
+    margin-left: 1.5em;
+}
+.aligncenter {
+    clear: both;
+    display: block;
+    margin: 0 auto;
+}
+ul.menu li ul {
+    display: none;
+}
+ul#gallery  {
+    list-style-type: none;
+    margin-top: 100px;
+    padding-left: 0px;
+}
+ul#gallery li{
+    margin-top: 15px;
+}
+ul#gallery li img{
+    max-width: 100%;
+    /*max-height: 300px;*/
+    width: auto;
+}
+/*
+.submenu {
+    position:relative;
+}
+.submenu>.menu {
+    top:0;
+    left:100%;
+    margin-top:-6px;
+    margin-left:-1px;
+    -webkit-border-radius:0 6px 6px 6px;
+    -moz-border-radius:0 6px 6px 6px;
+    border-radius:0 6px 6px 6px;
+}
+.submenu:hover>.menu {
+    display:block;
+}
+.submenu>a:after {
+    display:block;
+    content:" ";
+    float:right;
+    width:0;
+    height:0;
+    border-color:transparent;
+    border-style:solid;
+    border-width:5px 0 5px 5px;
+    border-left-color:#cccccc;
+    margin-top:5px;
+    margin-right:-10px;
+}
+.submenu:hover>a:after {
+    border-left-color:#ffffff;
+}
+.submenu.pull-left {
+    float:none;
+}
+.submenu.pull-left>.menu {
+    left:-100%;
+    margin-left:10px;
+    -webkit-border-radius:6px 0 6px 6px;
+    -moz-border-radius:6px 0 6px 6px;
+    border-radius:6px 0 6px 6px;
+}*/

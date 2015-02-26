@@ -254,6 +254,19 @@ function getPostGallMeta($post_id){
 	}
 	return $mytext;
 }
+function arrGetPostGallery($post_id){
+    $gallinpost = get_post_meta($post_id, 'gallinpost', true);
+    $gallinpostid = get_post_meta($post_id, 'gallinpostid', true);
+    $mytext = '';
+    if($gallinpostid){
+        $p1 = explode(',',$gallinpost);
+        $p2 = explode(',',$gallinpostid);
+        for($i=0;$i<count($p2);$i++){
+            $arrGallery[] = array($p2[$i],$p1[$i]);
+        }
+    }
+    return $arrGallery;
+}
 class inittheme{
 	private $def_post = array(
 		  'post_title' => 'My post',

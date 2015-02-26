@@ -91,6 +91,7 @@ $title_contact = $title_contact?$title_contact:'Get in Touch';
     </div>
 </div>
 <!--/Footer end Here-->
+<script type="application/javascript" src="<?php echo get_stylesheet_directory_uri().'/library/js/jquery.min.js';?>"/>
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 <script type="text/javascript" src="<?php echo get_stylesheet_directory_uri().'/library/js/move-top.js';?>"></script>
 <script type="text/javascript" src="<?php echo get_stylesheet_directory_uri().'/library/js/easing.js';?>"></script>

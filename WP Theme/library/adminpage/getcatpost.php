@@ -61,7 +61,7 @@ query_posts( $args );
 $i =1;
 $myarr['pagination']=str_replace($paged.'/',$paged,spd_pagination(true,$catid));
 while(have_posts()):the_post();
-$imagethumb = get_the_post_thumbnail( $post->ID );
+$imagethumb = get_the_post_thumbnail( $post->ID,'thumbnail' );
 $imagethumb = $imagethumb?str_replace('','',$imagethumb):get_first_inserted_image();
 $mypotarr = array('post_title'=>$post->post_title,'ID'=>$post->ID,'image'=>$imagethumb,'shortpost'=>$post->post_content);
 $myarr['data'][] = $mypotarr;

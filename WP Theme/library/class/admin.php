@@ -60,7 +60,12 @@ function gallinpost_save_postdata($post_id) {
 	}
 }
 function gallinpost_add_custom_box(){
-    add_meta_box('gallery_forpost', __('Gallery post'), 'gallinpost_image_custom_box', 'post', 'advanced','high');
+	$screens = array( 'post', 'page' );
+
+	foreach ( $screens as $screen ) {
+add_meta_box('gallery_forpost', __('Gallery post'), 'gallinpost_image_custom_box',$screen, 'advanced','high');
+	}
+    
 }
 function gallinpost_image_custom_box() {
     global $post;

@@ -254,7 +254,6 @@ function getPostGallMeta($post_id){
 	}
 	return $mytext;
 }
-<<<<<<< HEAD
 function arrGetPostGallery($post_id){
     $gallinpost = get_post_meta($post_id, 'gallinpost', true);
     $gallinpostid = get_post_meta($post_id, 'gallinpostid', true);
@@ -267,7 +266,7 @@ function arrGetPostGallery($post_id){
         }
     }
     return $arrGallery;
-=======
+}
 function getpostGallArr($post_id){
 	$returnArr = NULL;
 	$gallinpost = get_post_meta($post_id, 'gallinpost', true);
@@ -280,7 +279,6 @@ function getpostGallArr($post_id){
 	}
 	}
 	return $returnArr;
->>>>>>> origin/master
 }
 class inittheme{
 	private $def_post = array(

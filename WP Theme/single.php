@@ -20,6 +20,7 @@ while ( have_posts() ) : the_post();
 					<p><?php the_content(); ?></p>
                 </div>
 
+				<?php if(!empty($array)):?>
                 <ul id="gallery" class="clearfix">
                     <?php
                         foreach($array as $key=>$value):
@@ -27,6 +28,7 @@ while ( have_posts() ) : the_post();
                         endforeach;
                     ?>
                 </ul>
+				<?php endif; ?>
 
             </div>
             <div class="clearfix"> </div>

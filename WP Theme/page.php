@@ -1,5 +1,6 @@
 <?php include_once('header.php');
 if(is_page('contact-us')){
+
 ?>
 <div class="container">
         <div class="bootstrap-grids">
@@ -17,7 +18,10 @@ if(is_page('contact-us')){
     </div>
 <?php
 }else{
-while ( have_posts() ) : the_post();?>
+while ( have_posts() ) : the_post();
+$postID = get_the_ID();
+$array = arrGetPostGallery($postID);
+?>
 <div class="container">
         <div class="top-p1 col-md-12" style="text-align: left;">
             <h3 style="text-align: left;"><?php the_title(); ?></h3>
@@ -29,10 +33,21 @@ while ( have_posts() ) : the_post();?>
                     <?php 
 					if(is_page('gallery')){
 						include_once('post-formats/loop-gallery.php');
+						wp_reset_query();
 					}else{
 						the_content();
 					}?>
                 </div>
+				
+				<?php if(!empty($array)):?>
+				<ul id="gallery" class="clearfix">
+                    <?php
+                        foreach($array as $key=>$value):
+                            echo '<li class="gallery-frame col-md-4" style=""><a class="fancybox-thumbs" href="'.$value[1].'" data-fancybox-group="thumb" title=""><img src="'.$value[1].'" class="gallery-thumb" alt="" /></a></li>';
+                        endforeach;
+                    ?>
+                </ul>
+				<?php endif; ?>
             </div>
             <div class="clearfix"> </div>
         </div>

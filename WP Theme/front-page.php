@@ -1,4 +1,12 @@
 <?php    include_once('header.php'); ?>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&appId=1499945126956049&version=v2.0";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
 <div id="camps" class="upcoming" style="margin-top: 25px;">
 <?php
 function getListHilight($title, $desc, $link, $img = '<img class="img-responsive img-content" src="http://tsis.ac.th/i/wp-content/uploads/2013/02/copy-header1.png" alt=""/>')
@@ -107,7 +115,9 @@ $topContentDescription = apply_filters('the_content', $post->post_content);
             </div>
             <div class="clearfix"></div>
         <?php } ?>
-    </div>
+		<div class="fb-like-box" data-href="https://www.facebook.com/ThaiSingaporeInternationalSchool" data-height="800" data-colorscheme="light" data-show-faces="true" data-header="true" data-stream="false" data-show-border="true" style="width: 100%"></div>
+	
+	</div>
     <div class="col-md-8">
     <div class="row">
     <!--Welcome to Kids Corner Start Here-->

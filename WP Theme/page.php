@@ -28,12 +28,56 @@ $array = arrGetPostGallery($postID);
             <p class="s_head" style="text-align: left; margin: 0; margin-bottom: 20px;"><?php $date = date('dS F Y',strtotime($post->post_date)); echo $date;?></p>
         </div>
         <div class="bootstrap-grids">
-            <div class="col-md-12 camps">
-                <div class="Proin">
+            <div class="col-md-12 camps clearfix" style="margin-bottom: 30px;">
+                <div class="Proin clearfix">
                     <?php 
 					if(is_page('gallery')){
 						include_once('post-formats/loop-gallery.php');
 						wp_reset_query();
+					}else if(is_page('About us')){
+						// Set up the objects needed
+						$my_wp_query = new WP_Query();
+						$all_wp_pages = $my_wp_query->query(array('post_type' => 'page', 'order' => 'ASC', 'order_by' => 'menu_order', 'posts_per_page' => '-1'));
+
+						// Get the page as an Object
+						$childPage =  get_page_by_title('About us');
+
+						// Filter through all pages and find Portfolio's children
+						$childPageList = get_page_children( $childPage->ID, $all_wp_pages );
+						
+						foreach($childPageList as $key=>$value):
+						?>
+							<div class="col-md-4" style="height: 300px;">
+								<?php// echo $value->ID;?>
+								<?php $featureImage = get_the_post_thumbnail( $value->ID, 'full' ); ?>
+								<div class="page-child-frame"><a href="<?php echo $value->guid ?>"><?php echo $featureImage; ?></a></div>
+								<a class="button wow bounceIn text-center animated col-md-12" data-wow-delay="0.4s" href="<?php echo $value->guid ?>" style="visibility: visible; -webkit-animation: bounceIn 0.4s;"><?php echo $value->post_title; ?></a>
+								<div class="clearfix"></div>
+							</div>
+						<?php
+						endforeach;
+					}else if(is_page('Level')){
+						// Set up the objects needed
+						$my_wp_query = new WP_Query();
+						$all_wp_pages = $my_wp_query->query(array('post_type' => 'page', 'order' => 'ASC', 'order_by' => 'menu_order', 'posts_per_page' => '-1'));
+
+						// Get the page as an Object
+						$childPage =  get_page_by_title('Level');
+
+						// Filter through all pages and find Portfolio's children
+						$childPageList = get_page_children( $childPage->ID, $all_wp_pages );
+						
+						foreach($childPageList as $key=>$value):
+						?>
+							<div class="col-md-4" style="height: 300px;">
+								<?php// echo $value->ID;?>
+								<?php $featureImage = get_the_post_thumbnail( $value->ID, 'full' ); ?>
+								<div class="page-child-frame"><a href="<?php echo $value->guid ?>"><?php echo $featureImage; ?></a></div>
+								<a class="button wow bounceIn text-center animated col-md-12" data-wow-delay="0.4s" href="<?php echo $value->guid ?>" style="visibility: visible; -webkit-animation: bounceIn 0.4s;"><?php echo $value->post_title; ?></a>
+								<div class="clearfix"></div>
+							</div>
+						<?php
+						endforeach;
 					}else{
 						the_content();
 					}?>
@@ -43,7 +87,7 @@ $array = arrGetPostGallery($postID);
 				<ul id="gallery" class="clearfix">
                     <?php
                         foreach($array as $key=>$value):
-                            echo '<li class="gallery-frame col-md-4" style=""><a class="fancybox-thumbs" href="'.$value[1].'" data-fancybox-group="thumb" title=""><img src="'.$value[1].'" class="gallery-thumb" alt="" /></a></li>';
+                            echo '<li class="gallery-frame col-md-3" style=""><a class="fancybox-thumbs" href="'.$value[1].'" data-fancybox-group="thumb" title=""><img src="'.$value[1].'" class="gallery-thumb" alt="" /></a></li>';
                         endforeach;
                     ?>
                 </ul>

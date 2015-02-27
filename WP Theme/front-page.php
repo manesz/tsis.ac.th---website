@@ -16,7 +16,7 @@ function getListHilight($title, $desc, $link, $img = '<img class="img-responsive
         <a href="<?php echo $link; ?>">
             <div class="img-frame"><?php echo $img; ?>
             </div>
-        </a>
+        
 
         <h3 style="height: 80px; margin-bottom: 20px; font-family: 'Bree Serif', serif; font-size: 18px; font-weight: 300; color: #fff"><?php echo $title; ?></h3>
 
@@ -24,6 +24,7 @@ function getListHilight($title, $desc, $link, $img = '<img class="img-responsive
             <p style="color: #eee; height: 200px;"><?php echo $desc; ?></p>
             <a class="button wow bounceIn col-md-12 text-center" data-wow-delay="0.4s" href="<?php echo $link; ?>">READ MORE</a>
         </div>
+		</a>
     </div>
 <?php
 }
@@ -53,7 +54,7 @@ function getListAchievements($title, $desc, $link, $img = '<img class="img-respo
         <a href="<?php echo $link; ?>">
             <div class="img-frame"><?php echo $img; ?>
             </div>
-        </a>
+        
 
         <h3 style="height: 80px; margin-bottom: 20px; font-family: 'Bree Serif', serif; font-size: 18px; font-weight: 300; color: #fff"><?php echo $title; ?></h3>
 
@@ -61,6 +62,7 @@ function getListAchievements($title, $desc, $link, $img = '<img class="img-respo
             <p style="color: #eee; height: 200px;"><?php echo $desc; ?></p>
             <a class="button wow bounceIn col-md-12 text-center" data-wow-delay="0.4s" href="<?php echo $link; ?>">READ MORE</a>
         </div>
+		</a>
     </div>
 <?php
 }

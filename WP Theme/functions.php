@@ -20,6 +20,12 @@ LAUNCH BONES
 Let's get everything up and running.
 *********************/
 
+function unload_fonts() {
+          wp_dequeue_style( 'googleFonts');
+       }
+
+add_action('wp_print_styles', 'unload_fonts', 11);
+
 function bones_ahoy() {
 
   //Allow editor style.

@@ -24,7 +24,7 @@ while ( have_posts() ) : the_post();
                 <ul id="gallery" class="clearfix">
                     <?php
                         foreach($array as $key=>$value):
-                            echo '<li class="gallery-frame col-md-4" style=""><a class="fancybox-thumbs" href="'.$value[1].'" data-fancybox-group="thumb" title=""><img src="'.$value[1].'" class="gallery-thumb" alt="" /></a></li>';
+                            echo '<li class="gallery-frame col-md-3" style=""><a class="fancybox-thumbs" href="'.$value[1].'" data-fancybox-group="thumb" title=""><img src="'.$value[1].'" class="gallery-thumb" alt="" /></a></li>';
                         endforeach;
                     ?>
                 </ul>

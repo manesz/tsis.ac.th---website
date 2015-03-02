@@ -24,7 +24,7 @@ $top_content_op = $top_content_op?$top_content_op:1;
                                     <?php
                                     global $post,$posts;
                                     $post = get_post($top_content_op);
-                                    $imagethumb = get_the_post_thumbnail( $post->ID );
+                                    $imagethumb = get_the_post_thumbnail( $post->ID,'full');
                                     $imagethumb = $imagethumb?str_replace('','',$imagethumb):get_first_inserted_image();
                                     ?>
                                     <div class="col-lg-6 img-thumbfull" id="postselect-img"><?php echo $imagethumb;?></div>

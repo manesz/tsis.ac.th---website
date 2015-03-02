@@ -145,29 +145,15 @@ $topContentDescription = apply_filters('the_content', $post->post_content);
             <div class="bootstrap-grids">
                 <?php $cat_show = get_option('highlight_show');
                 $myindex = json_decode(stripslashes($cat_show));
-                if (count($myindex) < 5) {
-                    $arghis = array(
-                        'post_type' => array('post', 'page'),
-                        'post_status' => 'publish',
-                        'category_name' => 'highlight',
-						'posts_per_page' => 6
-                    );
-                    global $posts, $post;
-                    query_posts($arghis);
-                    while (have_posts()):the_post();
-                        $imagethumb = get_the_post_thumbnail($post->ID, 'full');
-                        $imagethumb = $imagethumb ? str_replace('src', ' class="img-responsive img-content" src', $imagethumb) : str_replace('src', ' class="img-responsive img-content" style="width: auto; height: 180px;" src', get_first_inserted_image());
-                        getListHilight($post->post_title, $post->post_excerpt ? $post->post_excerpt : iconv_substr(strip_tags($post->post_content), 0, 320, "UTF-8") . "...", get_permalink($post->ID), $imagethumb);
-                    endwhile;
-                } else if (count($myindex) > 5) {
+				if(count($myindex)){
                     global $posts, $post;
                     for ($i = 0; $i < count($myindex); $i++) {
                         $post = get_post($myindex[$i]);
                         $imagethumb = get_the_post_thumbnail($post->ID, 'full');
-                        $imagethumb = $imagethumb ? '<img alt="' . $post->post_title . '" class="img-responsive img-content" src="' . $imagethumb . '" />' : str_replace('src', ' class="img-responsive img-content" style="width: auto; height: 180px;" src', get_first_inserted_image());
+                        $imagethumb = $imagethumb ?$imagethumb: str_replace('src', ' class="img-responsive img-content" style="width: auto; height: 180px;" src', get_first_inserted_image());
                         getListHilight($post->post_title, $post->post_excerpt ? $post->post_excerpt : iconv_substr(strip_tags($post->post_content), 0, 320, "UTF-8") . "...", get_permalink($post->ID), $imagethumb);
                     }
-                }
+				}
                 ?>
 
 
@@ -183,8 +169,8 @@ $topContentDescription = apply_filters('the_content', $post->post_content);
             On Focus</h3>
         <?php $cat_show = get_option('onfocus_show');
         $myindex = json_decode(stripslashes($cat_show));
-        if (count($myindex) < 6) {
-            $arghis = array(
+        if (count($myindex)) {
+/*            $arghis = array(
                 'post_type' => array('post', 'page'),
                 'post_status' => 'publish',
                 'category_name' => 'onfocus',
@@ -197,7 +183,7 @@ $topContentDescription = apply_filters('the_content', $post->post_content);
                 $imagethumb = $imagethumb ? str_replace('src', ' class="img-responsive img-content" src', $imagethumb) : str_replace('src', ' class="img-responsive img-content" style="width: auto; height: 350px;" src', get_first_inserted_image());
                 getListOnFocus($post->post_title, $post->post_excerpt ? $post->post_excerpt : iconv_substr(strip_tags($post->post_content), 0, 320, "UTF-8") . "...", get_permalink($post->ID), $imagethumb);
             endwhile;
-        } else if (count($myindex) > 5) {
+        } else if (count($myindex) > 5) {*/
             global $posts, $post;
             for ($i = 0; $i < count($myindex); $i++) {
                 $post = get_post($myindex[$i]);
@@ -216,8 +202,8 @@ $topContentDescription = apply_filters('the_content', $post->post_content);
         <div class="bootstrap-grids">
             <?php $cat_show = get_option('achievements_show');
             $myindex = json_decode(stripslashes($cat_show));
-            if (count($myindex) < 6) {
-                $arghis = array(
+            if (count($myindex)) {
+/*                $arghis = array(
                     'post_type' => array('post', 'page'),
                     'post_status' => 'publish',
                     'category_name' => 'achievements',
@@ -230,7 +216,7 @@ $topContentDescription = apply_filters('the_content', $post->post_content);
                     $imagethumb = $imagethumb ? str_replace('src', ' class="img-responsive img-content" src', $imagethumb) : str_replace('src', ' class="img-responsive img-content" style="width: auto; height: 180px;" src', get_first_inserted_image());
                     getListAchievements($post->post_title, $post->post_excerpt ? $post->post_excerpt : iconv_substr(strip_tags($post->post_content), 0, 320, "UTF-8") . "...", get_permalink($post->ID), $imagethumb);
                 endwhile;
-            } else if (count($myindex) > 5) {
+            } else if (count($myindex) > 5) {*/
                 global $posts, $post;
                 for ($i = 0; $i < count($myindex); $i++) {
                     $post = get_post($myindex[$i]);

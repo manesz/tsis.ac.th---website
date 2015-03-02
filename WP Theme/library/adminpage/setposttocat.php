@@ -25,7 +25,7 @@ if ($myvar == false) {
 	}
 	update_option($contentkey,json_encode($dataset));
 }
-wp_set_post_categories($post_id,$catarrid);
+//wp_set_post_categories($post_id,$catarrid);
 
 header('Content-Type: application/json');
 echo json_encode(array('error'=>'none'));

@@ -57,6 +57,9 @@ function gallinpost_save_postdata($post_id) {
 	if($fg_metadata&&$gallinpost_meta){
 		update_post_meta($post_id, 'gallinpost', $gallinpost_meta);
     update_post_meta($post_id, 'gallinpostid', $fg_metadata);
+	}else{
+		update_post_meta($post_id, 'gallinpost','');
+    update_post_meta($post_id, 'gallinpostid','');
 	}
 }
 function gallinpost_add_custom_box(){
@@ -74,7 +77,7 @@ function gallinpost_image_custom_box() {
     ?>
     <input type="hidden" value="<?php echo $gallinpostid;?>" id="fg_metadata" name="fg_metadata" />
     <input type="hidden" value="<?php echo $gallinpost;?>" id="gallinpost_meta" name="gallinpost_meta" />
-    <a class="button" id="findgallinpost"><?php if($gallinpost){?>Edit Gallery<?php }else{?>Add image<?php }?></a>
+    <a class="button" id="findgallinpost"><?php if($gallinpost){?>Edit Gallery<?php }else{?>Add image<?php }?></a><a class="button" id="clearallgall" style="margin-left:5px">Clear all</a>
     <div id="gallinpost">
     	<ul>
         <?php echo getPostGallMeta($post->ID);?>
@@ -98,6 +101,14 @@ function gallinpost_image_custom_box() {
 				if(jQuery( "#gallinpost ul" ).sortable( "instance" )){
 			jQuery( "#gallinpost ul" ).sortable("destroy");
 				}
+			jQuery('a#clearallgall').on('click',function(){
+				if(confirm('ต้องการลบรูปทั้งหมดหรือไม่')){
+					jQuery('#fg_metadata').val('');
+					jQuery("#gallinpost_meta").val('');
+					jQuery("#gallinpost ul").html('');
+				}
+				return false;	
+			});
 			jQuery( "#gallinpost ul" ).sortable({
 			placeholder: "sortable-placeholder",
 			stop:function( event, ui ) {

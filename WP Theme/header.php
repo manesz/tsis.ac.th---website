@@ -50,13 +50,11 @@ $mysite = get_option('siteurl') . '/'; ?> itemscope itemtype="http://schema.org/
 <!--Header-->
 <div class="header" style="border-bottom: 1px #ddd solid; ">
     <div class="fluid-container clearfix">
-        <div class="logo">
-            <a href="<?php echo $mysite ?>"><img src="<?php echo $themeLib; ?>images/logo.png" class="img-responsive"
-                                                 alt="" style="max-width: 300px;"/></a>
-
+        <div class="logo col-md-12 text-center">
+            <a href="<?php echo $mysite ?>"><img src="<?php echo $themeLib; ?>images/logo.png" class="" alt="" style="width: 700px; max-width: 100%; height: auto;"/></a>
             <div class="clearfix"></div>
         </div>
-        <div class="header-right">
+        <div class="header-right col-md-12">
             <div class="navigation">
                 <span class="menu"> </span>
                 <?php

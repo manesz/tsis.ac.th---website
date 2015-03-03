@@ -22,7 +22,7 @@ function getListHilight($title, $desc, $link, $img = '<img class="img-responsive
 
         <div class="Proin">
             <p style="color: #eee; height: 200px;"><?php echo $desc; ?></p>
-            <a class="button wow bounceIn col-md-12 text-center" data-wow-delay="0.4s" href="<?php echo $link; ?>">READ MORE</a>
+            <!--<a class="button wow bounceIn col-md-12 text-center" data-wow-delay="0.4s" href="<?php// echo $link; ?>">READ MORE</a>-->
         </div>
 		</a>
     </div>
@@ -154,6 +154,9 @@ $topContentDescription = apply_filters('the_content', $post->post_content);
                         getListHilight($post->post_title, $post->post_excerpt ? $post->post_excerpt : iconv_substr(strip_tags($post->post_content), 0, 320, "UTF-8") . "...", get_permalink($post->ID), $imagethumb);
                     }
 				}
+				$catHighLightID = get_cat_ID( 'highlight' );
+				$catHighLightLink = get_category_link( $catHighLightID );
+				echo "<div class='col-md-12'><a class='button wow bounceIn text-center col-md-12' data-wow-delay='0.4s' href='$catHighLightLink' target='_blank'>READ MORE ARTICLE</a></div>";
                 ?>
 
 
@@ -162,15 +165,17 @@ $topContentDescription = apply_filters('the_content', $post->post_content);
         </div>
     </div>
 
-    <div class="clearfix">
+    <div class="col-md-6 clearfix">
 
         <h3 class="text-left"
             style="font-family: 'Bree Serif', serif; font-weight: 300; color: #668591; text-align: center; font-size: 52px; padding: 0.5em 0em 0.5em; margin-top: 0;">
             On Focus</h3>
-        <?php $cat_show = get_option('onfocus_show');
+        <?php 
+/*		$cat_show = get_option('onfocus_show');
         $myindex = json_decode(stripslashes($cat_show));
         if (count($myindex)) {
-/*            $arghis = array(
+###----------------------------------------------------------------------------------------------###
+            $arghis = array(
                 'post_type' => array('post', 'page'),
                 'post_status' => 'publish',
                 'category_name' => 'onfocus',
@@ -183,7 +188,8 @@ $topContentDescription = apply_filters('the_content', $post->post_content);
                 $imagethumb = $imagethumb ? str_replace('src', ' class="img-responsive img-content" src', $imagethumb) : str_replace('src', ' class="img-responsive img-content" style="width: auto; height: 350px;" src', get_first_inserted_image());
                 getListOnFocus($post->post_title, $post->post_excerpt ? $post->post_excerpt : iconv_substr(strip_tags($post->post_content), 0, 320, "UTF-8") . "...", get_permalink($post->ID), $imagethumb);
             endwhile;
-        } else if (count($myindex) > 5) {*/
+        } else if (count($myindex) > 5) {
+###----------------------------------------------------------------------------------------------###
             global $posts, $post;
             for ($i = 0; $i < count($myindex); $i++) {
                 $post = get_post($myindex[$i]);
@@ -192,18 +198,36 @@ $topContentDescription = apply_filters('the_content', $post->post_content);
                 getListOnFocus($post->post_title, $post->post_excerpt ? $post->post_excerpt : iconv_substr(strip_tags($post->post_content), 0, 320, "UTF-8") . "...", get_permalink($post->ID), $imagethumb);
             }
         }
+*/
+		
+		$args = array (
+			'pagename' => 'on focus',
+		);
+		
+		// The Query
+		$query = new WP_Query( $args );
+		while ( $query->have_posts() ) : $query->the_post();
+			$bannerUrl = wp_get_attachment_url( get_post_thumbnail_id(get_the_ID()), 'medium' );
+			$pageOnFocusID = get_post_permalink();
+			echo "<div style='min-height: 550px;'><img src='$bannerUrl' class='col-md-12' style='width: 100%; height: auto;'/></div>";
+		endwhile;
+		echo "<a class='button wow bounceIn col-md-12 text-center' data-wow-delay='0.4s' href='$pageOnFocusID'>READ MORE</a>";
+		wp_reset_postdata();
         ?>
 
     </div>
 
-    <div id="" class="offerings text-left" style="color: #fff;">
-        <h3 class="text-left">Achievements</h3>
+    <div id="" class="col-md-6 text-left" style="">
+        <h3 class="text-left" style="font-family: 'Bree Serif', serif; font-weight: 300; color: #668591; text-align: center; font-size: 52px; padding: 0.5em 0em 0.5em; margin-top: 0;">Achievements</h3>
 
         <div class="bootstrap-grids">
-            <?php $cat_show = get_option('achievements_show');
+            <?php 
+/*			$cat_show = get_option('achievements_show');
             $myindex = json_decode(stripslashes($cat_show));
             if (count($myindex)) {
-/*                $arghis = array(
+                
+###----------------------------------------------------------------------------------------------###
+				$arghis = array(
                     'post_type' => array('post', 'page'),
                     'post_status' => 'publish',
                     'category_name' => 'achievements',
@@ -216,7 +240,9 @@ $topContentDescription = apply_filters('the_content', $post->post_content);
                     $imagethumb = $imagethumb ? str_replace('src', ' class="img-responsive img-content" src', $imagethumb) : str_replace('src', ' class="img-responsive img-content" style="width: auto; height: 180px;" src', get_first_inserted_image());
                     getListAchievements($post->post_title, $post->post_excerpt ? $post->post_excerpt : iconv_substr(strip_tags($post->post_content), 0, 320, "UTF-8") . "...", get_permalink($post->ID), $imagethumb);
                 endwhile;
-            } else if (count($myindex) > 5) {*/
+            } else if (count($myindex) > 5) {
+###----------------------------------------------------------------------------------------------###
+
                 global $posts, $post;
                 for ($i = 0; $i < count($myindex); $i++) {
                     $post = get_post($myindex[$i]);
@@ -225,10 +251,54 @@ $topContentDescription = apply_filters('the_content', $post->post_content);
                     getListAchievements($post->post_title, $post->post_excerpt ? $post->post_excerpt : iconv_substr(strip_tags($post->post_content), 0, 320, "UTF-8") . "...", get_permalink($post->ID), $imagethumb);
                 }
             }
+*/
+			$catID = get_cat_ID( 'achievements' );
+			$catLink = get_category_link( $catID );
+			$args = array (
+				'category_name' => 'achievements',
+				'posts_per_page' => 1
+			);
+
+			// The Query
+			$query = new WP_Query( $args );
+			while ( $query->have_posts() ) : $query->the_post();
+				$bannerUrl = wp_get_attachment_url( get_post_thumbnail_id(get_the_ID()), 'medium' );
+				echo "<div style='min-height: 550px;'><img src='$bannerUrl' class='col-md-12' style='width: 100%; height: auto;'/></div>";
+			endwhile;
+			echo "<a class='button wow bounceIn col-md-12 text-center' data-wow-delay='0.4s' href='$catLink'>READ MORE</a>";
+			wp_reset_postdata();
             ?>
 
         </div>
         <div class="clearfix"></div>
+    </div>
+	
+	<div class="clearfix">
+        <!--<h2 class="text-left" style="margin-bottom: 20px; font-family: 'Bree Serif', serif; font-size: 38px; font-weight: 300; color: #668591">HighLight</h2>-->
+        <div id="" class="offerings text-left" style="color: #fff;">
+            <h3 class="text-left">Activity </h3>
+
+            <div class="bootstrap-grids">
+                <?php $cat_show = get_option('highlight_show');
+                $myindex = json_decode(stripslashes($cat_show));
+				if(count($myindex)){
+                    global $posts, $post;
+                    for ($i = 0; $i < count($myindex); $i++) {
+                        $post = get_post($myindex[$i]);
+                        $imagethumb = get_the_post_thumbnail($post->ID, 'full');
+                        $imagethumb = $imagethumb ?$imagethumb: str_replace('src', ' class="img-responsive img-content" style="width: auto; height: 180px;" src', get_first_inserted_image());
+                        getListHilight($post->post_title, $post->post_excerpt ? $post->post_excerpt : iconv_substr(strip_tags($post->post_content), 0, 320, "UTF-8") . "...", get_permalink($post->ID), $imagethumb);
+                    }
+				}
+				$catHighLightID = get_cat_ID( 'activity' );
+				$catHighLightLink = get_category_link( $catHighLightID );
+				echo "<div class='col-md-12'><a class='button wow bounceIn text-center col-md-12' data-wow-delay='0.4s' href='$catHighLightLink' target='_blank'>READ MORE ARTICLE</a></div>";
+                ?>
+
+
+            </div>
+            <div class="clearfix"></div>
+        </div>
     </div>
 
 

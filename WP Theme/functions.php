@@ -286,6 +286,19 @@ function arrGetPostGallery($post_id){
     }
     return $arrGallery;
 }
+function arrGetPostGallery_rotation($post_id){
+    $gallinpost = get_post_meta($post_id, 'gallinpost_rotation', true);
+    $gallinpostid = get_post_meta($post_id, 'gallinpostid_rotation', true);
+    $mytext = '';
+    if($gallinpostid){
+        $p1 = explode(',',$gallinpost);
+        $p2 = explode(',',$gallinpostid);
+        for($i=0;$i<count($p2);$i++){
+            $arrGallery[] = array($p2[$i],$p1[$i]);
+        }
+    }
+    return $arrGallery;
+}
 class inittheme{
 	private $def_post = array(
 		  'post_title' => 'My post',

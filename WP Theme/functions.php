@@ -260,6 +260,19 @@ function getPostGallMeta($post_id){
 	}
 	return $mytext;
 }
+function getPostGallMeta_rotation($post_id){
+	$gallinpost = get_post_meta($post_id, 'gallinpost_rotation', true);
+	$gallinpostid = get_post_meta($post_id, 'gallinpostid_rotation', true);
+	$mytext = '';
+	if($gallinpostid){
+	$p1 = explode(',',$gallinpost);
+	$p2 = explode(',',$gallinpostid);
+	for($i=0;$i<count($p2);$i++){
+		$mytext .= '<li><img id="gall_rotation-'.$p2[$i].'" class="mygallsrc_rotation" src="'.$p1[$i].'"></li>';
+	}
+	}
+	return $mytext;
+}
 function arrGetPostGallery($post_id){
     $gallinpost = get_post_meta($post_id, 'gallinpost', true);
     $gallinpostid = get_post_meta($post_id, 'gallinpostid', true);

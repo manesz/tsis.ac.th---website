@@ -156,6 +156,7 @@ function gallinpost_imagerotation_custom_box(){
 					file_frame_rotation = wp.media.frame = wp.media({
 						frame: "post",
 						state: "gallery",
+						title:'Select 5 images',
 						library : { type : 'image'},
 						button: {text: "Edit Image rotation Order"},
 						multiple: true
@@ -177,10 +178,14 @@ function gallinpost_imagerotation_custom_box(){
 						var imageHTML = '';
 						var metadataString = '',metadataStringSrc='';
 						images = file_frame_rotation.state().get('library');
+						var countimg = 0;
 						images.each(function(attachment) {
+							if(countimg<5){
 							imageIDArray.push(attachment.attributes.id);
 							mysrcarr_rotation.push(attachment.attributes.url);
 							imageHTML += '<li><img id="gall-'+attachment.attributes.id+'" class="mygallsrc" src="'+attachment.attributes.url+'"></li>';
+							}
+							countimg++;
 						});
 						metadataString = imageIDArray.join(",");
 						metadataStringSrc = mysrcarr_rotation.join(",");

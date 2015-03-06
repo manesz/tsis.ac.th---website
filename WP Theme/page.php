@@ -1,7 +1,5 @@
-<?php include_once('header.php');
-if(is_page('contact-us')){
+<?php include_once('header.php'); if(is_page('contact-us')){ ?>
 
-?>
 <div class="container">
         <div class="bootstrap-grids">
             <div class="col-md-12 camps">
@@ -34,6 +32,99 @@ $array = arrGetPostGallery($postID);
 					if(is_page('gallery')){
 						include_once('post-formats/loop-gallery.php');
 						wp_reset_query();
+					}else if(is_page('Parent Information')){
+					?>
+						<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+							  
+						<?php
+							
+							echo '<h1>Parent Information (1)</h1>';
+							$args = array (
+								
+								// 'cat' => '8',
+								// 'category_name' => 'news-letter',
+								'post_type' => 'parent_info',
+							);
+
+							// The Query
+							$query = new WP_Query( $args );
+							$i = 0;
+							while ( $query->have_posts() ) : $query->the_post();
+							
+							?>
+							<div class="panel">
+								<div class="panel-heading" role="tab" id="heading<?php echo get_the_ID(); ?>">
+								  
+								<a data-toggle="collapse" data-parent="#accordion" href="#collapse<?php echo get_the_ID(); ?>" aria-expanded="true" aria-controls="collapse<?php echo get_the_ID(); ?>">
+									<h4 class="panel-title"> <?php echo get_the_title(); ?> </h4>
+								</a>
+								  
+								</div>
+								<div id="collapse<?php echo get_the_ID(); ?>" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading<?php echo get_the_ID(); ?>">
+								  <div class="panel-body">
+									<?php 
+										the_content(); 
+										$postID = get_the_ID();
+										$arrayGallery[] = arrGetPostGallery($postID);
+									?>
+									<?php if(!empty($arrayGallery[$i])):?>
+									<ul id="gallery" class="clearfix">
+										<?php
+											foreach($arrayGallery[$i] as $key=>$value):
+												echo '<li class="gallery-frame col-md-3" style=""><a class="fancybox-thumbs" href="'.$value[1].'" data-fancybox-group="thumb" title=""><img src="'.$value[1].'" class="gallery-thumb" alt="" /></a></li>';
+											endforeach;
+										?>
+									</ul>
+									<?php endif; ?>
+								  </div>
+								</div>
+							  </div>
+							<?php
+							$i++;
+							endwhile;
+							wp_reset_postdata();
+						?>
+							
+						</div>					
+						
+						<hr/>
+						
+						<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+							  
+						<?php
+							echo '<h1>Parent Information</h1>';
+							$args = array (
+								'post_type' => 'parent_info',
+								'cat_ID' => 9,
+							);
+
+							// The Query
+							$query = new WP_Query( $args );
+							while ( $query->have_posts() ) : $query->the_post();
+							?>
+							<div class="panel">
+								<div class="panel-heading" role="tab" id="heading<?php echo get_the_ID(); ?>">
+								  
+								<a data-toggle="collapse" data-parent="#accordion" href="#collapse<?php echo get_the_ID(); ?>" aria-expanded="true" aria-controls="collapse<?php echo get_the_ID(); ?>">
+									<h4 class="panel-title"> <?php echo single_cat_title().' ###### '; echo get_the_title(); ?> </h4>
+								</a>
+								  
+								</div>
+								<div id="collapse<?php echo get_the_ID(); ?>" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading<?php echo get_the_ID(); ?>">
+								  <div class="panel-body">
+									<?php the_content(); ?>
+								  </div>
+								</div>
+							  </div>
+							<?php
+							endwhile;
+							wp_reset_postdata();
+						?>
+							
+						</div>					
+
+					<?php
+						
 					}else if(is_page('About us')){
 						// Set up the objects needed
 						$my_wp_query = new WP_Query();

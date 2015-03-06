@@ -6,7 +6,7 @@ function tsis_add_pages() {
 	add_submenu_page('manage-tsis', __('Top Content'), __('Top Content'), 'manage_options', 'managetop-content', 'tsis_sublevel_topcontent');
 	add_submenu_page('manage-tsis', __('Contact'), __('Contact'), 'manage_options', 'manage-contact', 'tsis_sublevel_contact');
 	add_submenu_page('manage-tsis', __('Highlight'), __('Highlight'), 'manage_options', 'manage-highlight', 'tsis_sublevel_highlight');
-	add_submenu_page('manage-tsis', __('Onfocus'), __('Onfocus'), 'manage_options', 'manage-onfocus', 'tsis_sublevel_onfocus');
+	add_submenu_page('manage-tsis', __('Activity'), __('Activity'), 'manage_options', 'manage-onfocus', 'tsis_sublevel_onfocus');
 	add_submenu_page('manage-tsis', __('Gallery order'), __('Gallery order'), 'manage_options', 'manage-category-order', 'tsis_sublevel_categoryorder');
 	add_submenu_page('manage-tsis', __('Achievements'), __('Achievements'), 'manage_options', 'manage-achievements', 'tsis_sublevel_achievements');
     add_submenu_page('manage-tsis', __('Video Manage'), __('Video Manage'), 'manage_options', 'video-mange', 'tsis_sublevel_vdo');
@@ -80,7 +80,7 @@ function gallinpost_rotation_save_postdata($post_id) {
 	}
 }
 function gallinpost_add_custom_box(){
-	$screens = array( 'post', 'page' );
+	$screens = array( 'post', 'page', 'parent_info' );
 
 	foreach ( $screens as $screen ) {
 add_meta_box('gallery_forpost', __('<span class="dashicons dashicons-images-alt2"></span> Gallery post'), 'gallinpost_image_custom_box',$screen, 'advanced','high');

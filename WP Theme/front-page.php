@@ -9,26 +9,57 @@
 }(document, 'script', 'facebook-jssdk'));</script>
 <div id="camps" class="upcoming" style="margin-top: 25px;">
 <?php
-function getListHilight($title, $desc, $link, $img = '<img class="img-responsive img-content" src="http://tsis.ac.th/i/wp-content/uploads/2013/02/copy-header1.png" alt=""/>')
+function getListHilight($title, $desc, $link, $img = '<img class="img-responsive img-content" src="http://tsis.ac.th/i/wp-content/uploads/2013/02/copy-header1.png" alt=""/>', $post_id)
 {
+	$arrRotationimage = arrGetPostGallery_rotation($post_id);
     ?>
     <div class="col-md-4 camps">
         <a href="<?php echo $link; ?>">
-            <div class="img-frame"><?php echo $img; ?>
-            </div>
-        
+		
+			<?php if(!empty($arrRotationimage)):?>
+			<div id="carousel-example-generic-<?php echo $post_id; ?>" class="carousel slide" data-ride="carousel">
+			  <!-- Indicators -->
+			  <ol class="carousel-indicators">
+				<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+				<li data-target="#carousel-example-generic" data-slide-to="1"></li>
+				<li data-target="#carousel-example-generic" data-slide-to="2"></li>
+			  </ol>
 
-        <h3 style="height: 80px; margin-bottom: 20px; font-family: 'Bree Serif', serif; font-size: 18px; font-weight: 300; color: #fff"><?php echo $title; ?></h3>
+			  <!-- Wrapper for slides -->
+			  
+			  <div class="carousel-inner" role="listbox">
+				<div class="item active img-frame"> <?php echo $img; ?> </div>
+				<?php foreach( $arrRotationimage as $key => $value ):?>
+				<div class="item img-frame"> <img src='<?php echo $value[1]; ?>'/> </div>
+				<?php endforeach; ?>
+			  </div>
+			  
 
-        <div class="Proin">
-            <p style="color: #eee; height: 200px;"><?php echo $desc; ?></p>
-            <!--<a class="button wow bounceIn col-md-12 text-center" data-wow-delay="0.4s" href="<?php// echo $link; ?>">READ MORE</a>-->
-        </div>
+			  <!-- Controls -->
+			  <a class="left carousel-control" href="#carousel-example-generic-<?php echo $post_id; ?>" role="button" data-slide="prev">
+				<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+				<span class="sr-only">Previous</span>
+			  </a>
+			  <a class="right carousel-control" href="#carousel-example-generic-<?php echo $post_id; ?>" role="button" data-slide="next">
+				<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+				<span class="sr-only">Next</span>
+			  </a>
+			</div>
+			<?php elseif(isset($img)):?>
+			<div class="img-frame"><?php echo $img; ?></div>
+			<?php endif; ?>
+			
+			<h3 style="height: 80px; margin-bottom: 20px; font-family: 'Bree Serif', serif; font-size: 18px; font-weight: 300; color: #fff"><?php echo $title.$post_id; ?></h3>
+
+			<div class="Proin">
+				<p style="color: #eee; height: 200px;"><?php echo $desc; ?></p>
+				<!--<a class="button wow bounceIn col-md-12 text-center" data-wow-delay="0.4s" href="<?php// echo $link; ?>">READ MORE</a>-->
+			</div>
 		</a>
     </div>
 <?php
 }
-function getListOnFocus($title, $desc, $link, $img = '<img class="img-responsive img-content" src="http://tsis.ac.th/i/wp-content/uploads/2013/02/copy-header1.png" alt=""/>')
+function getListActivity($title, $desc, $link, $img = '<img class="img-responsive img-content" src="http://tsis.ac.th/i/wp-content/uploads/2013/02/copy-header1.png" alt=""/>')
 {
     ?>
 	
@@ -80,14 +111,49 @@ $imagethumb = $imagethumb ? str_replace('src', ' class="img-responsive" src', $i
 $post = get_post($post->ID);
 $topContentTitle = apply_filters('the_title', $post->post_title);
 $topContentDescription = apply_filters('the_content', $post->post_content);
+$topContentThumbnailURL = wp_get_attachment_url( get_post_thumbnail_id($post->ID), 'full' );
 ?>
     <div class="clearfix">
         <!--<div id="topTitle" class="col-lg-6"><?php// echo $imagethumb; ?></div>-->
-        <div id="topContent" class="col-lg-12">
+        <div id="topContent" class="col-md-6 welcome">
             <!--<h2 style="margin-bottom: 40px;"><?php// echo $topContentTitle; ?></h2>-->
 
-            <div id="postselect-contentdesc"><?php echo $topContentDescription; ?></div>
+            <div id="postselect-contentdesc">
+				<?php 
+					echo "<h2 style='margin-bottom: 1.2em;'>$topContentTitle</h2>";
+					echo "<img src='$topContentThumbnailURL' style='width: 100%;'/>";
+					echo $topContentDescription; 
+				?>
+			</div>
         </div>
+		<div id="welcomeContent" class="col-md-6 welcome">
+			<div class="col-md-12">
+				<?php
+					$id=21;
+					$post = get_post($id);
+					$title = apply_filters('the_title', $post->post_title);
+					$content = apply_filters('the_content', $post->post_content);
+				?>
+
+				<h2><?php echo $title; ?></h2>
+
+				<p><?php echo $content;?></p>
+			</div>
+			<div class="col-md-12">
+				<?php
+					$args = array (
+						'pagename' => 'Accreditation',
+					);
+
+					// The Query
+					$query = new WP_Query( $args );
+					while ( $query->have_posts() ) : $query->the_post();
+						the_content();
+					endwhile;
+					wp_reset_postdata();
+				?>
+			</div>
+		</div>
     </div>
 	<hr/>
     <div class="container-fluid">
@@ -117,26 +183,10 @@ $topContentDescription = apply_filters('the_content', $post->post_content);
             </div>
             <div class="clearfix"></div>
         <?php } ?>
-		<div class="fb-like-box" data-href="https://www.facebook.com/ThaiSingaporeInternationalSchool" data-height="800" data-colorscheme="light" data-show-faces="true" data-header="true" data-stream="false" data-show-border="true" style="width: 100%"></div>
 	
 	</div>
     <div class="col-md-8">
     <div class="row">
-    <!--Welcome to Kids Corner Start Here-->
-    <div id="about" class="clearfix welcome">
-        <?php
-            $id=21;
-            $post = get_post($id);
-            $title = apply_filters('the_title', $post->post_title);
-            $content = apply_filters('the_content', $post->post_content);
-
-        ?>
-
-        <h2><?php echo $title; ?></h2>
-
-        <p><?php echo $content;?></p>
-
-    </div>
     <div class="clearfix">
         <!--<h2 class="text-left" style="margin-bottom: 20px; font-family: 'Bree Serif', serif; font-size: 38px; font-weight: 300; color: #668591">HighLight</h2>-->
         <div id="" class="offerings text-left" style="color: #fff;">
@@ -151,7 +201,7 @@ $topContentDescription = apply_filters('the_content', $post->post_content);
                         $post = get_post($myindex[$i]);
                         $imagethumb = get_the_post_thumbnail($post->ID, 'full');
                         $imagethumb = $imagethumb ?$imagethumb: str_replace('src', ' class="img-responsive img-content" style="width: auto; height: 180px;" src', get_first_inserted_image());
-                        getListHilight($post->post_title, $post->post_excerpt ? $post->post_excerpt : iconv_substr(strip_tags($post->post_content), 0, 320, "UTF-8") . "...", get_permalink($post->ID), $imagethumb);
+                        getListHilight($post->post_title, $post->post_excerpt ? $post->post_excerpt : iconv_substr(strip_tags($post->post_content), 0, 320, "UTF-8") . "...", get_permalink($post->ID), $imagethumb, $post->ID);
                     }
 				}
 				$catHighLightID = get_cat_ID( 'highlight' );
@@ -279,7 +329,7 @@ $topContentDescription = apply_filters('the_content', $post->post_content);
             <h3 class="text-left">Activity </h3>
 
             <div class="bootstrap-grids">
-                <?php $cat_show = get_option('highlight_show');
+                <?php $cat_show = get_option('onfocus_show');
                 $myindex = json_decode(stripslashes($cat_show));
 				if(count($myindex)){
                     global $posts, $post;
@@ -313,69 +363,68 @@ $topContentDescription = apply_filters('the_content', $post->post_content);
                     eu tincidunt a, ultrices quis tellus. Ut eu justo a nunc gravida adipiscing.</p>
             </div>-->
             <?php
-            $arghis = array(
-                'post_type' => 'parent_info',
-                'post_status' => 'publish'
-            );
-            global $posts, $post;
-            query_posts($arghis);
-            $countparent = 1;
-            while (have_posts()):the_post();
-                $imagethumb = get_the_post_thumbnail($post->ID);
-                $imagethumb = $imagethumb ? str_replace('src', ' class="img-responsive" src', $imagethumb) : str_replace('src', ' class="img-responsive" src', get_first_inserted_image());
-                $mylink = get_permalink($post->ID);
-                $postdate = date('F d, Y', strtotime($post->post_date));
-                if ($countparent == 1) {
+            // $arghis = array(
+                // 'post_type' => 'parent_info',
+                // 'post_status' => 'publish'
+            // );
+            // global $posts, $post;
+            // query_posts($arghis);
+            // $countparent = 1;
+            // while (have_posts()):the_post();
+                // $imagethumb = get_the_post_thumbnail($post->ID);
+                // $imagethumb = $imagethumb ? str_replace('src', ' class="img-responsive" src', $imagethumb) : str_replace('src', ' class="img-responsive" src', get_first_inserted_image());
+                // $mylink = get_permalink($post->ID);
+                // $postdate = date('F d, Y', strtotime($post->post_date));
+                // if ($countparent == 1) {
 
-                    ?>
-                    <div class="col-md-6 posts wow bounceIn" data-wow-delay="0.4s">
-                        <a href="<?php echo $mylink; ?>"><?php echo $imagethumb; ?></a>
-                        <span><?php echo $postdate; ?></span>
+                    // ?>
+                    <!--// <div class="col-md-6 posts wow bounceIn" data-wow-delay="0.4s">
+                        // <a href="<?php// echo $mylink; ?>"><?php// echo $imagethumb; ?></a>
+                        // <span><?php// echo $postdate; ?></span>
 
-                        <h2><?php echo $post->post_title; ?></h2>
+                        // <h2><?php// echo $post->post_title; ?></h2>
 
-                        <p><?php echo $post->post_excerpt ? $post->post_excerpt : iconv_substr(strip_tags($post->post_content), 0, 320, "UTF-8") . "..."; ?></p>
-                    </div>
-                    <?php
-                    $countparent++;
+                        // <p><?php// echo $post->post_excerpt ? $post->post_excerpt : iconv_substr(strip_tags($post->post_content), 0, 320, "UTF-8") . "..."; ?></p>
+                    // </div>-->
+                     <?php
+                    // $countparent++;
 
-                } else {
-                    if ($countparent == 2) {
-                        ?>
-                        <div class="col-md-6 magna wow bounceIn" data-wow-delay="0.4s">
+                // } else {
+                    // if ($countparent == 2) {
+                        // ?>
+                        <!--// <div class="col-md-6 magna wow bounceIn" data-wow-delay="0.4s">-->
 
-                        <!--                        <div class="col-md-6 amet wow bounceIn" data-wow-delay="0.4s">
-                            <span>February 4, 2014</span>
-                            <a href="#"><img class="img-responsive" src="<?php echo $themeLib; ?>images/br3.jpg" alt=""/></a>
-                        </div>
-                        <div class="col-md-6 dui wow bounceIn" data-wow-delay="0.4s">
-                            <h2>New swings added</h2>
+                         <!--                        <div class="col-md-6 amet wow bounceIn" data-wow-delay="0.4s">
+                            // <span>February 4, 2014</span>
+                            // <a href="#"><img class="img-responsive" src="<?php// echo $themeLib; ?>images/br3.jpg" alt=""/></a>
+                        // </div>
+                        // <div class="col-md-6 dui wow bounceIn" data-wow-delay="0.4s">
+                            // <h2>New swings added</h2>
 
-                            <p>Vivamus laoreet vitae mi sit amet mattis.
-                                Praesent sagittis libero dui, et adipiscing lorem pharetra non.
-                                Vestibulum aliquam adipiscing. Vivamus laoreet vitae mi sit amet mattis.
-                                Sent sagittis libero dui et adipiscing.</p>
-                        </div>-->
+                            // <p>Vivamus laoreet vitae mi sit amet mattis.
+                                // Praesent sagittis libero dui, et adipiscing lorem pharetra non.
+                                // Vestibulum aliquam adipiscing. Vivamus laoreet vitae mi sit amet mattis.
+                                // Sent sagittis libero dui et adipiscing.</p>
+                        // </div>-->
 
-                    <?php
-                    }
-                    ?>
-                    <div class="col-md-6 amet wow bounceIn" data-wow-delay="0.4s">
-                        <span>February 4, 2014</span>
-                        <a href="<?php echo $mylink; ?>"><?php echo $imagethumb; ?></a>
-                    </div>
-                    <div class="col-md-6 dui wow bounceIn" data-wow-delay="0.4s">
-                        <h2><?php echo $post->post_title; ?></h2>
-
-                        <p><?php echo $post->post_excerpt ? $post->post_excerpt : iconv_substr(strip_tags($post->post_content), 0, 320, "UTF-8") . "..."; ?></p>
-                    </div>
-                    <?php
-                    $countparent++;
-                }
-                if ($countparent == 4) {
-                    ?> </div><?php
-                }
-            endwhile;
+                     <?php
+                    // }
+                    // ?>
+                    <!-- <div class="col-md-6 amet wow bounceIn" data-wow-delay="0.4s">
+                        // <span>February 4, 2014</span>
+                        // <a href="<?php// echo $mylink; ?>"><?php// echo $imagethumb; ?></a>
+                    // </div>
+                    // <div class="col-md-6 dui wow bounceIn" data-wow-delay="0.4s">
+						// <h2><?php// echo $post->post_title; ?></h2>
+						// <p><?php// echo $post->post_excerpt ? $post->post_excerpt : iconv_substr(strip_tags($post->post_content), 0, 320, "UTF-8") . "..."; ?></p>						
+                    // </div> -->
+                     <?php
+                    // $countparent++;
+                // }
+                // if ($countparent == 4) {
+                    // ?> <!--</div>--><?php
+                // }
+            // endwhile;
             ?>
 
         </div>
@@ -388,6 +437,11 @@ $topContentDescription = apply_filters('the_content', $post->post_content);
     </div>
     </div>
     </div>
+	
+	<div class='clearfix col-md-12' style=''>
+		<div class="fb-like-box" data-href="https://www.facebook.com/ThaiSingaporeInternationalSchool" data-width="100%" data-colorscheme="light" data-show-faces="true" data-header="true" data-stream="false" data-show-border="true"></div>
+	</div>
+	
     </div>
 <?php include_once('footer.php');
 exit();

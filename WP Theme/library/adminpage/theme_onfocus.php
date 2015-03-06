@@ -13,7 +13,7 @@ include_once('script.php');?>
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-12">
-      <h2>Onfocus order</h2>
+      <h2>Activity order</h2>
       <div class="panel panel-default">
         <div class="panel-body">
         <button type="button" class="btn btn-primary" id="add-video-bt" data-toggle="modal" data-target="#addTopModal"><i class="glyphicon glyphicon-plus"></i> Select Post</button>
@@ -36,7 +36,7 @@ include_once('script.php');?>
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Add Onfocus</h4>
+                    <h4 class="modal-title" id="myModalLabel">Add Activity</h4>
                 </div>
                 <div class="modal-body">
                     <div class="panel panel-default">
@@ -145,11 +145,9 @@ var hookTopconent = {
 		contentHilight.init();
 	},
 	templatePostList: function (data) {
-		var mytext = '<li class="listinsert" rel="' + data.ID + '">';
-		mytext += data.image;
-		mytext += '<strong>';
-		mytext += data.post_title;
-		mytext += '</strong>';
+		var mytext = '<li class="listinsert" rel="' + data.ID + '" style="max-width: 125px; height: auto;">';
+		mytext += "<div class='col-md-12'>"+data.image+"</div>";
+		mytext += "<div class='col-md-12'><strong>"+data.post_title+"</strong>";
 		mytext += '</li>';
 		return mytext;
 	},

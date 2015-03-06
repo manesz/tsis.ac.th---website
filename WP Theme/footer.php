@@ -83,7 +83,7 @@ $title_contact = $title_contact?$title_contact:'Get in Touch';
 <div class="footer">
     <div class="container">
         <div class="col-md-6 Reserved">
-            <h4 style="font-size: 12px;">Design by<a href="http://www.idaecorners.com" target="_blank"> Idea Corners Studio co.,ltd.</a></h4>
+            <h4 style="font-size: 12px;">Design by <a href="http://www.idaecorners.com" target="_blank">Idea Corners Studio co.,ltd.</a></h4>
         </div>
         <div class="col-md-6 bottom-icons">
             <?php if($fb_contact){?><a href="<?php echo $fb_contact;?>"><span class="icon1"> </span></a><?php } if($tw_contact){?><a href="<?php echo $tw_contact;?>"><span class="icon2"> </span></a><?php } if($gp_conteact){?><a href="<?php echo $gp_conteact;?>"><span class="icon3"> </span></a><?php }?>
@@ -144,6 +144,9 @@ if($myfrontpage){?>
 <script src='<?php echo get_stylesheet_directory_uri();?>/lib/moment.min.js'></script>
 <script src='<?php echo get_stylesheet_directory_uri();?>/lib/fullcalendar.min.js'></script>
 <script type="text/javascript">var ishome = true,calurl = '<?php echo get_site_url();?>/';</script>
+<?php// if(is_page('Parent Information')):?>
+	<script type="text/javascript" src="<?php echo get_stylesheet_directory_uri().'/library/js/bootstrap.min.js';?>"/>
+<?php// endif; ?>
 <?php } ?>
 
 
@@ -216,7 +219,11 @@ var mysiteurl = '<?php echo get_option('siteurl').'/';?>';
 <script type="text/javascript">
     var $ = jQuery.noConflict();
     $(document).ready(function() {
-        homeHook.init();
+		$('.carousel').carousel()
+	
+        <?php if(!is_page('Parent Information')):?> homeHook.init(); <?php endif; ?>
+		
+		<?php if(is_page('Parent Information')):?> $('.collapse').collapse(); <?php endif; ?>
 
         $('.fancybox-thumbs').fancybox({
             prevEffect : 'none',

@@ -144,13 +144,11 @@ if($myfrontpage){?>
 <script src='<?php echo get_stylesheet_directory_uri();?>/lib/moment.min.js'></script>
 <script src='<?php echo get_stylesheet_directory_uri();?>/lib/fullcalendar.min.js'></script>
 <script type="text/javascript">var ishome = true,calurl = '<?php echo get_site_url();?>/';</script>
-<?php// if(is_page('Parent Information')):?>
-	<script type="text/javascript" src="<?php echo get_stylesheet_directory_uri().'/library/js/bootstrap.min.js';?>"/>
-<?php// endif; ?>
+<?php // if(is_page('Parent Information')):?>
+	<script type="text/javascript" src="<?php echo get_stylesheet_directory_uri().'/library/js/bootstrap.min.js';?>"></script>
+<?php // endif; ?>
 <?php } ?>
-
-
-<script>
+<script type="text/javascript">
 
 var mysiteurl = '<?php echo get_option('siteurl').'/';?>';
 	var $ = jQuery.noConflict();
@@ -215,9 +213,6 @@ var mysiteurl = '<?php echo get_option('siteurl').'/';?>';
 		}
 	};
 
-</script>
-<script type="text/javascript">
-    var $ = jQuery.noConflict();
     $(document).ready(function() {
 		$('.carousel').carousel();
 		// $('#myModal').modal('show');

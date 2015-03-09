@@ -219,7 +219,8 @@ var mysiteurl = '<?php echo get_option('siteurl').'/';?>';
 <script type="text/javascript">
     var $ = jQuery.noConflict();
     $(document).ready(function() {
-		$('.carousel').carousel()
+		$('.carousel').carousel();
+		// $('#myModal').modal('show');
 	
         <?php if(!is_page('Parent Information')):?> homeHook.init(); <?php endif; ?>
 		
@@ -242,6 +243,96 @@ var mysiteurl = '<?php echo get_option('siteurl').'/';?>';
         });
     });
 </script>
-<a href="#to-top" id="toTop" style="display: block;"><span id="toTopHover" style="opacity: 1;"> </span></a>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" style='width: 90%; margin: auto;'>
+    <div class="modal-content">
+      <div class="modal-body container">
+	  
+		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        
+		<div class="row">
+			<div class="col-md-12">
+			
+				<img src='http://demo.ideacorners.com/tsis/wp-content/themes/tsisacth/library/images/logo.png' style='margin: auto; max-width: 600px; height: auto;'/>
+			
+				<?php
+					$id=21;
+					$post = get_post($id);
+					$title = apply_filters('the_title', $post->post_title);
+					$content = apply_filters('the_content', $post->post_content);
+					$arrModalRotationimage = arrGetPostGallery_rotation($id);
+				?>
+				
+				<?php if(!empty($arrModalRotationimage)):?>
+				<div id="carousel-example-generic-<?php echo $post_id; ?>" class="carousel slide" data-ride="carousel">
+				  <!-- Indicators -->
+				  <ol class="carousel-indicators">
+					<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+					<li data-target="#carousel-example-generic" data-slide-to="1"></li>
+					<li data-target="#carousel-example-generic" data-slide-to="2"></li>
+				  </ol>
+
+				  <!-- Wrapper for slides -->
+				  
+				  <div class="carousel-inner" role="listbox">
+					<?php foreach( $arrModalRotationimage as $key => $value ):?>
+					<div class="item <?php if($key==0):echo 'active';endif;?>" style='width: 100%; max-height: 400px; overflow: hidden;'> <img src='<?php echo $value[1]; ?>' style='width: 100%;'/> </div>
+					<?php endforeach; ?>
+				  </div>
+				  
+
+				  <!-- Controls -->
+				  <a class="left carousel-control" href="#carousel-example-generic-<?php echo $post_id; ?>" role="button" data-slide="prev">
+					<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+					<span class="sr-only">Previous</span>
+				  </a>
+				  <a class="right carousel-control" href="#carousel-example-generic-<?php echo $post_id; ?>" role="button" data-slide="next">
+					<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+					<span class="sr-only">Next</span>
+				  </a>
+				</div>
+				<?php elseif(isset($img)):?>
+				<div class="img-frame"><?php echo $img; ?></div>
+				<?php endif; ?>
+			</div>
+			<div class='col-md-12' style='margin-top: 30px;'>
+			<?php
+					
+				// Set up the objects needed
+				$my_wp_query = new WP_Query();
+				$all_wp_pages = $my_wp_query->query(array('post_type' => 'page', 'order' => 'ASC', 'order_by' => 'menu_order', 'posts_per_page' => '-1'));
+
+				// Get the page as an Object
+				$childPage =  get_page_by_title('Level');
+
+				// Filter through all pages and find Portfolio's children
+				$childPageList = get_page_children( $childPage->ID, $all_wp_pages );
+				
+				foreach($childPageList as $key=>$value):
+				?>
+					<div class="col-md-4" style="height: 300px;">
+						<?php// echo $value->ID;?>
+						<?php $featureImage = get_the_post_thumbnail( $value->ID, 'full' ); ?>
+						<div class="page-child-frame"><a href="<?php echo $value->guid ?>"><?php echo $featureImage; ?></a></div>
+						<a class="button wow bounceIn text-center animated col-md-12" data-wow-delay="0.4s" href="<?php echo $value->guid ?>" style="visibility: visible; -webkit-animation: bounceIn 0.4s;"><?php echo $value->post_title; ?></a>
+						<div class="clearfix"></div>
+					</div>
+				<?php
+				endforeach;
+			
+			?>
+			</div>
+		</div>
+		
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default col-md-12" data-dismiss="modal">Visit our home page</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>

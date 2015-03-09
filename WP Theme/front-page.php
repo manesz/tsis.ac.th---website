@@ -20,17 +20,16 @@ function getListHilight($title, $desc, $link, $img = '<img class="img-responsive
 			<div id="carousel-example-generic-<?php echo $post_id; ?>" class="carousel slide" data-ride="carousel">
 			  <!-- Indicators -->
 			  <ol class="carousel-indicators">
-				<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-				<li data-target="#carousel-example-generic" data-slide-to="1"></li>
-				<li data-target="#carousel-example-generic" data-slide-to="2"></li>
+				<?php foreach( $arrRotationimage as $key => $value ):?>
+				<li data-target="#carousel-example-generic" data-slide-to="<?php echo $key; ?>" class="<?php if($key==0):echo 'active'; endif; ?>"></li>
+				<?php endforeach; ?>
 			  </ol>
 
 			  <!-- Wrapper for slides -->
 			  
-			  <div class="carousel-inner" role="listbox">
-				<div class="item active img-frame"> <?php echo $img; ?> </div>
+			  <div class="carousel-inner" role="listbox" style='height: 200px;'>
 				<?php foreach( $arrRotationimage as $key => $value ):?>
-				<div class="item img-frame"> <img src='<?php echo $value[1]; ?>'/> </div>
+				<div class="item <?php if($key==0):echo 'active'; endif; ?> img-frame"> <img src='<?php echo $value[1]; ?>'/> </div>
 				<?php endforeach; ?>
 			  </div>
 			  
@@ -49,7 +48,7 @@ function getListHilight($title, $desc, $link, $img = '<img class="img-responsive
 			<div class="img-frame"><?php echo $img; ?></div>
 			<?php endif; ?>
 			
-			<h3 style="height: 80px; margin-bottom: 20px; font-family: 'Bree Serif', serif; font-size: 18px; font-weight: 300; color: #fff"><?php echo $title.$post_id; ?></h3>
+			<h3 style="height: 80px; margin-bottom: 20px; font-family: 'Bree Serif', serif; font-size: 18px; font-weight: 300; color: #fff"><?php echo $title; ?></h3>
 
 			<div class="Proin">
 				<p style="color: #eee; height: 200px;"><?php echo $desc; ?></p>
@@ -63,18 +62,17 @@ function getListActivity($title, $desc, $link, $img = '<img class="img-responsiv
 {
     ?>
 	
-    <div class="col-md-4 camps" style="margin-bottom: 26px; height: 350px;">
+    <div class="col-md-4 camps" style="margin-bottom: 26px;">
         <a href="<?php echo $link; ?>">
-            <div class="onFocusImg"><?php echo $img; ?>
+            <div class="img-frame"><?php echo $img; ?>
             </div>
         </a>
 
-<!--        <h3 style="height: 80px; margin-bottom: 20px; font-family: 'Bree Serif', serif; font-size: 18px; font-weight: 300; color: #666">--><?php //echo $title; ?><!--</h3>-->
-<!---->
-<!--        <div class="Proin">-->
-<!--            <p style="color: #999; height: 200px;">--><?php //echo $desc; ?><!--</p>-->
-<!--            <a class="button wow bounceIn col-md-12 text-center" data-wow-delay="0.4s" href="--><?php //echo $link; ?><!--">READ MORE</a>-->
-<!--        </div>-->
+<h3 style="height: 80px; margin-bottom: 20px; font-family: 'Bree Serif', serif; font-size: 18px; font-weight: 300; color: #fff"><?php echo $title; ?></h3>
+
+        <div class="Proin">
+            <p style="color: #fff; height: 200px;"><?php echo $desc; ?></p>
+        </div>
     </div>
 <?php
 }
@@ -126,7 +124,7 @@ $topContentThumbnailURL = wp_get_attachment_url( get_post_thumbnail_id($post->ID
 				?>
 			</div>
         </div>
-		<div id="welcomeContent" class="col-md-6 welcome">
+		<div id="welcomeContent" class="col-md-6 welcome" style='color: #333; text-align: left; font-size: 12px;'>
 			<div class="col-md-12">
 				<?php
 					$id=21;
@@ -148,6 +146,8 @@ $topContentThumbnailURL = wp_get_attachment_url( get_post_thumbnail_id($post->ID
 					// The Query
 					$query = new WP_Query( $args );
 					while ( $query->have_posts() ) : $query->the_post();
+						$Actitle = apply_filters('the_title', $query->post_title);
+						echo "<h2>Accreditation and Member</h2>";
 						the_content();
 					endwhile;
 					wp_reset_postdata();
@@ -214,6 +214,35 @@ $topContentThumbnailURL = wp_get_attachment_url( get_post_thumbnail_id($post->ID
             <div class="clearfix"></div>
         </div>
     </div>
+	
+	<div class="clearfix">
+        <!--<h2 class="text-left" style="margin-bottom: 20px; font-family: 'Bree Serif', serif; font-size: 38px; font-weight: 300; color: #668591">HighLight</h2>-->
+        <div id="" class="offerings text-left" style="color: #fff;">
+            <h3 class="text-left">Activity </h3>
+
+            <div class="bootstrap-grids">
+                <?php $cat_show = get_option('onfocus_show');
+                $myindex = json_decode(stripslashes($cat_show));
+				if(count($myindex)){
+                    global $posts, $post;
+                    for ($i = 0; $i < count($myindex); $i++) {
+                        $post = get_post($myindex[$i]);
+                        $imagethumb = get_the_post_thumbnail($post->ID, 'full');
+                        $imagethumb = $imagethumb ?$imagethumb: str_replace('src', ' class="img-responsive img-content" style="width: auto; height: 180px;" src', get_first_inserted_image());
+                        getListActivity($post->post_title, $post->post_excerpt ? $post->post_excerpt : iconv_substr(strip_tags($post->post_content), 0, 320, "UTF-8") . "...", get_permalink($post->ID), $imagethumb);
+                    }
+				}
+				$catHighLightID = get_cat_ID( 'activity' );
+				$catHighLightLink = get_category_link( $catHighLightID );
+				echo "<div class='col-md-12'><a class='button wow bounceIn text-center col-md-12' data-wow-delay='0.4s' href='$catHighLightLink' target='_blank'>READ MORE ARTICLE</a></div>";
+                ?>
+
+
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+	
 
     <div class="col-md-6 clearfix">
 
@@ -306,7 +335,8 @@ $topContentThumbnailURL = wp_get_attachment_url( get_post_thumbnail_id($post->ID
 			$catLink = get_category_link( $catID );
 			$args = array (
 				'category_name' => 'achievements',
-				'posts_per_page' => 1
+				'posts_per_page' => 1,
+				'orderby' => 'DESC',
 			);
 
 			// The Query
@@ -321,34 +351,6 @@ $topContentThumbnailURL = wp_get_attachment_url( get_post_thumbnail_id($post->ID
 
         </div>
         <div class="clearfix"></div>
-    </div>
-	
-	<div class="clearfix">
-        <!--<h2 class="text-left" style="margin-bottom: 20px; font-family: 'Bree Serif', serif; font-size: 38px; font-weight: 300; color: #668591">HighLight</h2>-->
-        <div id="" class="offerings text-left" style="color: #fff;">
-            <h3 class="text-left">Activity </h3>
-
-            <div class="bootstrap-grids">
-                <?php $cat_show = get_option('onfocus_show');
-                $myindex = json_decode(stripslashes($cat_show));
-				if(count($myindex)){
-                    global $posts, $post;
-                    for ($i = 0; $i < count($myindex); $i++) {
-                        $post = get_post($myindex[$i]);
-                        $imagethumb = get_the_post_thumbnail($post->ID, 'full');
-                        $imagethumb = $imagethumb ?$imagethumb: str_replace('src', ' class="img-responsive img-content" style="width: auto; height: 180px;" src', get_first_inserted_image());
-                        getListHilight($post->post_title, $post->post_excerpt ? $post->post_excerpt : iconv_substr(strip_tags($post->post_content), 0, 320, "UTF-8") . "...", get_permalink($post->ID), $imagethumb);
-                    }
-				}
-				$catHighLightID = get_cat_ID( 'activity' );
-				$catHighLightLink = get_category_link( $catHighLightID );
-				echo "<div class='col-md-12'><a class='button wow bounceIn text-center col-md-12' data-wow-delay='0.4s' href='$catHighLightLink' target='_blank'>READ MORE ARTICLE</a></div>";
-                ?>
-
-
-            </div>
-            <div class="clearfix"></div>
-        </div>
     </div>
 
 

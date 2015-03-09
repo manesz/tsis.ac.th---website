@@ -155,13 +155,14 @@ h1,h2,h3,h4,h5,h6,p,span{
 }
 .welcome p{
 	font-family: 'Lato', sans-serif;
-	font-size: 17px;
+	font-size: 14px;
 	font-weight: 300;
-	color: #8BA4AD;
+	/* color: #8BA4AD; */
+	color: #333;
 	line-height: 34px;
 	word-spacing: 4px;
 	width: 76%;
-	margin: 2em 0em 1em 12em;
+	/* margin: 2em 0em 1em 12em; */
 }
 .welcome h3{
 	font-family: 'Lato', sans-serif;
@@ -1236,8 +1237,8 @@ span.menu {
 	margin: 2em 0em 0em 5em;
 }
 .welcome p {
-	font-size: 17px;
-	line-height: 26px;
+	font-size: 14px;
+	line-height: 20px;
 	word-spacing: 3px;
 }
 .welcome h3 {
@@ -1623,7 +1624,8 @@ a.fa-btn1.btn-2.btn-1e1 {
 /*--/responsive design--*/
 .gallery-frame { height: 200px; overflow: hidden }
 .gallery-thumb { position: relative; }
-.img-frame { width: 100%; height: 200px; overflow: hidden }
+.img-frame { width: 100%; max-height: 200px; overflow: hidden }
+.img-frame img{ width: auto; min-height: 200px; }
 .img-content { position: relative; /*top: -10%;*/ }
 .onFocusImg img{ max-height: 350px !important; width: auto; }
 .alignleft {
@@ -1675,6 +1677,9 @@ div a img { max-width: 100%; }
 .panel-heading:hover { background-color: #DD6B46; }
 .panel-heading h4 a { color: #fff; }
 .panel-heading h4 a:hover { color: #fff; }
+.menu-main-container { background-color: #4FB9E1; padding: 20px 0 20px 0; }
+.menu-main-container ul li a { color: #fff;  }
+
 /*
 .submenu {
     position:relative;

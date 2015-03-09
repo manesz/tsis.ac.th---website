@@ -46,7 +46,6 @@
 
 <body <?php body_class();
 $mysite = get_option('siteurl') . '/'; ?> itemscope itemtype="http://schema.org/WebPage">
-
 <!--Header-->
 <div class="header" style="border-bottom: 1px #ddd solid; ">
     <div class="fluid-container clearfix">
@@ -54,12 +53,13 @@ $mysite = get_option('siteurl') . '/'; ?> itemscope itemtype="http://schema.org/
             <a href="<?php echo $mysite ?>"><img src="<?php echo $themeLib; ?>images/logo.png" class="" alt="" style="width: 700px; max-width: 100%; height: auto;"/></a>
             <div class="clearfix"></div>
         </div>
-        <div class="header-right col-md-12">
+        <div class="header-right col-md-12" style='padding: 0px !important;'>
             <div class="navigation">
                 <span class="menu"> </span>
                 <?php
                 if (has_nav_menu('top-menu')) {
                     wp_nav_menu(array('menu' => 'Main'));
+					echo "<div class='col-md-12 text-center' style='padding-top: 20px;'>Tel : +66 2 710 5900 Email: info@tsis.ac.th</div>";
                 } else {
 
                     ?>

@@ -331,14 +331,24 @@ $topContentThumbnailURL = wp_get_attachment_url( get_post_thumbnail_id($post->ID
                 }
             }
 */
+			$cat_show = get_option('achievements_show');
 			$catID = get_cat_ID( 'achievements' );
 			$catLink = get_category_link( $catID );
+			if(!$cat_show){			
 			$args = array (
 				'category_name' => 'achievements',
 				'posts_per_page' => 1,
 				'orderby' => 'DESC',
 			);
-
+			}else{
+				$myindex = json_decode(stripslashes($cat_show));
+				$args = array(
+                    'post_type' => array('post', 'page'),
+                    'post_status' => 'publish',
+                    'p'=>$myindex[0],
+					'posts_per_page' => 1
+                );
+			}
 			// The Query
 			$query = new WP_Query( $args );
 			while ( $query->have_posts() ) : $query->the_post();

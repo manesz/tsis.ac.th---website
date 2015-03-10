@@ -40,9 +40,13 @@ $array = arrGetPostGallery($postID);
 							
 							echo '<h1>Parent Information (1)</h1>';
 							$args = array (
-								
-								// 'cat' => '8',
-								// 'category_name' => 'news-letter',
+								'tax_query' => array(
+									array(
+										'taxonomy' => 'parent_info_cat',
+										'field'    => 'slug',
+										'terms'    => 'news-letter',
+									),
+								),
 								'post_type' => 'parent_info',
 							);
 

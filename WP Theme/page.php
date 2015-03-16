@@ -34,6 +34,67 @@ $array = arrGetPostGallery($postID);
 						wp_reset_query();
 					}else if(is_page('Parent Information')){
 					?>
+<<<<<<< HEAD
+=======
+						<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+							  
+						<?php
+							
+							echo '<h1>Parent Information (1)</h1>';
+							$args = array (
+								'tax_query' => array(
+									array(
+										'taxonomy' => 'parent_info_cat',
+										'field'    => 'slug',
+										'terms'    => 'news-letter',
+									),
+								),
+								'post_type' => 'parent_info',
+							);
+
+							// The Query
+							$query = new WP_Query( $args );
+							$i = 0;
+							while ( $query->have_posts() ) : $query->the_post();
+							
+							?>
+							<div class="panel">
+								<div class="panel-heading" role="tab" id="heading<?php echo get_the_ID(); ?>">
+								  
+								<a data-toggle="collapse" data-parent="#accordion" href="#collapse<?php echo get_the_ID(); ?>" aria-expanded="true" aria-controls="collapse<?php echo get_the_ID(); ?>">
+									<h4 class="panel-title"> <?php echo get_the_title(); ?> </h4>
+								</a>
+								  
+								</div>
+								<div id="collapse<?php echo get_the_ID(); ?>" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading<?php echo get_the_ID(); ?>">
+								  <div class="panel-body">
+									<?php 
+										the_content(); 
+										$postID = get_the_ID();
+										$arrayGallery[] = arrGetPostGallery($postID);
+									?>
+									<?php if(!empty($arrayGallery[$i])):?>
+									<ul id="gallery" class="clearfix">
+										<?php
+											foreach($arrayGallery[$i] as $key=>$value):
+												echo '<li class="gallery-frame col-md-3" style=""><a class="fancybox-thumbs" href="'.$value[1].'" data-fancybox-group="thumb" title=""><img src="'.$value[1].'" class="gallery-thumb" alt="" /></a></li>';
+											endforeach;
+										?>
+									</ul>
+									<?php endif; ?>
+								  </div>
+								</div>
+							  </div>
+							<?php
+							$i++;
+							endwhile;
+							wp_reset_postdata();
+						?>
+							
+						</div>					
+						
+						<hr/>
+>>>>>>> origin/master
 						
 						<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 							  

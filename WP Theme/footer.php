@@ -80,13 +80,29 @@ $title_contact = $title_contact?$title_contact:'Get in Touch';
 </div>
 <!--/Get in Touch Ends Here-->
 <!--Footer Start Here-->
-<div class="footer">
-    <div class="container">
-        <div class="col-md-6 Reserved">
-            <h4 style="font-size: 12px;">Design by <a href="http://www.idaecorners.com" target="_blank">Idea Corners Studio co.,ltd.</a></h4>
+<div class="footer" style='background: #fff;'>
+    <div class="container-fluid">
+        <div class="col-md-6">
+			<?php 
+				if (has_nav_menu('top-menu')) :
+                    wp_nav_menu(array('menu' => 'footer'));
+				endif;
+			?>
         </div>
-        <div class="col-md-6 bottom-icons">
-            <?php if($fb_contact){?><a href="<?php echo $fb_contact;?>"><span class="icon1"> </span></a><?php } if($tw_contact){?><a href="<?php echo $tw_contact;?>"><span class="icon2"> </span></a><?php } if($gp_conteact){?><a href="<?php echo $gp_conteact;?>"><span class="icon3"> </span></a><?php }?>
+        <div class="col-md-6 text-center">
+			<?php 
+				$argsCert = array (
+					'cat' => 61,
+				);
+				
+				// The Query
+				$queryCert = new WP_Query( $argsCert );
+				while ( $queryCert->have_posts() ) : $queryCert->the_post();
+					$certBanner = wp_get_attachment_url( get_post_thumbnail_id(get_the_ID()), 'medium' );
+					$certLink = get_post_permalink();
+					echo "<a href='$certLink' target='_blank'><img src='$certBanner' class='col-md-12' style='max-width: 90px; max-height: 40px;'/></a>";
+				endwhile;
+			?>
         </div>
     </div>
 </div>
@@ -215,10 +231,9 @@ var mysiteurl = '<?php echo get_option('siteurl').'/';?>';
 
     $(document).ready(function() {
 		$('.carousel').carousel();
-		// $('#myModal').modal('show');
-	
+		<?php if(!isset($_SESSION['cover_display'])): $_SESSION['cover_display'] = 0; endif;?>
+		<?php if($_SESSION['cover_display'] == 0 ): ?> $('#myModal').modal('show'); <?php endif;?>
         <?php if(!is_page('Parent Information')):?> homeHook.init(); <?php endif; ?>
-		
 		<?php if(is_page('Parent Information')):?> $('.collapse').collapse(); <?php endif; ?>
 
         $('.fancybox-thumbs').fancybox({
@@ -238,60 +253,77 @@ var mysiteurl = '<?php echo get_option('siteurl').'/';?>';
         });
     });
 </script>
-
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&appId=1499945126956049&version=v2.0";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog" style='width: 90%; margin: auto;'>
-    <div class="modal-content">
-      <div class="modal-body container">
+  <div class="modal-dialog" style='width: 100%; margin: auto;'>
+    <div class="modal-content body-bg">
+	  <div class="modal-header clearfix" style='background: #fff'>
+	    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <div class="col-md-12 text-center" style='margin-bottom: 20px; background: #fff;'>
+			<img src='http://demo.ideacorners.com/tsis/wp-content/themes/tsisacth/library/images/logo.png' style='margin: auto; max-width: 600px; height: auto;'/>
+		</div>
+      </div>
 	  
-		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        
-		<div class="row">
-			<div class="col-md-12">
-			
-				<img src='http://demo.ideacorners.com/tsis/wp-content/themes/tsisacth/library/images/logo.png' style='margin: auto; max-width: 600px; height: auto;'/>
-			
-				<?php
-					$id=21;
-					$post = get_post($id);
-					$title = apply_filters('the_title', $post->post_title);
-					$content = apply_filters('the_content', $post->post_content);
-					$arrModalRotationimage = arrGetPostGallery_rotation($id);
-				?>
+      <div class="modal-body container-fluid">
+		
+		<div class='container-fluid'>
+			<div class="row">
+				<div class="col-md-12 text-center">
 				
-				<?php if(!empty($arrModalRotationimage)):?>
-				<div id="carousel-example-generic-<?php echo $post_id; ?>" class="carousel slide" data-ride="carousel">
-				  <!-- Indicators -->
-				  <ol class="carousel-indicators">
-					<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-					<li data-target="#carousel-example-generic" data-slide-to="1"></li>
-					<li data-target="#carousel-example-generic" data-slide-to="2"></li>
-				  </ol>
+					<?php
+						$_SESSION['cover_display'] = 1;
+						$id=21;
+						$post = get_post($id);
+						$title = apply_filters('the_title', $post->post_title);
+						$content = apply_filters('the_content', $post->post_content);
+						$arrModalRotationimage = arrGetPostGallery_rotation($id);
+					?>
+					
+					<?php if(!empty($arrModalRotationimage)):?>
+					<div id="carousel-example-generic-<?php echo $post_id; ?>" class="carousel slide" data-ride="carousel">
+					  <!-- Indicators -->
+					  <ol class="carousel-indicators">
+						<?php foreach( $arrModalRotationimage as $key => $value ):?>
+						<li data-target="#carousel-example-generic" data-slide-to="<?php echo $key?>" class="<?php if($key==0):echo 'active';endif;?>"></li>
+						<?php endforeach; ?>
+					  </ol>
 
-				  <!-- Wrapper for slides -->
-				  
-				  <div class="carousel-inner" role="listbox">
-					<?php foreach( $arrModalRotationimage as $key => $value ):?>
-					<div class="item <?php if($key==0):echo 'active';endif;?>" style='width: 100%; max-height: 400px; overflow: hidden;'> <img src='<?php echo $value[1]; ?>' style='width: 100%;'/> </div>
-					<?php endforeach; ?>
-				  </div>
-				  
+					  <!-- Wrapper for slides -->
+					  
+					  <div class="carousel-inner" role="listbox">
+						<?php foreach( $arrModalRotationimage as $key => $value ):?>
+						<div class="item <?php if($key==0):echo 'active';endif;?>" style='width: 100%; max-height: 400px; overflow: hidden;'> <img src='<?php echo $value[1]; ?>' style='width: 100%;'/> </div>
+						<?php endforeach; ?>
+					  </div>
+					  
 
-				  <!-- Controls -->
-				  <a class="left carousel-control" href="#carousel-example-generic-<?php echo $post_id; ?>" role="button" data-slide="prev">
-					<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-					<span class="sr-only">Previous</span>
-				  </a>
-				  <a class="right carousel-control" href="#carousel-example-generic-<?php echo $post_id; ?>" role="button" data-slide="next">
-					<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-					<span class="sr-only">Next</span>
-				  </a>
+					  <!-- Controls -->
+					  <a class="left carousel-control" href="#carousel-example-generic-<?php echo $post_id; ?>" role="button" data-slide="prev">
+						<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+						<span class="sr-only">Previous</span>
+					  </a>
+					  <a class="right carousel-control" href="#carousel-example-generic-<?php echo $post_id; ?>" role="button" data-slide="next">
+						<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+						<span class="sr-only">Next</span>
+					  </a>
+					</div>
+					<?php elseif(isset($img)):?>
+					<div class="img-frame"><?php echo $img; ?></div>
+					<?php endif; ?>
 				</div>
-				<?php elseif(isset($img)):?>
-				<div class="img-frame"><?php echo $img; ?></div>
-				<?php endif; ?>
 			</div>
+		</div>
+		
+		<div class='container-fluid'>
+			<div class="row">	
 			<div class='col-md-12' style='margin-top: 30px;'>
 			<?php
 					
@@ -311,7 +343,7 @@ var mysiteurl = '<?php echo get_option('siteurl').'/';?>';
 						<?php// echo $value->ID;?>
 						<?php $featureImage = get_the_post_thumbnail( $value->ID, 'full' ); ?>
 						<div class="page-child-frame"><a href="<?php echo $value->guid ?>"><?php echo $featureImage; ?></a></div>
-						<a class="button wow bounceIn text-center animated col-md-12" data-wow-delay="0.4s" href="<?php echo $value->guid ?>" style="visibility: visible; -webkit-animation: bounceIn 0.4s;"><?php echo $value->post_title; ?></a>
+						<a class="button wow bounceIn text-center animated col-md-12" data-wow-delay="0.4s" href="<?php echo $value->guid ?>" style=" visibility: visible; -webkit-animation: bounceIn 0.4s;"><?php echo $value->post_title; ?></a>
 						<div class="clearfix"></div>
 					</div>
 				<?php
@@ -320,10 +352,11 @@ var mysiteurl = '<?php echo get_option('siteurl').'/';?>';
 			?>
 			</div>
 		</div>
+		</div>
 		
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default col-md-12" data-dismiss="modal">Visit our home page</button>
+      <div class="modal-footer" style=''>
+        <button type="button" class="button-cover wow bounceIn col-md-12 text-center" data-wow-delay="0.4s" data-dismiss="modal">Visit our home page</button>
       </div>
     </div>
   </div>

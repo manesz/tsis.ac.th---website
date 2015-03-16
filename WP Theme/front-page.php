@@ -1,13 +1,6 @@
 <?php    include_once('header.php'); ?>
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&appId=1499945126956049&version=v2.0";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
-<div id="camps" class="upcoming" style="margin-top: 25px;">
+
+<div id="camps" class="upcoming" style="">
 <?php
 function getListHilight($title, $desc, $link, $img = '<img class="img-responsive img-content" src="http://tsis.ac.th/i/wp-content/uploads/2013/02/copy-header1.png" alt=""/>', $post_id)
 {
@@ -27,7 +20,7 @@ function getListHilight($title, $desc, $link, $img = '<img class="img-responsive
 
 			  <!-- Wrapper for slides -->
 			  
-			  <div class="carousel-inner" role="listbox" style='height: 200px;'>
+			  <div class="carousel-inner" role="listbox" style=''>
 				<?php foreach( $arrRotationimage as $key => $value ):?>
 				<div class="item <?php if($key==0):echo 'active'; endif; ?> img-frame"> <img src='<?php echo $value[1]; ?>'/> </div>
 				<?php endforeach; ?>
@@ -47,9 +40,11 @@ function getListHilight($title, $desc, $link, $img = '<img class="img-responsive
 			<?php elseif(isset($img)):?>
 			<div class="img-frame"><?php echo $img; ?></div>
 			<?php endif; ?>
-			
-			<h3 style="height: 80px; margin-bottom: 20px; font-family: 'Bree Serif', serif; font-size: 18px; font-weight: 300; color: #fff"><?php echo $title; ?></h3>
-
+		</a>
+		<a href="<?php echo $link; ?>">
+			<h3 style="height: 40px; margin-bottom: 20px; font-family: 'Bree Serif', serif; font-size: 18px; font-weight: 300; color: #fff"><?php echo $title; ?></h3>
+		</a>
+		<a href="<?php echo $link; ?>">
 			<div class="Proin">
 				<p style="color: #eee; height: 200px;"><?php echo $desc; ?></p>
 				<!--<a class="button wow bounceIn col-md-12 text-center" data-wow-delay="0.4s" href="<?php// echo $link; ?>">READ MORE</a>-->
@@ -68,7 +63,7 @@ function getListActivity($title, $desc, $link, $img = '<img class="img-responsiv
             </div>
         </a>
 
-<h3 style="height: 80px; margin-bottom: 20px; font-family: 'Bree Serif', serif; font-size: 18px; font-weight: 300; color: #fff"><?php echo $title; ?></h3>
+<h3 style="height: 40px; margin-bottom: 20px; font-family: 'Bree Serif', serif; font-size: 18px; font-weight: 300; color: #fff"><?php echo $title; ?></h3>
 
         <div class="Proin">
             <p style="color: #fff; height: 200px;"><?php echo $desc; ?></p>
@@ -85,7 +80,7 @@ function getListAchievements($title, $desc, $link, $img = '<img class="img-respo
             </div>
         
 
-        <h3 style="height: 80px; margin-bottom: 20px; font-family: 'Bree Serif', serif; font-size: 18px; font-weight: 300; color: #fff"><?php echo $title; ?></h3>
+        <h3 style="height: 40px; margin-bottom: 20px; font-family: 'Bree Serif', serif; font-size: 18px; font-weight: 300; color: #fff"><?php echo $title; ?></h3>
 
         <div class="Proin">
             <p style="color: #eee; height: 200px;"><?php echo $desc; ?></p>
@@ -110,61 +105,28 @@ $post = get_post($post->ID);
 $topContentTitle = apply_filters('the_title', $post->post_title);
 $topContentDescription = apply_filters('the_content', $post->post_content);
 $topContentThumbnailURL = wp_get_attachment_url( get_post_thumbnail_id($post->ID), 'full' );
+
+$postId=21;
+$WelcomePost = get_post($postId);
+$WelcomeTitle = apply_filters('the_title', $WelcomePost->post_title);
+$WelcomeContent = apply_filters('the_content', $WelcomePost->post_content);
+				
 ?>
-    <div class="clearfix">
-        <!--<div id="topTitle" class="col-lg-6"><?php// echo $imagethumb; ?></div>-->
-        <div id="topContent" class="col-md-6 welcome">
-            <!--<h2 style="margin-bottom: 40px;"><?php// echo $topContentTitle; ?></h2>-->
+	<div class='col-md-12 clearfix image-cover' style='padding: 0px; height: 700px; background: url("<?php echo $topContentThumbnailURL; ?>") no-repeat center center ;-webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;'>
+		<h2><span><?php echo $topContentTitle; ?></span></h2>
+		<div><?php echo $WelcomeContent; ?></div>
+	</div>
 
-            <div id="postselect-contentdesc">
-				<?php 
-					echo "<h2 style='margin-bottom: 1.2em;'>$topContentTitle</h2>";
-					echo "<img src='$topContentThumbnailURL' style='width: 100%;'/>";
-					echo $topContentDescription; 
-				?>
-			</div>
-        </div>
-		<div id="welcomeContent" class="col-md-6 welcome" style='color: #333; text-align: left; font-size: 12px;'>
-			<div class="col-md-12">
-				<?php
-					$id=21;
-					$post = get_post($id);
-					$title = apply_filters('the_title', $post->post_title);
-					$content = apply_filters('the_content', $post->post_content);
-				?>
-
-				<h2><?php echo $title; ?></h2>
-
-				<p><?php echo $content;?></p>
-			</div>
-			<div class="col-md-12">
-				<?php
-					$args = array (
-						'pagename' => 'Accreditation',
-					);
-
-					// The Query
-					$query = new WP_Query( $args );
-					while ( $query->have_posts() ) : $query->the_post();
-						$Actitle = apply_filters('the_title', $query->post_title);
-						echo "<h2>Accreditation and Member</h2>";
-						the_content();
-					endwhile;
-					wp_reset_postdata();
-				?>
-			</div>
-		</div>
-    </div>
 	<hr/>
     <div class="container-fluid">
     <div class="row">
-    <div class="col-md-4 welcome">
+    <div class="col-md-4 welcome" style='padding: 0px;'>
 
-        <h2 style="margin-bottom: 30px;">Announcements</h2>
+        <h2 style="">Announcements</h2>
 
         <div id="achievements" style="padding: 10px;"></div>
 
-        <h2 style="margin-bottom: 30px;">Videos</h2>
+        <h2 style="">Videos</h2>
         <?php
         $orderby = 'order_id';
         $sql = "
@@ -187,10 +149,31 @@ $topContentThumbnailURL = wp_get_attachment_url( get_post_thumbnail_id($post->ID
 	</div>
     <div class="col-md-8">
     <div class="row">
+	<div class='clearfix'>
+	
+		<div id='welcomeContent' class="col-md-12 clearfix accreditation">
+			<?php
+				$args = array (
+					'pagename' => 'Accreditation',
+				);
+
+				// The Query
+				$query = new WP_Query( $args );
+				while ( $query->have_posts() ) : $query->the_post();
+					$Actitle = apply_filters('the_title', $query->post_title);
+					echo "<h2>Accreditation and Member</h2>";
+					the_content();
+				endwhile;
+				wp_reset_postdata();
+			?>
+		</div>
+	
+	</div>
     <div class="clearfix">
         <!--<h2 class="text-left" style="margin-bottom: 20px; font-family: 'Bree Serif', serif; font-size: 38px; font-weight: 300; color: #668591">HighLight</h2>-->
+		
         <div id="" class="offerings text-left" style="color: #fff;">
-            <h3 class="text-left">Highlight </h3>
+            <h2 class="text-left">Highlight </h2>
 
             <div class="bootstrap-grids">
                 <?php $cat_show = get_option('highlight_show');
@@ -206,7 +189,8 @@ $topContentThumbnailURL = wp_get_attachment_url( get_post_thumbnail_id($post->ID
 				}
 				$catHighLightID = get_cat_ID( 'highlight' );
 				$catHighLightLink = get_category_link( $catHighLightID );
-				echo "<div class='col-md-12'><a class='button wow bounceIn text-center col-md-12' data-wow-delay='0.4s' href='$catHighLightLink' target='_blank'>READ MORE ARTICLE</a></div>";
+				echo "
+					<div class='col-md-12'> <a class='button wow bounceIn text-center col-md-12' data-wow-delay='0.4s' href='$catHighLightLink' target='_blank'> READ MORE ARTICLE </a> </div>";
                 ?>
 
 
@@ -218,7 +202,7 @@ $topContentThumbnailURL = wp_get_attachment_url( get_post_thumbnail_id($post->ID
 	<div class="clearfix">
         <!--<h2 class="text-left" style="margin-bottom: 20px; font-family: 'Bree Serif', serif; font-size: 38px; font-weight: 300; color: #668591">HighLight</h2>-->
         <div id="" class="offerings text-left" style="color: #fff;">
-            <h3 class="text-left">Activity </h3>
+            <h2 class="text-left">Activity </h2>
 
             <div class="bootstrap-grids">
                 <?php $cat_show = get_option('onfocus_show');
@@ -246,39 +230,10 @@ $topContentThumbnailURL = wp_get_attachment_url( get_post_thumbnail_id($post->ID
 
     <div class="col-md-6 clearfix">
 
-        <h3 class="text-left"
-            style="font-family: 'Bree Serif', serif; font-weight: 300; color: #668591; text-align: center; font-size: 52px; padding: 0.5em 0em 0.5em; margin-top: 0;">
-            On Focus</h3>
+        <h2 class="text-left"
+            style="font-family: 'Bree Serif', serif; font-weight: 300; color: #333; text-align: center;  padding: 0.5em 0em 0.5em; margin-top: 0;">
+            On Focus</h2>
         <?php 
-/*		$cat_show = get_option('onfocus_show');
-        $myindex = json_decode(stripslashes($cat_show));
-        if (count($myindex)) {
-###----------------------------------------------------------------------------------------------###
-            $arghis = array(
-                'post_type' => array('post', 'page'),
-                'post_status' => 'publish',
-                'category_name' => 'onfocus',
-				'posts_per_page' => 6
-            );
-            global $posts, $post;
-            query_posts($arghis);
-            while (have_posts()):the_post();
-                $imagethumb = get_the_post_thumbnail($post->ID, 'full');
-                $imagethumb = $imagethumb ? str_replace('src', ' class="img-responsive img-content" src', $imagethumb) : str_replace('src', ' class="img-responsive img-content" style="width: auto; height: 350px;" src', get_first_inserted_image());
-                getListOnFocus($post->post_title, $post->post_excerpt ? $post->post_excerpt : iconv_substr(strip_tags($post->post_content), 0, 320, "UTF-8") . "...", get_permalink($post->ID), $imagethumb);
-            endwhile;
-        } else if (count($myindex) > 5) {
-###----------------------------------------------------------------------------------------------###
-            global $posts, $post;
-            for ($i = 0; $i < count($myindex); $i++) {
-                $post = get_post($myindex[$i]);
-                $imagethumb = get_the_post_thumbnail($post->ID, 'full');
-                $imagethumb = $imagethumb ? str_replace('src', ' class="img-responsive img-content" src', $imagethumb) : str_replace('src', ' class="img-responsive img-content" style="width: auto; height: 350px;" src', get_first_inserted_image());
-                getListOnFocus($post->post_title, $post->post_excerpt ? $post->post_excerpt : iconv_substr(strip_tags($post->post_content), 0, 320, "UTF-8") . "...", get_permalink($post->ID), $imagethumb);
-            }
-        }
-*/
-		
 		$args = array (
 			'pagename' => 'on focus',
 		);
@@ -297,40 +252,10 @@ $topContentThumbnailURL = wp_get_attachment_url( get_post_thumbnail_id($post->ID
     </div>
 
     <div id="" class="col-md-6 text-left" style="">
-        <h3 class="text-left" style="font-family: 'Bree Serif', serif; font-weight: 300; color: #668591; text-align: center; font-size: 52px; padding: 0.5em 0em 0.5em; margin-top: 0;">Achievements</h3>
+        <h2 class="text-left" style="font-family: 'Bree Serif', serif; font-weight: 300; color: #333; text-align: center; padding: 0.5em 0em 0.5em; margin-top: 0;">Achievements</h2>
 
         <div class="bootstrap-grids">
-            <?php 
-/*			$cat_show = get_option('achievements_show');
-            $myindex = json_decode(stripslashes($cat_show));
-            if (count($myindex)) {
-                
-###----------------------------------------------------------------------------------------------###
-				$arghis = array(
-                    'post_type' => array('post', 'page'),
-                    'post_status' => 'publish',
-                    'category_name' => 'achievements',
-					'posts_per_page' => 6
-                );
-                global $posts, $post;
-                query_posts($arghis);
-                while (have_posts()):the_post();
-                    $imagethumb = get_the_post_thumbnail($post->ID, 'full');
-                    $imagethumb = $imagethumb ? str_replace('src', ' class="img-responsive img-content" src', $imagethumb) : str_replace('src', ' class="img-responsive img-content" style="width: auto; height: 180px;" src', get_first_inserted_image());
-                    getListAchievements($post->post_title, $post->post_excerpt ? $post->post_excerpt : iconv_substr(strip_tags($post->post_content), 0, 320, "UTF-8") . "...", get_permalink($post->ID), $imagethumb);
-                endwhile;
-            } else if (count($myindex) > 5) {
-###----------------------------------------------------------------------------------------------###
-
-                global $posts, $post;
-                for ($i = 0; $i < count($myindex); $i++) {
-                    $post = get_post($myindex[$i]);
-                    $imagethumb = get_the_post_thumbnail($post->ID, 'full');
-                    $imagethumb = $imagethumb ? str_replace('src', ' class="img-responsive img-content" src', $imagethumb) : str_replace('src', ' class="img-responsive img-content" style="width: auto; height: 180px;" src', get_first_inserted_image());
-                    getListAchievements($post->post_title, $post->post_excerpt ? $post->post_excerpt : iconv_substr(strip_tags($post->post_content), 0, 320, "UTF-8") . "...", get_permalink($post->ID), $imagethumb);
-                }
-            }
-*/
+            <?php
 			$cat_show = get_option('achievements_show');
 			$catID = get_cat_ID( 'achievements' );
 			$catLink = get_category_link( $catID );
@@ -340,6 +265,7 @@ $topContentThumbnailURL = wp_get_attachment_url( get_post_thumbnail_id($post->ID
 				'posts_per_page' => 1,
 				'orderby' => 'DESC',
 			);
+
 			}else{
 				$myindex = json_decode(stripslashes($cat_show));
 				$args = array(
@@ -349,6 +275,7 @@ $topContentThumbnailURL = wp_get_attachment_url( get_post_thumbnail_id($post->ID
 					'posts_per_page' => 1
                 );
 			}
+
 			// The Query
 			$query = new WP_Query( $args );
 			while ( $query->have_posts() ) : $query->the_post();
@@ -357,100 +284,16 @@ $topContentThumbnailURL = wp_get_attachment_url( get_post_thumbnail_id($post->ID
 			endwhile;
 			echo "<a class='button wow bounceIn col-md-12 text-center' data-wow-delay='0.4s' href='$catLink'>READ MORE</a>";
 			wp_reset_postdata();
-            ?>
-
+			?>
         </div>
         <div class="clearfix"></div>
     </div>
 
-
-    <!--Recent Blog Posts Start Here-->
-    <div class="justo">
-        <div id="blogs" class="recent">
-            <!--<div class="lacus">
-                <h2>Recent Blog Posts</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Suspendisse in laoreet purus. Phasellus turpis lacus, feugiat
-                    eu tincidunt a, ultrices quis tellus. Ut eu justo a nunc gravida adipiscing.</p>
-            </div>-->
-            <?php
-            // $arghis = array(
-                // 'post_type' => 'parent_info',
-                // 'post_status' => 'publish'
-            // );
-            // global $posts, $post;
-            // query_posts($arghis);
-            // $countparent = 1;
-            // while (have_posts()):the_post();
-                // $imagethumb = get_the_post_thumbnail($post->ID);
-                // $imagethumb = $imagethumb ? str_replace('src', ' class="img-responsive" src', $imagethumb) : str_replace('src', ' class="img-responsive" src', get_first_inserted_image());
-                // $mylink = get_permalink($post->ID);
-                // $postdate = date('F d, Y', strtotime($post->post_date));
-                // if ($countparent == 1) {
-
-                    // ?>
-                    <!--// <div class="col-md-6 posts wow bounceIn" data-wow-delay="0.4s">
-                        // <a href="<?php// echo $mylink; ?>"><?php// echo $imagethumb; ?></a>
-                        // <span><?php// echo $postdate; ?></span>
-
-                        // <h2><?php// echo $post->post_title; ?></h2>
-
-                        // <p><?php// echo $post->post_excerpt ? $post->post_excerpt : iconv_substr(strip_tags($post->post_content), 0, 320, "UTF-8") . "..."; ?></p>
-                    // </div>-->
-                     <?php
-                    // $countparent++;
-
-                // } else {
-                    // if ($countparent == 2) {
-                        // ?>
-                        <!--// <div class="col-md-6 magna wow bounceIn" data-wow-delay="0.4s">-->
-
-                         <!--                        <div class="col-md-6 amet wow bounceIn" data-wow-delay="0.4s">
-                            // <span>February 4, 2014</span>
-                            // <a href="#"><img class="img-responsive" src="<?php// echo $themeLib; ?>images/br3.jpg" alt=""/></a>
-                        // </div>
-                        // <div class="col-md-6 dui wow bounceIn" data-wow-delay="0.4s">
-                            // <h2>New swings added</h2>
-
-                            // <p>Vivamus laoreet vitae mi sit amet mattis.
-                                // Praesent sagittis libero dui, et adipiscing lorem pharetra non.
-                                // Vestibulum aliquam adipiscing. Vivamus laoreet vitae mi sit amet mattis.
-                                // Sent sagittis libero dui et adipiscing.</p>
-                        // </div>-->
-
-                     <?php
-                    // }
-                    // ?>
-                    <!-- <div class="col-md-6 amet wow bounceIn" data-wow-delay="0.4s">
-                        // <span>February 4, 2014</span>
-                        // <a href="<?php// echo $mylink; ?>"><?php// echo $imagethumb; ?></a>
-                    // </div>
-                    // <div class="col-md-6 dui wow bounceIn" data-wow-delay="0.4s">
-						// <h2><?php// echo $post->post_title; ?></h2>
-						// <p><?php// echo $post->post_excerpt ? $post->post_excerpt : iconv_substr(strip_tags($post->post_content), 0, 320, "UTF-8") . "..."; ?></p>						
-                    // </div> -->
-                     <?php
-                    // $countparent++;
-                // }
-                // if ($countparent == 4) {
-                    // ?> <!--</div>--><?php
-                // }
-            // endwhile;
-            ?>
-
-        </div>
-    </div>
-    <div class="clearfix"></div>
-    <!--/Recent Blog Posts Ends Here-->
-    <!--Get in Touch Start Here-->
-
-    <!--/Get in Touch Ends Here-->
     </div>
     </div>
     </div>
 	
-	<div class='clearfix col-md-12' style=''>
+	<div class='clearfix col-md-12' style='background: #fff;'>
 		<div class="fb-like-box" data-href="https://www.facebook.com/ThaiSingaporeInternationalSchool" data-width="100%" data-colorscheme="light" data-show-faces="true" data-header="true" data-stream="false" data-show-border="true"></div>
 	</div>
 	

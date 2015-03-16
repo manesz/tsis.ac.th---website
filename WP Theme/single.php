@@ -15,10 +15,9 @@ while ( have_posts() ) : the_post();
             <p class="s_head" style="text-align: left; margin: 0; margin-bottom: 20px;"><?php $date = date('dS F Y',strtotime($post->post_date)); echo $date;?></p>
         </div>
         <div class="bootstrap-grids">
-            <div class="col-md-12" style="margin-bottom: 20px;">
-                <div class="">
-					<p><?php the_content(); ?></p>
-                </div>
+			<div class='col-md-12 blockContent' style='padding: 20px;'> <?php the_content(); ?> </div>
+		
+            <div class="col-md-12 alpha omega" style="margin-bottom: 20px;">
 
 				<?php if(!empty($array)):?>
                 <ul id="gallery" class="clearfix">

@@ -1,3 +1,7 @@
+<?php 
+	session_start();
+	// if(@$_SESSION['cover_display']):$_SESSION['cover_display'] = 0;endif;
+?>
 <!doctype html>
 
 <!--[if lt IE 7]>
@@ -44,22 +48,65 @@
     <?php wp_head(); ?>
 </head>
 
-<body <?php body_class();
+<body class='body-bg'<?php //body_class();
 $mysite = get_option('siteurl') . '/'; ?> itemscope itemtype="http://schema.org/WebPage">
 <!--Header-->
-<div class="header" style="border-bottom: 1px #ddd solid; ">
+<div class="header" style="background: #fff; border-bottom: 1px #ddd solid; ">
     <div class="fluid-container clearfix">
         <div class="logo col-md-12 text-center">
-            <a href="<?php echo $mysite ?>"><img src="<?php echo $themeLib; ?>images/logo.png" class="" alt="" style="width: 700px; max-width: 100%; height: auto;"/></a>
+            <a href="<?php echo $mysite ?>"><img src="<?php echo $themeLib; ?>images/logo.png" class="" alt="" style="width: 600px; max-width: 100%; height: auto;"/></a>
             <div class="clearfix"></div>
         </div>
-        <div class="header-right col-md-12" style='padding: 0px !important;'>
+        <div class="col-md-12" style='margin-top: 30px; padding: 0px !important;'>
             <div class="navigation">
                 <span class="menu"> </span>
                 <?php
                 if (has_nav_menu('top-menu')) {
-                    wp_nav_menu(array('menu' => 'Main'));
-					echo "<div class='col-md-12 text-center' style='padding-top: 20px;'>Tel : +66 2 710 5900 Email: info@tsis.ac.th</div>";
+                    // wp_nav_menu(array('menu' => 'Main'));
+					
+					$defaults = array(
+						'theme_location'  => '',
+						'menu'            => 'Main',
+						'container'       => 'div',
+						'container_class' => '',
+						'container_id'    => '',
+						'menu_class'      => 'menu',
+						'menu_id'         => '',
+						'echo'            => true,
+						'fallback_cb'     => 'wp_page_menu',
+						'before'          => '',
+						'after'           => '',
+						'link_before'     => '',
+						'link_after'      => '',
+						'items_wrap'      => '<ul id="%1$s" class="%2$s">%3$s</ul>',
+						'depth'           => 0,
+						'walker'          => ''
+					);
+
+					wp_nav_menu( $defaults );
+					
+					// $menu_name = 'top-menu';
+
+					// if ( ( $locations = get_nav_menu_locations() ) && isset( $locations[ $menu_name ] ) ) {
+					// $menu = wp_get_nav_menu_object( $locations[ $menu_name ] );
+
+					// $menu_items = wp_get_nav_menu_items($menu->term_id);
+
+					// $menu_list = '<ul id="menu-' . $menu_name . '">';
+
+					// foreach ( (array) $menu_items as $key => $menu_item ) {
+						// $title = $menu_item->title;
+						// $url = $menu_item->url;
+						// $menu_list .= '<li><a href="' . $url . '">' . $title . '</a></li>';
+					// }
+					// $menu_list .= '</ul>';
+					// } else {
+					// $menu_list = '<ul><li>Menu "' . $menu_name . '" not defined.</li></ul>';
+					// }
+					// // $menu_list now ready to output
+					
+					// echo $menu_list;
+					
                 } else {
 
                     ?>
@@ -84,22 +131,18 @@ $mysite = get_option('siteurl') . '/'; ?> itemscope itemtype="http://schema.org/
                         </li>
                     </ul>
                 <?php } ?>
+				
+				
+				<div class='col-md-12 text-center' style='background-color: rgba(79,185,225,1); padding: 10px 0 10px 0; color: #fff;'>
+					<img src="http://demo.ideacorners.com/tsis/wp-content/themes/tsisacth/library/images/ion3.png" alt="" style='width: auto; height: 25px;'>  +66 2 710 5900
+					<img src="http://demo.ideacorners.com/tsis/wp-content/themes/tsisacth/library/images/ion2.png" alt="" style='width: auto; height: 20px;'>  info@tsis.ac.th
+				</div>
             </div>
+			
 
             <div class="clearfix"></div>
-            <!-- /script-nav -->
-<!--            <div class="top-icons">-->
-<!--                --><?php
-//                $fb_contact = get_option('fb_contact');
-//                $tw_contact = get_option('tw_contact');
-//                $gp_conteact = get_option('gp_conteact');
-//                if ($fb_contact) {
-//                    ?><!--<a href="--><?php //echo $fb_contact; ?><!--"><span class="icon1"> </span></a>--><?php //}
-//                if ($tw_contact) { ?><!--<a href="--><?php //echo $tw_contact; ?><!--"><span class="icon2"> </span></a>--><?php //}
-//                if ($gp_conteact) { ?><!--<a href="--><?php //echo $gp_conteact; ?><!--"><span class="icon3"> </span></a>--><?php //} ?>
-<!--            </div>-->
-<!--            <div class="clearfix"></div>-->
         </div>
+		
     </div>
 </div>
 <!--/Header Ends Here-->

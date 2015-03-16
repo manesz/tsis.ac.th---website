@@ -34,94 +34,45 @@ $array = arrGetPostGallery($postID);
 						wp_reset_query();
 					}else if(is_page('Parent Information')){
 					?>
-						<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-							  
-						<?php
-							
-							echo '<h1>Parent Information (1)</h1>';
-							$args = array (
-								
-								// 'cat' => '8',
-								// 'category_name' => 'news-letter',
-								'post_type' => 'parent_info',
-							);
-
-							// The Query
-							$query = new WP_Query( $args );
-							$i = 0;
-							while ( $query->have_posts() ) : $query->the_post();
-							
-							?>
-							<div class="panel">
-								<div class="panel-heading" role="tab" id="heading<?php echo get_the_ID(); ?>">
-								  
-								<a data-toggle="collapse" data-parent="#accordion" href="#collapse<?php echo get_the_ID(); ?>" aria-expanded="true" aria-controls="collapse<?php echo get_the_ID(); ?>">
-									<h4 class="panel-title"> <?php echo get_the_title(); ?> </h4>
-								</a>
-								  
-								</div>
-								<div id="collapse<?php echo get_the_ID(); ?>" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading<?php echo get_the_ID(); ?>">
-								  <div class="panel-body">
-									<?php 
-										the_content(); 
-										$postID = get_the_ID();
-										$arrayGallery[] = arrGetPostGallery($postID);
-									?>
-									<?php if(!empty($arrayGallery[$i])):?>
-									<ul id="gallery" class="clearfix">
-										<?php
-											foreach($arrayGallery[$i] as $key=>$value):
-												echo '<li class="gallery-frame col-md-3" style=""><a class="fancybox-thumbs" href="'.$value[1].'" data-fancybox-group="thumb" title=""><img src="'.$value[1].'" class="gallery-thumb" alt="" /></a></li>';
-											endforeach;
-										?>
-									</ul>
-									<?php endif; ?>
-								  </div>
-								</div>
-							  </div>
-							<?php
-							$i++;
-							endwhile;
-							wp_reset_postdata();
-						?>
-							
-						</div>					
-						
-						<hr/>
 						
 						<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 							  
 						<?php
-							echo '<h1>Parent Information</h1>';
 							$args = array (
-								'post_type' => 'parent_info',
-								'cat_ID' => 9,
+								// 'show_option_all'    => '',
+								'orderby'            => 'name',
+								'order'              => 'ASC',
+								// 'style'              => 'list',
+								// 'show_count'         => 0,
+								// 'hide_empty'         => 1,
+								// 'use_desc_for_title' => 1,
+								'child_of'           => 41,
+								// 'feed'               => '',
+								// 'feed_type'          => '',
+								// 'feed_image'         => '',
+								// 'exclude'            => '',
+								// 'exclude_tree'       => '',
+								// 'include'            => '',
+								// 'hierarchical'       => 1,
+								'title_li'           => __( '' ),
+								// 'show_option_none'   => __( '' ),
+								// 'number'             => null,
+								// 'echo'               => 1,
+								// 'depth'              => 0,
+								// 'current_category'   => 0,
+								// 'pad_counts'         => 0,
+								// 'taxonomy'           => 'category',
+								// 'walker'             => null
 							);
+							
+
 
 							// The Query
 							$query = new WP_Query( $args );
-							while ( $query->have_posts() ) : $query->the_post();
 							?>
-							<div class="panel">
-								<div class="panel-heading" role="tab" id="heading<?php echo get_the_ID(); ?>">
-								  
-								<a data-toggle="collapse" data-parent="#accordion" href="#collapse<?php echo get_the_ID(); ?>" aria-expanded="true" aria-controls="collapse<?php echo get_the_ID(); ?>">
-									<h4 class="panel-title"> <?php echo single_cat_title().' ###### '; echo get_the_title(); ?> </h4>
-								</a>
-								  
-								</div>
-								<div id="collapse<?php echo get_the_ID(); ?>" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading<?php echo get_the_ID(); ?>">
-								  <div class="panel-body">
-									<?php the_content(); ?>
-								  </div>
-								</div>
-							  </div>
-							<?php
-							endwhile;
-							wp_reset_postdata();
-						?>
+							<ul class="cat-item-list" style=''> <?php wp_list_categories( $args ); ?> </ul>
 							
-						</div>					
+						</div><!-- ## END: panel-group ##-->
 
 					<?php
 						

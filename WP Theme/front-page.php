@@ -98,6 +98,9 @@ $top_content_op = get_option('top_content');
 global $post, $posts;
 $post = get_post($top_content_op);
 $imagethumb = get_the_post_thumbnail($post->ID, 'full');
+
+
+
 $imagethumb = $imagethumb ? str_replace('src', ' class="img-responsive" src', $imagethumb) : str_replace('src', ' class="img-responsive img-content" src', get_first_inserted_image());
 
 
@@ -112,19 +115,50 @@ $WelcomeTitle = apply_filters('the_title', $WelcomePost->post_title);
 $WelcomeContent = apply_filters('the_content', $WelcomePost->post_content);
 				
 ?>
-	<div class='col-md-12 clearfix image-cover' style='padding: 0px; height: 700px; background: url("<?php echo $topContentThumbnailURL; ?>") no-repeat center center ;-webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;'>
-		<h2><span><?php echo $topContentTitle; ?></span></h2>
-		<div><?php echo $WelcomeContent; ?></div>
-	</div>
+	<div class='bg-content clearfix' style='margin-top: 30px;'>
+		<div class='col-md-6'>
+			<div class='img-frame' style='max-height: 700px;'> 
+				<h2 class='text-center' style='margin: 0 0 10px 0;'><span><?php echo $topContentTitle; ?></span></h2>
+				<img src="<?php echo $topContentThumbnailURL; ?>"/> 
+			</div>
+		</div>
+		<div class='col-md-6'>
+			<div class='' style=''> 
+				<?php 
+					echo "<h2 class='text-center font-shadow ' style='margin: 0 0 10px 0;'>$WelcomeTitle</h2>";
+					echo "<div style='text-align: left;'>$WelcomeContent</div>"; 
+					
+					$args = array (
+						'pagename' => 'Accreditation',
+					);
 
-	<hr/>
+					// The Query
+					$query = new WP_Query( $args );
+					while ( $query->have_posts() ) : $query->the_post();
+						$Actitle = apply_filters('the_title', $query->post_title);
+						echo "<h2 class='text-center' style='margin: 30px 0 10px 0;'>Accreditation and Member</h2>";
+						echo "<div style='text-align: left; line-height: 2.5;'>";
+						the_content();
+						echo "</div>";
+					endwhile;
+					wp_reset_postdata();
+				?> 
+			</div>
+		</div>
+		<div class='clearfix'></div>
+	</div>
+	
+	
+	
+	<div id='focus-word' class='clearfix text-center' style=''>
+		<h1>TSIS the first Sigaporean Curriculum is Samutprakarn<br/>TSIS the candidate status of CFBT accreditation</h1>
+	</div>
+	
     <div class="container-fluid">
     <div class="row">
     <div class="col-md-4 welcome" style='padding: 0px;'>
 
-        <h2 style="">Announcements</h2>
-
-        <div id="achievements" style="padding: 10px;"></div>
+        <div id="achievements" style="margin: 0 10px 10px 10px;"></div>
 
         <h2 style="">Videos</h2>
         <?php
@@ -149,26 +183,6 @@ $WelcomeContent = apply_filters('the_content', $WelcomePost->post_content);
 	</div>
     <div class="col-md-8">
     <div class="row">
-	<div class='clearfix'>
-	
-		<div id='welcomeContent' class="col-md-12 clearfix accreditation">
-			<?php
-				$args = array (
-					'pagename' => 'Accreditation',
-				);
-
-				// The Query
-				$query = new WP_Query( $args );
-				while ( $query->have_posts() ) : $query->the_post();
-					$Actitle = apply_filters('the_title', $query->post_title);
-					echo "<h2>Accreditation and Member</h2>";
-					the_content();
-				endwhile;
-				wp_reset_postdata();
-			?>
-		</div>
-	
-	</div>
     <div class="clearfix">
         <!--<h2 class="text-left" style="margin-bottom: 20px; font-family: 'Bree Serif', serif; font-size: 38px; font-weight: 300; color: #668591">HighLight</h2>-->
 		
@@ -231,20 +245,30 @@ $WelcomeContent = apply_filters('the_content', $WelcomePost->post_content);
     <div class="col-md-6 clearfix">
 
         <h2 class="text-left"
-            style="font-family: 'Bree Serif', serif; font-weight: 300; color: #333; text-align: center;  padding: 0.5em 0em 0.5em; margin-top: 0;">
+            style="font-family: 'Bree Serif', serif; font-weight: 300; color: #E1774F; text-align: center;  padding: 0.5em 0em 0.5em; margin-top: 0;">
             On Focus</h2>
         <?php 
+		wp_reset_postdata();
+		$args = NULL;
 		$args = array (
-			'pagename' => 'on focus',
+			'name' => 'on-focus',
+			'post_type'=> 'page'
 		);
-		
+		$onfocus_array = get_posts( $args );
+		$arrRotationimage = arrGetPostGallery($onfocus_array[0]->ID);
+		$pageOnFocusID = get_post_permalink($onfocus_array[0]->ID);
+		getCarouselList($onfocus_array[0]->ID,$arrRotationimage);
 		// The Query
-		$query = new WP_Query( $args );
+		/*$query = new WP_Query( $args );
 		while ( $query->have_posts() ) : $query->the_post();
-			$bannerUrl = wp_get_attachment_url( get_post_thumbnail_id(get_the_ID()), 'medium' );
 			$pageOnFocusID = get_post_permalink();
+			/*$arrRotationimage = arrGetPostGallery_rotation(get_the_ID());
+			print_r(arrGetPostGallery_rotation(get_the_ID()));
+			getCarouselList(get_the_ID(),$arrRotationimage);
+			$bannerUrl = wp_get_attachment_url( get_post_thumbnail_id(get_the_ID()), 'medium' );
+			
 			echo "<div style='min-height: 550px;'><img src='$bannerUrl' class='col-md-12' style='width: 100%; height: auto;'/></div>";
-		endwhile;
+		endwhile;*/
 		echo "<a class='button wow bounceIn col-md-12 text-center' data-wow-delay='0.4s' href='$pageOnFocusID'>READ MORE</a>";
 		wp_reset_postdata();
         ?>
@@ -252,36 +276,33 @@ $WelcomeContent = apply_filters('the_content', $WelcomePost->post_content);
     </div>
 
     <div id="" class="col-md-6 text-left" style="">
-        <h2 class="text-left" style="font-family: 'Bree Serif', serif; font-weight: 300; color: #333; text-align: center; padding: 0.5em 0em 0.5em; margin-top: 0;">Achievements</h2>
+        <h2 class="text-left" style="font-family: 'Bree Serif', serif; font-weight: 300; color: #E1774F; text-align: center; padding: 0.5em 0em 0.5em; margin-top: 0;">Achievements</h2>
 
         <div class="bootstrap-grids">
             <?php
-			$cat_show = get_option('achievements_show');
+			
+			$cat_shows = get_option('achievements_show');
+			$arrRotationimage = NULL;
 			$catID = get_cat_ID( 'achievements' );
-			$catLink = get_category_link( $catID );
+			$catLink = get_category_link( $catID );			
 			if(!$cat_show){			
-			$args = array (
-				'category_name' => 'achievements',
-				'posts_per_page' => 1,
-				'orderby' => 'DESC',
-			);
-
+				
 			}else{
-				$myindex = json_decode(stripslashes($cat_show));
-				$args = array(
-                    'post_type' => array('post', 'page'),
-                    'post_status' => 'publish',
-                    'p'=>$myindex[0],
-					'posts_per_page' => 1
-                );
+				$cat_show = json_decode(stripslashes($cat_show));
+				for($ai=0;$ai<5;$ai++){
+					if(!isset($cat_show[$ai])){
+						break;
+					}
+					$mythumb = wp_get_attachment_image_src(get_post_thumbnail_id($cat_show[$ai]),array(420,420));
+					if(strpos($_SERVER['HTTP_HOST'],'sis.th')){
+						$mythumb[0] = str_replace('http://tsis.th/i/','http://demo.ideacorners.com/tsis/',$mythumb[0]);
+					}
+					$myarrayR = NULL;
+					$myarrayR = array($cat_show[$ai],$mythumb[0]);
+				$arrRotationimage[] = $myarrayR;
+				}
 			}
-
-			// The Query
-			$query = new WP_Query( $args );
-			while ( $query->have_posts() ) : $query->the_post();
-				$bannerUrl = wp_get_attachment_url( get_post_thumbnail_id(get_the_ID()), 'medium' );
-				echo "<div style='min-height: 550px;'><img src='$bannerUrl' class='col-md-12' style='width: 100%; height: auto;'/></div>";
-			endwhile;
+			getCarouselList('achievements_show',$arrRotationimage);
 			echo "<a class='button wow bounceIn col-md-12 text-center' data-wow-delay='0.4s' href='$catLink'>READ MORE</a>";
 			wp_reset_postdata();
 			?>

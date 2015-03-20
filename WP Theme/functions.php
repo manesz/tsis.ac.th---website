@@ -394,3 +394,8 @@ add_filter( 'wp_mail_content_type', 'set_html_content_type' );
 function set_html_content_type() {
 return 'text/html';
 }
+function getCarouselList($postid,$arrRotationimage){
+?>
+<div id="carousel-example-generic-<?php echo $postid;?>" class="carousel slide" data-ride="carousel">
+<?php $i=1;if(!empty($arrRotationimage)):?><ol class="carousel-indicators"><?php $i=1;foreach( $arrRotationimage as $key => $value ):?><li data-target="#carousel-example-generic" data-slide-to="<?php echo $key; ?>" class="<?php if($key==0):echo 'active'; endif; ?>"></li><?php if($i==5){break;}$i++; endforeach;?></ol><div class="carousel-inner" role="listbox"><?php $i=1;foreach( $arrRotationimage as $key => $value ):?><div class="item <?php if($key==0):echo 'active'; endif; ?> img-frame"> <img src='<?php echo $value[1]; ?>'/> </div><?php if($i==5){break;}$i++; endforeach; ?></div><a class="left carousel-control" href="#carousel-example-generic-<?php echo $postid;?>" role="button" data-slide="prev"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span><span class="sr-only">Previous</span></a><a class="right carousel-control" href="#carousel-example-generic-<?php echo $postid;?>" role="button" data-slide="next"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span><span class="sr-only">Next</span></a><?php endif;?></div><?php	
+}

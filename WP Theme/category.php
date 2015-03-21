@@ -1,6 +1,6 @@
 <?php include_once('header.php');?>
 <div class="container">
-        <div class="top-p1">
+        <div class="top-p1" id="catheader">
             <h3>CATEGORY : <?php printf( __( '%s'), single_cat_title( '', false ) ); ?></h3>
             <?php if ( category_description() ) :?>
 				<div class="archive-meta"><?php echo category_description(); ?></div>
@@ -14,6 +14,7 @@
 // echo "<ul class='cat-item-list' style=''>".$catList = wp_list_categories( $argsChildCate )."</ul>";
 
 $currentCat = get_query_var('cat');
+
 $categories= get_categories('child_of='.$currentCat.'&amp;depth=1');
 $catcount = count($categories);
 
@@ -48,7 +49,10 @@ if($i > 0):
 
 	
 else:
-	
+$levelcheck = in_levelparent($this_category->term_id,$this_category->category_parent);
+if($levelcheck[0]&&($levelcheck[1]==2)){
+	include("post-formats/child-level.php");
+}else{
 // START: get post description value
 $args = array ('posts_per_page'=>-1, 'cat' => $currentCat);
 $query = new WP_Query( $args );
@@ -105,7 +109,7 @@ $arrCategory = get_the_category( $query->ID )
 				</a>
 				
 				
-				<?php// echo '<pre>';var_dump($query); echo '</pre>'; ?>
+				<?php // echo '<pre>';var_dump($query); echo '</pre>'; ?>
 				
 				<?php 
 					$my_excerpt = get_the_excerpt();
@@ -123,4 +127,4 @@ $arrCategory = get_the_category( $query->ID )
 		</div>
 	</div> 
 	
-<?php  endwhile; endif; /* catcount */ ?></div></div><?php include_once('footer.php');exit();
+<?php  endwhile; } endif; /* catcount */ ?></div></div><?php include_once('footer.php');exit();

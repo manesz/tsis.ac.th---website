@@ -10,7 +10,21 @@
         <div class="panel-body">
         <div class="well"><button type="button" class="btn btn-primary" id="sortsave-bt"><i class="glyphicon glyphicon-floppy-disk"></i> Save</button></div>
         <ul id="mylistorder">
-        	<?php
+        	<?php global $posts,$post,$wp_query;
+			$args = array(
+	'post_type' => array('post','page'),
+	'post_status' =>'publish',
+	'category_name' => 'gallery',
+	'posts_per_page' => -1
+);
+query_posts( $args );
+while(have_posts()):the_post();
+$order_gall = get_post_meta($post->ID, 'order_gall', true);
+if ( ! $order_gall) { 
+	add_post_meta($post->ID,'order_gall','0', true );	
+}
+endwhile;
+ wp_reset_query();
 			$args = array(
 	'post_type' => array('post','page'),
 	'post_status' =>'publish',
@@ -20,7 +34,7 @@
 	'meta_key'=>'order_gall',
 	'order'=>'DESC'
 );
-global $posts,$post,$wp_query;
+
 query_posts( $args );
 if(!$wp_query->found_posts){
 	$args = array(
